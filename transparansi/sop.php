@@ -39,14 +39,22 @@ $result = $stmt->get_result();
 <body>
 	
 <div class="topnav" id="mynavBtn">
-	
+	<div class="startlogoDD">
+		<button onclick="toggleStartMenu()" class="startbtn"><img src="/icon/LogoStart.png"></button>
+		<div id="myStart" class="start-content">
+			<a href="/cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
+			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
+			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
+		</div>
+	</div>
 	<div class="navLogo">
 		<a href="../index.php"><img src="../icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
 	</div>
 	
 	<div class="navRight" >
 		<div class="dropdown">
-			<button onclick="toggleDropdown('menu1')" class="dropbtn">PROFIL <i class="fa fa-caret-down"></i></button>
+			<button class="dropbtn">PROFIL <i class="fa fa-caret-down"></i></button>
 		  <div id="menu1" class="dropdown-content">
 			<a href="../profil.html#visiMisi">Visi dan Misi</a>
 			<a href="../profil.html#selaPang">Selayang Pandang</a>
@@ -58,7 +66,7 @@ $result = $stmt->get_result();
 		</div>
 		
 		<div class="dropdown">
-			<button onclick="toggleDropdown('menu2')" class="dropbtn">ARTIKEL <i class="fa fa-caret-down"></i></button>
+			<button class="dropbtn">ARTIKEL <i class="fa fa-caret-down"></i></button>
 		  <div id="menu2" class="dropdown-content">
 			<a href="../news.php">Berita ASN</a>
 			<a href="../blog.php">Blog ASN</a>
@@ -68,7 +76,7 @@ $result = $stmt->get_result();
 		<a href="../layanan.html">LAYANAN</a>
 		
 		<div class="dropdown">
-			<button onclick="toggleDropdown('menu3')" class="dropbtn">TRANSPARANSI <i class="fa fa-caret-down"></i></button>
+			<button class="dropbtn">TRANSPARANSI <i class="fa fa-caret-down"></i></button>
 		  <div id="menu3" class="dropdown-content">
 			<a href="perbup.php">Perbup</a>
 			<a href="renstra.php">Rencana Stategis</a>
@@ -88,7 +96,7 @@ $result = $stmt->get_result();
 		<a href="../ppid.html">P.P.I.D.</a>
 		
 		<div class="dropdown">
-			<button onclick="toggleDropdown('menu4')" class="dropbtn">GALERI <i class="fa fa-caret-down"></i></button>
+			<button class="dropbtn">GALERI <i class="fa fa-caret-down"></i></button>
 		  <div id="menu4" class="dropdown-content">
 			<a href="../galeri.html#foto">Album Foto</a>
 			<a href="../galeri.html#video">Album Video</a>
@@ -98,7 +106,7 @@ $result = $stmt->get_result();
 		
 		<a href="../pengumuman.php">PENGUMUMAN</a>
 		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
-		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="myFunction()">&#9776;</a>
+		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>
 	</div>
 </div>
 	

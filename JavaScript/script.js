@@ -1,43 +1,44 @@
-//RESPONSIVE TOP NAV----------------------------------------------
-function myFunction() {
-  var x = document.getElementById("mynavBtn");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
+// ---------- NAV ----------
+function toggleNav() {
+  document.getElementById("mynavBtn").classList.toggle("responsive");
 }
 
-//DROPDOWN BUTTONS----------------------------------------------
- function toggleDropdown(menuId) {
-      // Close all other dropdowns
-      document.querySelectorAll(".dropdown-content").forEach(menu => {
-        if (menu.id !== menuId) {
-          menu.classList.remove("show");
-        }
-      });
-    }
-    // Close dropdown if clicking outside
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        document.querySelectorAll(".dropdown-content").forEach(menu => {
-          menu.classList.remove("show");
-        });
-      }
-    }
-    // Mobile: toggle dropdown on click
-    document.querySelectorAll(".dropbtn").forEach(toggle => {
-      toggle.addEventListener("click", function(e) {
-        // Only work on small screens
-        if (window.innerWidth < 768) {
-          e.preventDefault();
-          const dropdown = this.nextElementSibling;
-          dropdown.classList.toggle("show");
-        }
-      });
-    });
+// ---------- START LOGO ----------
+function toggleStartMenu() {
+  document.getElementById("myStart").classList.toggle("show");
+}
 
-    // INFOGRAPHIS SLIDESHOW----------------------------------------------
+// ---------- CLICK OUTSIDE ----------
+window.addEventListener("click", e => {
+  // Close start menu
+  if (!e.target.closest(".startlogoDD")) {
+    document.getElementById("myStart").classList.remove("show");
+  }
+  // Close dropdown-content
+  if (!e.target.closest(".dropdown")) {
+    document.querySelectorAll(".dropdown-content").forEach(menu => {
+      menu.classList.remove("show");
+    });
+  }
+});
+
+// ---------- DROPDOWN BUTTONS ----------
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".dropbtn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      const dropdown = btn.nextElementSibling; // assumes dropdown-content is next
+      // close others first
+      document.querySelectorAll(".dropdown-content").forEach(menu => {
+        if (menu !== dropdown) menu.classList.remove("show");
+      });
+      // toggle this one
+      dropdown.classList.toggle("show");
+    });
+  });
+});
+
+// INFOGRAPHIS SLIDESHOW----------------------------------------------
 var myIndex = 0;
 carousel();
 function carousel() {
