@@ -52,13 +52,13 @@
   
 }
 .startbtn img {
-  height: 25px;
+  height: 30px;
 }
 .startlogoDD {
   position: relative;
   float: left;
   display: inline-block;
-  margin-top: 17px;
+  margin-top: 15px;
   margin-left: 20px;
   font-size: 20px;
 }
@@ -66,10 +66,10 @@
   display: none;
   position: absolute;
   background-color: #0400ffd5;
-  margin-top: 18px;
+  margin-top: 15px;
   min-width: 200px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 10px 0px black;
   z-index: 1;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -92,7 +92,7 @@
 .navLogo #bkpsdmdLogo {
 	height: 45px;
 	padding-top: 17px;
-	padding-left: 20px;
+	padding-left: 15px;
 	padding-right: 20px;
 }
 

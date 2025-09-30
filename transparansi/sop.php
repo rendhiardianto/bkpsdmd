@@ -111,7 +111,7 @@ $result = $stmt->get_result();
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
-<h1 style="text-align: center; margin-top:30px;">Standar Operasional Prosedur</h1>
+<h1 style="text-align: center; margin-top:30px;">Standar Operasional Prosedur (SOP)</h1>
 
 <?php while ($row = $result->fetch_assoc()): ?>
 <table style="overflow-x:auto; width: 80%;">

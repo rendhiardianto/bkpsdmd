@@ -12,7 +12,6 @@ $captions = [];
 while ($row = $result->fetch_assoc()) {
     $captions[$row['id']] = $row['caption'];
 }
-
 ?>
 
 <!doctype html>
