@@ -80,6 +80,7 @@ $user = $profileResult->fetch_assoc();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="dashboard_admin_list.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
   <div class="header">
     <div class="navbar">
@@ -90,10 +91,7 @@ $user = $profileResult->fetch_assoc();
     </div>
   </div>
 
-  <h2>CMS Admin List</h2>
-
   <div class="top-bar">
-
     <form id="filterForm">
       <input type="text" name="search" id="search" placeholder="Search by name/nip/email">
       <select name="role_filter" id="role_filter">
@@ -103,8 +101,8 @@ $user = $profileResult->fetch_assoc();
       </select>
       <button type="submit">Filter</button>
     </form>
-
   </div>
+
   <div id="userTable">
     <table border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
       <tr style="background:#3498db; color:white;">

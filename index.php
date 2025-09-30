@@ -114,6 +114,7 @@ while ($row = $result->fetch_assoc()) {
 		</div>
 		
 		<a href="pengumuman.php">PENGUMUMAN</a>
+		<a href="fungsional.php">POJOK FUNGSIONAL</a>
 		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
 		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>
 	</div>

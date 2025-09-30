@@ -109,13 +109,13 @@ $user = $result->fetch_assoc();
 
     <div class="flex-item-main">
       <p><a href="cms_admin_authority/add_user.php?role=<?php echo urlencode($role); ?>">
-      <img src="../icon/button/add_user.png" alt="Add User"> </a><br>ADD USER</p>
+      <img src="../icon/button/add_user.png" alt="Add User"> </a><br>ADD CMS USER</p>
     </div>
 
 
     <div class="flex-item-main">
       <p><a href="cms_admin_authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/profil.png" ></a><br>CMS USER</p>
+        <img src="../icon/button/profil.png" ></a><br>CMS USER LIST</p>
     </div>
 
     <div class="flex-item-main">
@@ -141,6 +141,11 @@ $user = $result->fetch_assoc();
     <div class="flex-item-main">
       <p><a href="transparansi/dashboard_transparansi.php?role=<?php echo urlencode($role); ?>">
         <img src="../icon/button/transparansi.png"></a><br>TRANSPARANSI</p>
+    </div>
+
+    <div class="flex-item-main">
+      <p><a href="pojokjafung/add_pojafung.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
     </div>
 
 </div>

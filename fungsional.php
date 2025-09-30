@@ -1,3 +1,48 @@
+<?php
+session_start();
+
+include "cms/db.php";
+include "cms/auth.php";
+
+// --- Pagination setup ---
+$limit = 10;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+$offset = ($page - 1) * $limit;
+
+// --- Search & Filter ---
+$where = "1=1";
+
+// allowed columns to sort by (whitelist)
+$allowedSort = ['id','jabatan','total'];
+
+// default sort
+$sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSort) ? $_GET['sort'] : 'id';
+$order = (isset($_GET['order']) && strtolower($_GET['order']) === 'asc') ? 'asc' : 'desc';
+
+
+if (!empty($_GET['search'])) {
+    $search = $conn->real_escape_string($_GET['search']);
+    $where .= " AND (jabatan LIKE '%$search%')";
+}
+
+// --- Count total users ---
+$countResult = $conn->query("SELECT COUNT(*) AS total FROM pojafung WHERE $where");
+$totalUsers = $countResult->fetch_assoc()['total'];
+$totalPages = ceil($totalUsers / $limit);
+
+// --- Fetch users for the table ---
+$result = $conn->query(
+  "SELECT id, jabatan, total, link
+   FROM pojafung
+   WHERE $where
+   ORDER BY $sort $order
+   LIMIT $offset, $limit"
+);
+
+
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -91,7 +136,7 @@
 		
 		<a href="pengumuman.php">PENGUMUMAN</a>
 
-		<a href="fungsional.html">POJOK FUNGSIONAL</a>
+		<a href="fungsional.php">POJOK FUNGSIONAL</a>
 		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
 		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>
 	</div>
@@ -100,17 +145,105 @@
 <!------------------- CONTENT ----------------------------------->
 
 <div class="header">
-	<h1>POJOK FUNGSIONAL</h1>
+	<h1 class="title">POJOK JABATAN FUNGSIONAL</h1>
+	<h2 class="subtitle">Di Lingkungan Pemkab Merangin</h2>
 </div>
-<div class="chart-rekap" style="justify-content:center">
+<div class="content">
+	<h2>FUNGSI DAN TUGAS POKOK JABATAN FUNGSIONAL</h2>
+	<p>Jabatan Fungsional adalah jabatan yang menunjukkan tugas, tanggung jawab, wewenang, dan hak seorang PNS yang ditetapkan berdasarkan keahlian atau keterampilan tertentu sesuai dengan peraturan perundang-undangan.</p>		
+</div>
 
+<div class="chart-rekap" style="justify-content:center">
 	<div class="chart">
 		<iframe width="410" height="318" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQShXug2siZVSLzbdzzg_AU4AefMpc9IxBAgRsaKK8bGcyY?em=2&wdAllowInteractivity=False&Item=Chart%202&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
 		<iframe width="520" height="318" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQShXug2siZVSLzbdzzg_AU4AefMpc9IxBAgRsaKK8bGcyY?em=2&wdAllowInteractivity=False&Item=Chart%201&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
 	</div>
+</div> <!-- -->
 
+<div class="top-bar">
+    <form id="filterForm">
+      <input type="text" name="search" id="search" placeholder="Cari berdasarkan jabatan">
+      <button type="submit">Cari</button>
+    </form>
+  </div>
+
+  <div class="tableJafung">
+
+    <table id="userTable" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+      <thead>
+    <tr style="background:#3498db; color:white; height:50px;">
+      <th>
+        <?php
+          $p = $_GET; $p['sort']='id'; $p['order'] = ($sort=='id' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+          $url = '?'.http_build_query($p);
+        ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Nomor <?php if($sort=='id') echo $order=='asc' ? '▲' : '▼'; ?></a>
+      </th>
+
+      <th>
+        <?php
+          $p = $_GET; $p['sort']='jabatan'; $p['order'] = ($sort=='jabatan' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+          $url = '?'.http_build_query($p);
+        ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Nama Jabatan Fungsional <?php if($sort=='jabatan') echo $order=='asc' ? '▲' : '▼'; ?></a>
+      </th>
+
+      <th>
+        <?php
+          $p = $_GET; $p['sort']='total'; $p['order'] = ($sort=='total' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+          $url = '?'.http_build_query($p);
+        ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Total Penjabat <?php if($sort=='total') echo $order=='asc' ? '▲' : '▼'; ?></a>
+      </th>
+
+      <th>Link Informasi</th>
+    </tr>
+  </thead>
+      <?php while($row = $result->fetch_assoc()): ?>
+      <tr style="text-align: left;">
+        <td style="text-align:center; width: 10%;"><?php echo $row['id']; ?></td>
+        <td style="width: 45%;"><?php echo $row['jabatan']; ?></td>
+        <td style="text-align:center; width: 15%;"><?php echo $row['total']; ?></td>
+
+        <td style="text-align:center; width: 30%;">
+			<?php if (!empty($row['link'])): ?>
+			<a href="<?php echo $row['link']; ?>" target="_blank">
+				<?php echo $row['link']; ?>
+			</a>
+			<?php else: ?>
+				<b>Belum tersedia.</b> Jika Anda memiliki informasi mengenai jabatan ini, silahkan <a href="https://wa.me/6285159997813" target="_blank"> beritahu kami.</a>
+			<?php endif; ?>
+		</td>
+
+      </tr>
+      <?php endwhile; ?>
+    </table>
+
+  </div>
+
+<div class="pagination">
+  <?php if ($page > 1): ?>
+    <?php $p = $_GET; $p['page'] = $page-1; $url = '?'.http_build_query($p); ?>
+    <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">&#10094; Prev</a>
+  <?php endif; ?>
+
+  <?php for ($i=1; $i <= $totalPages; $i++): 
+        $p = $_GET; $p['page'] = $i;
+        $url = '?'.http_build_query($p);
+  ?>
+    <a href="<?php echo htmlspecialchars($url); ?>" 
+       class="page-link <?php echo ($i==$page) ? 'active' : ''; ?>">
+      <?php echo $i; ?>
+    </a>
+  <?php endfor; ?>
+
+  <?php if ($page < $totalPages): ?>
+    <?php $p = $_GET; $p['page'] = $page+1; $url = '?'.http_build_query($p); ?>
+    <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">Next &#10095;</a>
+  <?php endif; ?>
 </div>
-	
+
+
 <!------------------- FOOTER ----------------------------------->	
 	
 <div class="row">
@@ -169,8 +302,67 @@
 </script>-->
 	
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
-	
+
 <script src="JavaScript/script.js"></script>
-	
+
+ <script>
+	$(document).ready(function() {
+	$('#userTable').DataTable({
+		paging: false,      // keep server pagination? set false to keep your existing prev/next links
+		ordering: true,
+		info: false,
+		searching: false    // you already have your own search form
+	});
+	});
+</script>
+<script>
+  $(document).ready(function() {
+    $('#userTable').DataTable({
+      // Optional: customize language
+      language: {
+        search: "Cari:",
+        lengthMenu: "Tampilkan _MENU_ data",
+        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        paginate: {
+          first: "Awal",
+          last: "Akhir",
+          next: "Berikutnya",
+          previous: "Sebelumnya"
+        }
+      },
+      // Optional: default order by first column (id)
+      order: [[0, "asc"]],
+      // Optional: disable sorting for last column (Link)
+      columnDefs: [
+        { orderable: false, targets: 3 }
+      ]
+    });
+  });
+</script>
+
+<script>
+// Handle Search form submission	
+$(document).ready(function() {
+  $('#filterForm').on('submit', function(e) {
+    e.preventDefault(); // stop normal submit
+
+    $.get('fungsional.php', $(this).serialize(), function(data) {
+      // Extract only the table part from response
+      const newTable = $(data).find('#tableContainer').html();
+      $('#tableContainer').html(newTable);
+    });
+  });
+});
+
+// Handle pagination clicks
+    document.addEventListener("click", function(e) {
+      if (e.target.classList.contains("pagination-link")) {
+        e.preventDefault();
+        const page = e.target.getAttribute("data-page");
+        loadUsers(page);
+      }
+    });
+</script>
+
 </body>
 </html>
