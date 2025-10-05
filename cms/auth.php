@@ -1,5 +1,5 @@
 <?php
-// auth.php
+
 include "db.php";
 
 // Block if not logged in
