@@ -1,59 +1,73 @@
 <?php
 session_start();
-
 include "cms/db.php";
 
-// --- Pagination setup ---
+// --- Pagination setup (for jf_meranginkab only) ---
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 $offset = ($page - 1) * $limit;
 
-
-// --- Search & Filter ---
-$where = "1=1";
-
-// allowed columns to sort by (whitelist)
-$allowedSort = ['id','jabatan','total','pembina'];
-
-// default sort
+// --- Sort setup ---
+$allowedSort = ['id', 'jabatan', 'total', 'pembina'];
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSort) ? $_GET['sort'] : 'id';
 $order = (isset($_GET['order']) && strtolower($_GET['order']) === 'desc') ? 'desc' : 'asc';
 
+/* =====================================================
+   TABLE 1: jf_meranginkab (searchable + paginated)
+   ===================================================== */
+$where1 = "1=1";
 
 if (!empty($_GET['search'])) {
-    $search = $conn->real_escape_string($_GET['search']);
-    $where .= " AND (jabatan LIKE '%$search%')";
+    $search1 = $conn->real_escape_string($_GET['search']);
+    $where1 .= " AND (jabatan LIKE '%$search1%')";
 }
 
-// --- Count total users ---
-$countResult = $conn->query("SELECT COUNT(*) AS total FROM pojafung WHERE $where");
-$totalUsers = $countResult->fetch_assoc()['total'];
-$totalPages = ceil($totalUsers / $limit);
+// Count total rows for pagination
+$countResult1 = $conn->query("SELECT COUNT(*) AS total FROM jf_meranginkab WHERE $where1");
+$totalUsers1 = $countResult1->fetch_assoc()['total'];
+$totalPages1 = ceil($totalUsers1 / $limit);
 
-// --- Fetch users for the table ---
-$result = $conn->query(
-  "SELECT id, jabatan, total, link
-   FROM pojafung
-   WHERE $where
-   ORDER BY $sort $order
-   LIMIT $offset, $limit"
-);
+// Fetch paginated rows
+$result1 = $conn->query("
+    SELECT id, jabatan, total, link
+    FROM jf_meranginkab
+    WHERE $where1
+    ORDER BY $sort $order
+    LIMIT $offset, $limit
+");
 
-// --- Count total users ---
-$countResult2 = $conn->query("SELECT COUNT(*) AS total FROM instapembinajf WHERE $where");
+/* =====================================================
+   TABLE 2: jf_bkn (no search, no pagination)
+   ===================================================== */
+$where2 = "1=1";
+
+$countResult2 = $conn->query("SELECT COUNT(*) AS total FROM jf_bkn WHERE $where2");
 $totalUsers2 = $countResult2->fetch_assoc()['total'];
-$totalPages2 = ceil($totalUsers2 / $limit);
 
-// --- Fetch users for the table ---
-$result2 = $conn->query(
-  "SELECT id, jabatan, pembina
-   FROM instapembinajf
-   WHERE $where
-   ORDER BY $sort $order"
-);
+$result2 = $conn->query("
+    SELECT id, jabatan, pembina
+    FROM jf_bkn
+    WHERE $where2
+    ORDER BY $sort $order
+");
 
+/* =====================================================
+   TABLE 3: jf_bkn (different view, no search)
+   ===================================================== */
+$where3 = "1=1";
+
+$countResult3 = $conn->query("SELECT COUNT(*) AS total FROM jf_bkn WHERE $where3");
+$totalUsers3 = $countResult3->fetch_assoc()['total'];
+
+$result3 = $conn->query("
+    SELECT id, jabatan, rumpun, kategori, lingkup, pembina, image_path
+    FROM jf_bkn
+    WHERE $where3
+    ORDER BY $sort $order
+");
 ?>
+
 
 <!doctype html>
 <html>
@@ -178,10 +192,98 @@ $result2 = $conn->query(
   <!-- ============================== Tab content ============================== -->
   <div id="tab1" class="tabcontent">
     <h2 style="text-align: center;">Rekapitulasi Jabatan Fungsional</h2>
-    <h3 style="text-align: center;">di Lingkungan Pemerintah Kabupaten Merangin</h3>     
+    <h3 style="text-align: center;">di Lingkungan Pemerintah Kabupaten Merangin</h3>
+
     <div class="chart-rekap">
       <div class="chart1" id="myPlot1"></div>
       <div class="chart2" id="myPlot2"></div>
+    </div>
+
+    <div class="tableJFMerangin">
+      <h2 style="text-align:center;">Tabel Rekapitulasi Pejabat Jabatan Fungsional Pemkab Merangin</h2>
+
+      <div class="top-bar">
+        <form id="filterForm">
+          <input type="text" name="search" id="search_jfMerangin" placeholder="Cari berdasarkan jabatan">
+          <button type="submit">Cari</button>
+        </form>
+      </div>
+
+      <div class="tableJafung">
+
+        <table id="tableJFMerangin" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+        <thead>
+        <tr style="background:#3498db; color:white; height:50px;">
+          <th>
+            <?php
+              $p = $_GET; $p['sort']='id'; $p['order'] = ($sort=='id' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+              $url = '?'.http_build_query($p);
+            ?>
+            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Nomor <?php if($sort=='id') echo $order=='asc' ? '▲' : '▼'; ?></a>
+          </th>
+
+          <th>
+            <?php
+              $p = $_GET; $p['sort']='jabatan'; $p['order'] = ($sort=='jabatan' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+              $url = '?'.http_build_query($p);
+            ?>
+            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Jabatan Fungsional <?php if($sort=='jabatan') echo $order=='asc' ? '▲' : '▼'; ?></a>
+          </th>
+
+          <th>
+            <?php
+              $p = $_GET; $p['sort']='total'; $p['order'] = ($sort=='total' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
+              $url = '?'.http_build_query($p);
+            ?>
+            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Total Pejabat <?php if($sort=='total') echo $order=='asc' ? '▲' : '▼'; ?></a>
+          </th>
+
+         <!-- <th>Link Informasi</th> -->
+        </tr>
+        </thead>
+          <?php while($row = $result1->fetch_assoc()): ?>
+          <tr style="text-align: left;">
+            <td style="text-align:center; width: 10%;"><?php echo $row['id']; ?></td>
+            <td style="width: 45%;"><?php echo $row['jabatan']; ?></td>
+            <td style="text-align:center; width: 15%;"><?php echo $row['total']; ?></td>
+
+         <!-- <td style="text-align:center; width: 30%;">
+            <?php if (!empty($row['link'])): ?>
+            <a href="<?php echo $row['link']; ?>" target="_blank">
+              <?php echo $row['link']; ?>
+            </a>
+            <?php else: ?>
+              <b>Belum tersedia.</b> Jika Anda memiliki informasi mengenai jabatan ini, silahkan <a href="https://wa.me/6285159997813" target="_blank"> beritahu kami.</a>
+            <?php endif; ?>
+          </td> -->
+
+          </tr>
+          <?php endwhile; ?>
+        </table>
+
+      </div>
+
+    <div class="pagination">
+      <?php if ($page > 1): ?>
+        <?php $p = $_GET; $p['page'] = $page-1; $url = '?'.http_build_query($p); ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">&#10094; Prev</a>
+      <?php endif; ?>
+
+      <?php for ($i=1; $i <= $totalPages1; $i++): 
+            $p = $_GET; $p['page'] = $i;
+            $url = '?'.http_build_query($p);
+      ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" 
+          class="page-link <?php echo ($i==$page) ? 'active' : ''; ?>">
+          <?php echo $i; ?>
+        </a>
+      <?php endfor; ?>
+
+      <?php if ($page < $totalPages1): ?>
+        <?php $p = $_GET; $p['page'] = $page+1; $url = '?'.http_build_query($p); ?>
+        <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">Next &#10095;</a>
+      <?php endif; ?>
+    </div>
     </div>
   </div>
 
@@ -486,8 +588,9 @@ $result2 = $conn->query(
       
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cari nama jabatan atau instansi pembina" title="Type in a name">
       
-      <div style="width:100%; height:500px; overflow:auto; border:1px solid #ccc; margin:auto;">
-      <table id="userTable" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+      <div style="width:100%; height:1000px; overflow:auto; border:1px solid #ccc; margin:auto;">
+      
+      <table id="userTable1" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
         <thead>
           <tr style="background:#3498db; color:white; height:50px;">
             <th>Nomor</th>
@@ -507,92 +610,61 @@ $result2 = $conn->query(
     </div>
   </div>
 
-  <div id="tab7" class="tabcontent" style="text-align: justify; line-height: 1.6;">
-    <h2 style="text-align: center;">Daftar Tabel Informasi Jabatan Fungsional</h2>
+  <div id="tab7" class="tabcontent">
 
-      <div class="top-bar">
-        <form id="filterForm">
-          <input type="text" name="search" id="search" placeholder="Cari berdasarkan jabatan">
-          <button type="submit">Cari</button>
-        </form>
-      </div>
+    <h2 style="text-align: center;">Daftar Informasi Detail Jabatan Fungsional</h2>
 
-      <div class="tableJafung">
-        <table id="userTable" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+    <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Masukkan data yang anda cari" title="Type in a name">
+      
+    <div style="width:100%; height:800px; overflow:auto; border:1px solid #ccc; margin:auto;">
+      
+      <table id="userTable2" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
         <thead>
-        <tr style="background:#3498db; color:white; height:50px;">
-          <th>
-            <?php
-              $p = $_GET; $p['sort']='id'; $p['order'] = ($sort=='id' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
-              $url = '?'.http_build_query($p);
-            ?>
-            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Nomor <?php if($sort=='id') echo $order=='asc' ? '▲' : '▼'; ?></a>
-          </th>
-
-          <th>
-            <?php
-              $p = $_GET; $p['sort']='jabatan'; $p['order'] = ($sort=='jabatan' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
-              $url = '?'.http_build_query($p);
-            ?>
-            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Jabatan Fungsional <?php if($sort=='jabatan') echo $order=='asc' ? '▲' : '▼'; ?></a>
-          </th>
-
-          <th>
-            <?php
-              $p = $_GET; $p['sort']='total'; $p['order'] = ($sort=='total' && $order=='asc') ? 'desc' : 'asc'; $p['page']=1;
-              $url = '?'.http_build_query($p);
-            ?>
-            <a href="<?php echo htmlspecialchars($url); ?>" style="text-decoration:none; color:white;">Total Pejabat <?php if($sort=='total') echo $order=='asc' ? '▲' : '▼'; ?></a>
-          </th>
-
-          <th>Link Informasi</th>
-        </tr>
-        </thead>
-          <?php while($row = $result->fetch_assoc()): ?>
-          <tr style="text-align: left;">
-            <td style="text-align:center; width: 10%;"><?php echo $row['id']; ?></td>
-            <td style="width: 45%;"><?php echo $row['jabatan']; ?></td>
-            <td style="text-align:center; width: 15%;"><?php echo $row['total']; ?></td>
-
-          <td style="text-align:center; width: 30%;">
-            <?php if (!empty($row['link'])): ?>
-            <a href="<?php echo $row['link']; ?>" target="_blank">
-              <?php echo $row['link']; ?>
-            </a>
-            <?php else: ?>
-              <b>Belum tersedia.</b> Jika Anda memiliki informasi mengenai jabatan ini, silahkan <a href="https://wa.me/6285159997813" target="_blank"> beritahu kami.</a>
-            <?php endif; ?>
-          </td>
-
+          <tr style="background:#3498db; color:white; height:50px;">
+            <th>Nomor</th>
+            <th>Jabatan Fungsional</th>
+            <th>Rumpun Jabatan</th>
+            <th>Kategori</th>
+            <th>Ruang Lingkup</th>
+            <th>Instansi Pembina</th>
+            <th>Informasi Detail</th>
           </tr>
-          <?php endwhile; ?>
-        </table>
+        </thead>
+        <?php while($row = $result3->fetch_assoc()): ?>
+          <tr style="text-align:left;">
+            <td style="text-align:center;"><?php echo $row['id']; ?></td>
+            <td><?php echo $row['jabatan']; ?></td>
+            <td><?php echo $row['rumpun']; ?></td>
+            <td><?php echo $row['kategori']; ?></td>
+            <td><?php echo $row['lingkup']; ?></td>
+            <td><?php echo $row['pembina']; ?></td>
+            <td style="text-align: center;">
+              <button class="detailBtn" data-img="<?php echo 'cms/pojokjafung/uploads/detail_image/' . htmlspecialchars($row['image_path']); ?>"> 
+                Lihat
+              </button>
+            </td>
+          </tr>
+        <?php endwhile; ?>
+      </table>
 
+      <div id="imageModal" class="lightbox" style="display:none; position:fixed; top:0; left:0; 
+        width:100%; height:100%; background:rgba(0,0,0,0.6); 
+        justify-content:center; align-items:center; z-index:1000;">
+        
+        <div class="lightbox-content" style="background:white; padding:20px; border-radius:10px; text-align:center; position:relative;">
+          <img id="modalImage" src="" alt="Detail Image" style="max-width:90vw; max-height:80vh; border-radius:8px;">
+          <br>
+          <div style="margin-top:10px;">
+            <button onclick="downloadImage()" class="downloadBtn" style="margin-right:50px;">Download</button>
+            <button onclick="closeModal()" class="closeBtn">Close</button>
+          </div>
+        </div>
       </div>
 
-    <div class="pagination">
-      <?php if ($page > 1): ?>
-        <?php $p = $_GET; $p['page'] = $page-1; $url = '?'.http_build_query($p); ?>
-        <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">&#10094; Prev</a>
-      <?php endif; ?>
 
-      <?php for ($i=1; $i <= $totalPages; $i++): 
-            $p = $_GET; $p['page'] = $i;
-            $url = '?'.http_build_query($p);
-      ?>
-        <a href="<?php echo htmlspecialchars($url); ?>" 
-          class="page-link <?php echo ($i==$page) ? 'active' : ''; ?>">
-          <?php echo $i; ?>
-        </a>
-      <?php endfor; ?>
 
-      <?php if ($page < $totalPages): ?>
-        <?php $p = $_GET; $p['page'] = $page+1; $url = '?'.http_build_query($p); ?>
-        <a href="<?php echo htmlspecialchars($url); ?>" class="page-link">Next &#10095;</a>
-      <?php endif; ?>
     </div>
   </div>
-
 </div>
 <!------------------- FOOTER ----------------------------------->	
 	
@@ -657,6 +729,7 @@ $result2 = $conn->query(
 <script src="JavaScript/tab_switching.js"></script>
 <script src="JavaScript/chart_fungsional.js"></script>
 <script src="JavaScript/searchable_table.js"></script>
+<script src="JavaScript/modal_showImage.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -667,55 +740,6 @@ $result2 = $conn->query(
 		searching: false    // you already have your own search form
 	});
 	});
-</script>
-
-<script>
-  $(document).ready(function() {
-    $('#userTable').DataTable({
-      // Optional: customize language
-      language: {
-        search: "Cari:",
-        lengthMenu: "Tampilkan _MENU_ data",
-        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-        paginate: {
-          first: "Awal",
-          last: "Akhir",
-          next: "Berikutnya",
-          previous: "Sebelumnya"
-        }
-      },
-      // Optional: default order by first column (id)
-      order: [[0, "asc"]],
-      // Optional: disable sorting for last column (Link)
-      columnDefs: [
-        { orderable: false, targets: 3 }
-      ]
-    });
-  });
-</script>
-
-<script>
-// Handle Search form submission	
-$(document).ready(function() {
-  $('#filterForm').on('submit', function(e) {
-    e.preventDefault(); // stop normal submit
-
-    $.get('fungsional.php', $(this).serialize(), function(data) {
-      // Extract only the table part from response
-      const newTable = $(data).find('#tableContainer').html();
-      $('#tableContainer').html(newTable);
-    });
-  });
-});
-
-// Handle pagination clicks
-    document.addEventListener("click", function(e) {
-      if (e.target.classList.contains("pagination-link")) {
-        e.preventDefault();
-        const page = e.target.getAttribute("data-page");
-        loadUsers(page);
-      }
-    });
 </script>
 
 </body>

@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $total    = $conn->real_escape_string($_POST['total']);
     $link    = $conn->real_escape_string($_POST['link']);
 
-    $cek = mysqli_query($conn, "SELECT * FROM pojafung WHERE jabatan='$jabatan'");
+    $cek = mysqli_query($conn, "SELECT * FROM jf_meranginkab WHERE jabatan='$jabatan'");
     if (mysqli_num_rows($cek) > 0) {
         $error = "";
         ?><script>
@@ -27,12 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.location.href='add_pojafung.php';
         </script><?php
     } else {
-        $insert = mysqli_query($conn, "INSERT INTO pojafung (jabatan, total, link)
+        $insert = mysqli_query($conn, "INSERT INTO jf_meranginkab (jabatan, total, link)
         VALUES ('$jabatan','$total','$link')");
           if ($insert) {
             $success = "";
             ?><script>
-                alert('Data Jabatan sudah ditambahakan.');
+                alert('Data Jabatan sudah ditambahkan.');
                 window.location.href='add_pojafung.php';
             </script><?php
           } 
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" style="text-decoration: none; color:white;">&#10094; Kembali</a>
     </div>
     <div class="roleHeader">
-      <h1>Dashboard Add Pojok Fungsional</h1>
+      <h1>Dashboard Add Jabatan Fungsional Merangin</h1>
     </div>
 </div>
 
@@ -86,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="POST" enctype="multipart/form-data">
       <input type="text" name="jabatan" placeholder="Nama Jabatan Fungsional" required>
       <input type="text" name="total" placeholder="Total Penjabat" required>
-      <input type="text" name="link" placeholder="Link Informasi Jabatan Fungsional" required>
       <button type="submit">Tambahkan</button>
     </form>
   </div>

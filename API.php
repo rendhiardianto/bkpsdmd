@@ -1,6 +1,6 @@
 <?php
-$token = "AmayGawagk435ccehWgu"; //isi dengan token anda
-$target = "6289507283753"; //isi dengan target nomor tujuan
+$token = "HBB89yoJxZs2DtcH5AR2"; //isi dengan token anda
+$target = "6282176687896"; //isi dengan target nomor tujuan
 
 $curl = curl_init();
 

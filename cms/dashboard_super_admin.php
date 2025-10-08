@@ -144,7 +144,7 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="flex-item-main">
-      <p><a href="pojokjafung/add_pojafung.php?role=<?php echo urlencode($role); ?>">
+      <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
         <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
     </div>
 
