@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $category = $_POST['category'];
+    $image_desc = $_POST['image_desc'];
     $created_by = $_SESSION['fullname']; 
 
     // Create slug from title
@@ -33,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert including slug column
-    $stmt = $conn->prepare("INSERT INTO news (title, slug, content, image, category, created_by, created_at)
-                            VALUES (?, ?, ?, ?, ?, ?, NOW())");
+    $stmt = $conn->prepare("INSERT INTO news (title, slug, content, image, image_desc, category, created_by, created_at)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
     
-    $stmt->bind_param("ssssss", $title, $slug, $content, $imagePath, $category, $created_by);  
+    $stmt->bind_param("sssssss", $title, $slug, $content, $imagePath, $image_desc, $category, $created_by);  
 
     $stmt->execute();
 
-    header("Location: add_news.php");
+    header("Location: admin_news.php");
     exit;
 }
 ?>
@@ -84,6 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <label>Thumbnail</label>
     <input type="file" name="image">
+
+    <label>Image Description</label>
+    <input type="text" name="image_desc">
 
     <button type="submit">Simpan</button>
   </form>

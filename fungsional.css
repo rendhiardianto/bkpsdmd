@@ -33,7 +33,6 @@ body {
 }
 
 /* ============================================ CONTENT ==============================*/
-
 .header {
   padding: 10px;
 	text-align: center;
@@ -51,7 +50,6 @@ body {
   margin-top: 0;        /* remove default top margin */
   line-height: 1.2;
 }
-
 .content{
   display: flex;
   align-items: stretch;   /* makes both equal height */
@@ -113,7 +111,6 @@ body {
   flex-direction: row;
   justify-content: center;
   margin: 10px;
-  
 }
 @media screen and (max-width: 1080px) {
   .chart-rekap {
@@ -134,7 +131,6 @@ body {
 .chart2 {
   margin: auto;
 }
-
 .top-bar {
   display:flex;
   margin-left: 20px;
@@ -169,12 +165,37 @@ body {
 .tableJFMerangin{
   margin-top: 50px;
 }
+.row_part {
+  display: table;
+  clear: both;
+}
+.left {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  background-color: #dfdfdf;
+}
+.right {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  background-color: #eeeeee;
+}
+
+@media screen and (max-width: 600px) {
+  .row_part {
+    display: flex;
+    flex-direction: column;
+  }
+  .left, .right{
+    width: 100%;
+  }
+}
 
 #tab6{
   display: flex;
   flex-direction: row;
 }
-
 .tabcontent .tab6Left {
   width: 35%;
   float: left;
@@ -197,13 +218,12 @@ body {
 
 @media screen and (max-width: 1080px) {
   .tabcontent .tab6Left {
-  width: 100%;
+    width: 100%;
+  }
+  .tabcontent .tab6Right {
+    width: 100%;
+  }
 }
-.tabcontent .tab6Right {
-  width: 100%;
-}
-}
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -232,7 +252,18 @@ body {
   font-weight: bold;
   cursor: default;
 }
-
+.lihatBtn {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  font-family: Segoe UI;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+}
+.lihatBtn:hover {
+  background-color: #1b71aa;
+}
 .detailBtn {
   padding: 10px 20px;
   background-color: #3498db;

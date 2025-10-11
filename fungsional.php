@@ -61,7 +61,7 @@ $countResult3 = $conn->query("SELECT COUNT(*) AS total FROM jf_bkn WHERE $where3
 $totalUsers3 = $countResult3->fetch_assoc()['total'];
 
 $result3 = $conn->query("
-    SELECT id, jabatan, rumpun, kategori, lingkup, pembina, image_path
+    SELECT id, jabatan, rumpun, rekom_ip, penetapan_menpan, kategori, lingkup, pembina, image_path
     FROM jf_bkn
     WHERE $where3
     ORDER BY $sort $order
@@ -100,6 +100,7 @@ $result3 = $conn->query("
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
 			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+      <a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
@@ -243,9 +244,9 @@ $result3 = $conn->query("
         </thead>
           <?php while($row = $result1->fetch_assoc()): ?>
           <tr style="text-align: left;">
-            <td style="text-align:center; width: 10%;"><?php echo $row['id']; ?></td>
-            <td style="width: 45%;"><?php echo $row['jabatan']; ?></td>
-            <td style="text-align:center; width: 15%;"><?php echo $row['total']; ?></td>
+            <td style="text-align:center; width: 5%;"><?php echo $row['id']; ?></td>
+            <td style="width: 30%;"><?php echo $row['jabatan']; ?></td>
+            <td style="text-align:center; width: 10%;"><?php echo $row['total']; ?></td>
 
          <!-- <td style="text-align:center; width: 30%;">
             <?php if (!empty($row['link'])): ?>
@@ -303,7 +304,9 @@ $result3 = $conn->query("
     </p>
 
     <h2>Kategori dan Jenjang Jabatan Fungsional (JF)</h2>
-    <p><b>JF Keahlian</b></p>
+    <div class="row_part">
+      <div class="left">
+        <p><b>JF Keahlian</b></p>
     <ol>
       <li>Ahli Utama</li>
       <p>
@@ -327,7 +330,9 @@ $result3 = $conn->query("
       </p>
     </ol>
 
-    <p><b>JF Keterampilan</b></p>
+      </div>
+      <div class="right">
+         <p><b>JF Keterampilan</b></p>
     <ol>
       <li>Penyelia</li>
       <p>
@@ -346,6 +351,8 @@ $result3 = $conn->query("
         Jenjang JF pemula melaksanakan tugas dan fungsi yang bersifat dasar dalam JF keterampilan.
       </p>
     </ol>
+      </div>
+    </div> <!-- class="row" CLOSE -->
   </div>
 
   <div id="tab3" class="tabcontent" style="text-align: justify; line-height: 1.6;">
@@ -469,50 +476,56 @@ $result3 = $conn->query("
       <br>
       𝑇𝑎𝑟𝑔𝑒𝑡 𝐴𝑛𝑔𝑘𝑎 𝐾𝑟𝑒𝑑𝑖𝑡 = (25/12) × 9 = 18,75
     </p>
-
+    
+  <div class="row_part">
     <h3><i>Target angka kredit yang harus dicapai untuk masing-masing jenjang JF</i></h3>
-    <h4>JF Keahlian</h4>
-      <ol>
-        <li><b>Ahli Utama</b></li>
-        <p>Paling sedikit 50 Angka Kredit atau 20 Angka Kredit jika Pejabat Fungsional memiliki 
-          pangkat tertinggi pada jenjang tertinggi.</P>
+    <div class="left">
+      <h4>JF Keahlian</h4>
+        <ol>
+          <li><b>Ahli Utama</b></li>
+          <p>Paling sedikit 50 Angka Kredit atau 20 Angka Kredit jika Pejabat Fungsional memiliki 
+            pangkat tertinggi pada jenjang tertinggi.</P>
 
-        <li><b>Ahli Madya</b></li>
-        <p>Paling sedikit 37,5 Angka Kredit, atau 30 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi, & 20 Angka Kredit jika Pejabat Fungsional 
-          memiliki pangkat tertinggi pada jenjang tertinggi.</P>
+          <li><b>Ahli Madya</b></li>
+          <p>Paling sedikit 37,5 Angka Kredit, atau 30 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi, & 20 Angka Kredit jika Pejabat Fungsional 
+            memiliki pangkat tertinggi pada jenjang tertinggi.</P>
 
-        <li><b>Ahli Muda</b></li>
-        <p>Paling sedikit 25 Angka Kredit atau 20 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi.</P>
+          <li><b>Ahli Muda</b></li>
+          <p>Paling sedikit 25 Angka Kredit atau 20 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi.</P>
 
-        <li><b>Ahli Pertama</b></li>
-        <p>Paling sedikit 12,5 Angka Kredit atau 10 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi.</P>
-      </ol>
-    <h4>JF Keterampilan</h4>
-      <ol>
-        <li><b>Penyelia</b></li>
-          <p >
-            Paling sedikit 25 Angka Kredit atau 20 Angka Kredit jika Pejabat Fungsional memiliki 
-            pangkat tertinggi pada jenjang tertinggi.
+          <li><b>Ahli Pertama</b></li>
+          <p>Paling sedikit 12,5 Angka Kredit atau 10 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi.</P>
+        </ol>
+    </div>
+    <div class="right">
+      <h4>JF Keterampilan</h4>
+        <ol>
+          <li><b>Penyelia</b></li>
+            <p >
+              Paling sedikit 25 Angka Kredit atau 20 Angka Kredit jika Pejabat Fungsional memiliki 
+              pangkat tertinggi pada jenjang tertinggi.
+            </p>
+
+          <li><b>Mahir</b></li>
+          <p>Paling sedikit 12,5 Angka Kredit atau 10 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi.
           </p>
 
-        <li><b>Mahir</b></li>
-        <p>Paling sedikit 12,5 Angka Kredit atau 10 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi.
-        </p>
+          <li><b>Terampil</b></li>
+          <p>Paling sedikit 5 Angka Kredit atau 4 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi.
+          </p>
 
-        <li><b>Terampil</b></li>
-        <p>Paling sedikit 5 Angka Kredit atau 4 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi.
-        </p>
-
-        <li><b>Pemula</b></li>
-        <p>Paling sedikit 3,75 Angka Kredit atau 3 Angka Kredit jika belum tersedia lowongan 
-          kebutuhan jenjang jabatan lebih tinggi.
-        </p>
-      </ol>
+          <li><b>Pemula</b></li>
+          <p>Paling sedikit 3,75 Angka Kredit atau 3 Angka Kredit jika belum tersedia lowongan 
+            kebutuhan jenjang jabatan lebih tinggi.
+          </p>
+        </ol>
+    </div>
+  </div>
       <br>
       <h2>Penilaian SKP dan Capaian Angka Kredit</h2>
       <h3>Penilaian SKP dan Perilaku Kerja</h3>
@@ -616,17 +629,18 @@ $result3 = $conn->query("
 
     <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Masukkan data yang anda cari" title="Type in a name">
       
-    <div style="width:100%; height:800px; overflow:auto; border:1px solid #ccc; margin:auto;">
+    <div style="height:800px; overflow:auto; border:1px solid #ccc; margin:auto;">
       
-      <table id="userTable2" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+      <table id="userTable2" border="1" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
         <thead>
           <tr style="background:#3498db; color:white; height:50px;">
             <th>Nomor</th>
             <th>Jabatan Fungsional</th>
             <th>Rumpun Jabatan</th>
+            <th>Rekomendasi Instansi Pembina</th>
+            <th>Penetapan Menpan-RB</th>
             <th>Kategori</th>
             <th>Ruang Lingkup</th>
-            <th>Instansi Pembina</th>
             <th>Informasi Detail</th>
           </tr>
         </thead>
@@ -634,14 +648,33 @@ $result3 = $conn->query("
           <tr style="text-align:left;">
             <td style="text-align:center;"><?php echo $row['id']; ?></td>
             <td><?php echo $row['jabatan']; ?></td>
-            <td><?php echo $row['rumpun']; ?></td>
-            <td><?php echo $row['kategori']; ?></td>
-            <td><?php echo $row['lingkup']; ?></td>
-            <td><?php echo $row['pembina']; ?></td>
+            <td style="text-align:center;"><?php echo $row['rumpun']; ?></td>
+            
+            <td style="text-align:center;">
+              <?php if (!empty($row['rekom_ip'])): ?>
+              <a href="<?php echo $row['rekom_ip']; ?>" target="_blank">
+                <button class="lihatBtn">Lihat</button> 
+              </a>
+              <?php endif; ?>
+            </td>
+
+            <td style="text-align:center;">
+              <?php if (!empty($row['penetapan_menpan'])): ?>
+              <a href="<?php echo $row['penetapan_menpan']; ?>" target="_blank">
+                <button class="lihatBtn">Lihat</button> 
+              </a>
+              <?php endif; ?>
+            </td>
+
+            <td style="text-align:center;"><?php echo $row['kategori']; ?></td>
+            <td style="text-align:center;"><?php echo $row['lingkup']; ?></td>
+
             <td style="text-align: center;">
+              <?php if (!empty($row['image_path'])): ?>
               <button class="detailBtn" data-img="<?php echo 'cms/pojokjafung/uploads/detail_image/' . htmlspecialchars($row['image_path']); ?>"> 
                 Lihat
               </button>
+              <?php endif; ?>
             </td>
           </tr>
         <?php endwhile; ?>

@@ -106,6 +106,23 @@ a.button.red {
     background:#cc0000; 
 }
 
+.button.gray {
+  background-color: gray;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.button.green {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+
 * {
     box-sizing: border-box;
 }

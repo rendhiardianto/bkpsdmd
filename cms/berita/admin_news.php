@@ -75,8 +75,15 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC");
       <td><?php echo $row['created_at']; ?></td>
       <td>
         <a href="edit_news.php?id=<?php echo $row['id']; ?>" class="button edit">Edit</a>
-        <a href="delete_news.php?id=<?php echo $row['id']; ?>" class="button red" onclick="return confirm('Delete this news?');">Delete</a>
+        <a href="delete_news.php?id=<?php echo $row['id']; ?>" class="button red" onclick="return confirm('Hapus berita ini?');">Delete</a>
+        
+        <?php if ($row['visible']): ?>
+          <a href="toggle_visibility.php?id=<?php echo $row['id']; ?>" class="button gray">Hide</a>
+        <?php else: ?>
+          <a href="toggle_visibility.php?id=<?php echo $row['id']; ?>" class="button green">Unhide</a>
+        <?php endif; ?>
       </td>
+
     </tr>
     <?php endwhile; ?>
   </table>

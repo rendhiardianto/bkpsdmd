@@ -32,7 +32,7 @@ if (isset($_GET['delete'])) {
         }
 
         $conn->query("DELETE FROM announcements WHERE id=$id");
-        echo "<script>alert('Pengumuman sudah dihapus!'); window.location='dashboard_pengumuman.php';</script>";
+        echo "<script>alert('Pengumuman berhasil dihapus!'); window.location='dashboard_pengumuman.php';</script>";
         exit;
     }
 }
@@ -294,7 +294,7 @@ $(document).ready(function(){
 
   // Delete Announcement
   $(".delete").click(function(){
-    if (!confirm("Are you sure you want to delete this announcement?")) return;
+    if (!confirm("Apakah anda ingin menghapus pengumuman ini?")) return;
     let id = $(this).closest("tr").data("id");
 
     $.post("ajax_delete_announcement.php", { id: id }, function(response){

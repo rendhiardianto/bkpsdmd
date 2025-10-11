@@ -17,6 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Use old value if new one is empty
     $jabatan = !empty($_POST['jabatan']) ? $conn->real_escape_string($_POST['jabatan']) : $old['jabatan'];
     $rumpun = !empty($_POST['rumpun']) ? $conn->real_escape_string($_POST['rumpun']) : $old['rumpun'];
+    $rekom_ip = !empty($_POST['rekom_ip']) ? $conn->real_escape_string($_POST['rekom_ip']) : $old['rekom_ip'];
+    $penetapan_menpan = !empty($_POST['penetapan_menpan']) ? $conn->real_escape_string($_POST['penetapan_menpan']) : $old['penetapan_menpan'];
     $kategori = !empty($_POST['kategori']) ? $conn->real_escape_string($_POST['kategori']) : $old['kategori'];
     $lingkup = !empty($_POST['lingkup']) ? $conn->real_escape_string($_POST['lingkup']) : $old['lingkup'];
     $pembina = !empty($_POST['pembina']) ? $conn->real_escape_string($_POST['pembina']) : $old['pembina'];
@@ -67,6 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sql = "UPDATE jf_bkn SET 
                 jabatan='$jabatan',
                 rumpun='$rumpun',
+                rekom_ip='$rekom_ip',
+                penetapan_menpan='$penetapan_menpan',
                 kategori='$kategori',
                 lingkup='$lingkup',
                 pembina='$pembina'

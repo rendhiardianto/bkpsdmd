@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if ($insert) {
             $success = "";
             ?><script>
-                alert('Data sudah ditambahakan.');
+                alert('Data berhasil ditambahkan.');
                 window.location.href='add_user.php';
             </script><?php
           } 

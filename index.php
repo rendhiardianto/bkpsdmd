@@ -30,6 +30,7 @@ while ($row = $result->fetch_assoc()) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <link href="headerFooter.css" rel="stylesheet" type="text/css">
 <link href="index.css" rel="stylesheet" type="text/css">
@@ -50,6 +51,7 @@ while ($row = $result->fetch_assoc()) {
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
 			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
@@ -221,6 +223,7 @@ while ($row = $result->fetch_assoc()) {
 	<img src="cms/infoGrafis/uploads/images/12.png" onclick="currentSlide(12)">
 	</div>
 </div>
+
 <div class="pidato-kaban">
 	<h2> Sekapur Sirih<br><p>Kepala BKPSDMD Kabupaten Merangin</p></h2>
 	<img src="images/Foto_Kaban.png" alt="Foto Kaban">
@@ -239,66 +242,24 @@ while ($row = $result->fetch_assoc()) {
 	
 <div class="asn-rekap">
 	<h2>STATISTIK<br><p>Rekapitulasi ASN Kabupaten Merangin (per Desember 2024)</p></h2>
-	<!--style="font-size:2vw;"-->
+			
+	<div class="chart-rekap">
+		<div class="chart-donat" id="myPlot0"></div>
+		<div class="chart-donat" id="myPlot1"></div>
+		<div class="chart-donat" id="myPlot2"></div>
+		<div class="chart-donat" id="myPlot3"></div>
 
-		<div class="chart-rekap" style="justify-content:center">
+		<div class="chart100" id="myPlot100"></div>
+    </div>
 
-			<div class="chart">
-			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%204&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-			<div class="chart">
-			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%202&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-
-			<div class="chart">
-			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%201&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-
-			<div class="chart">
-			<iframe width="535" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%205&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-			<div class="chart">
-			<iframe width="535" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%209&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-			<div class="chart">
-			<iframe width="327" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%207&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-			<div class="chart">
-			<iframe width="458" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%2011&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-			<div class="chart">
-			<iframe width="458" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%2010&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-
-			<div class="chart">
-			<iframe width="326" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%208&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-			</div>
-			
-		<!--<canvas class="flex-item-half1" style="max-width:325px"></canvas>
-		<canvas class="flex-item-half2" id="myChart2" style="max-width:300px"></canvas>	
-		<canvas class="flex-item-half3" id="myChart3" style="max-width:300px"></canvas>
-		<canvas class="flex-item-half4" id="myChart4" style="max-width:300px"></canvas>
-		
-		<canvas class="flex-item-half5" id="myChart5" style="max-width:300px"></canvas>	
-		<canvas class="flex-item-half6" id="myChart6" style="max-width:300px"></canvas>	
-		<canvas class="flex-item-half7" id="myChart7" style="max-width:300px"></canvas>
-		<canvas class="flex-item-half8" id="myChart8" style="max-width:300px"></canvas>
-		</div>
-		<div class="maps-rekap">
-		
-		</div>-->
-	</div>
 </div>
+
 <!------------------- FOOTER ----------------------------------->	
-	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="/icon/go_to_top.png">Scroll to Top</div>
+
 <div class="row">
   <div class="column first">
-		<img src="icon/BKPLogo.png" alt="Logo BKPSDMD">
+	<img src="icon/BKPLogo.png" alt="Logo BKPSDMD">
 	  <p style="text-align: center">Copyright © 2025.</p>
 	  <p style="text-align: center">Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah (BKPSDMD) Kabupaten Merangin.</p> 
 	  <p style="text-align: center">All Rights Reserved</p>
@@ -350,10 +311,12 @@ while ($row = $result->fetch_assoc()) {
       document.getElementById("visitor-count").innerText = count;
     });
 </script>-->
-	
+
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script src="JavaScript/script.js"></script>
+<script src="JavaScript/chart_rekapASN.js"></script>
+<script src="JavaScript/back_to_top.js"></script>
 
 <script>
   let slideIndex = 1;

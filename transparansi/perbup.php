@@ -11,7 +11,6 @@ $result = $stmt->get_result();
 
 ?>
 
-
 <!doctype html>
 <html>
 <head>
@@ -42,6 +41,7 @@ $result = $stmt->get_result();
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="/icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
 			<a href="/cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>

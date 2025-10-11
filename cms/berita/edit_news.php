@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $category = $_POST['category'];
+    $image_desc = $_POST['image_desc'];
     $imagePath = $news['image']; // keep old image
 
     if (!empty($_FILES['image']['name'])) {
@@ -19,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
     }
 
-    $stmt = $conn->prepare("UPDATE news SET title=?, content=?, category=?, image=? WHERE id=?");
-    $stmt->bind_param("ssssi", $title, $content, $category, $imagePath, $id);
+    $stmt = $conn->prepare("UPDATE news SET title=?, content=?, category=?, image=?, image_desc=? WHERE id=?");
+    $stmt->bind_param("sssssi", $title, $content, $category, $imagePath, $image_desc, $id);
     $stmt->execute();
 
     header("Location: admin_news.php");
@@ -68,6 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <label>Thumbnail</label>
   <input type="file" name="image">
   <p>Current: <img src="<?php echo $news['image']; ?>" width="120"></p>
+
+  <label>Image Description</label>
+  <input type="text" name="image_desc" value="<?php echo $news['image_desc']; ?>" required>
+
+
 
   <button type="submit">Simpan</button>
 </form>

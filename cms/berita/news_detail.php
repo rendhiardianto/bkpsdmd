@@ -38,16 +38,21 @@ if (isset($_GET['slug']) && $_GET['slug'] !== '') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $news['title']; ?></title>
   <link href="news_detail.css" rel="stylesheet" type="text/css">
+  <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div class="article">
   <h1><?php echo $news['title']; ?></h1>
   <div class="meta">
-    Dipublish oleh: <?php echo htmlspecialchars($news['created_by']); ?> | Category: <?php echo $news['category']; ?>
-    <br><br><?php echo date("j F Y, H:i", strtotime($news['created_at'])); ?> </div>
-   
-  <img src="<?php echo $news['image']; ?>" alt="">
+    Dipublish oleh: <?php echo htmlspecialchars($news['created_by']); ?> | <?php echo date("j F Y, H:i", strtotime($news['created_at'])); ?>
+    <br><br>Category: <?php echo $news['category']; ?></div>
+
+  <figure>
+    <img src="<?php echo $news['image']; ?>" alt="Trulli" style="width:100%">
+    <figcaption style="text-align: center;"><?php echo $news['image_desc']; ?></figcaption>
+  </figure>
+
   <p><?php echo nl2br($news['content']); ?></p>
 </div>
 <!------------------- FOOTER ----------------------------------->	

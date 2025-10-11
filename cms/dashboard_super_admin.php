@@ -148,6 +148,11 @@ $user = $result->fetch_assoc();
         <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
     </div>
 
+    <div class="flex-item-main">
+      <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/fungsional.png"></a><br>INPUT REKAP ASN</p>
+    </div>
+
 </div>
 
   <div class="footer">

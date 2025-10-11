@@ -35,11 +35,13 @@ $result = $conn->query("SELECT * FROM jf_bkn ORDER BY id ASC");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $jabatan  = $conn->real_escape_string($_POST['jabatan']);
-    $rumpun   = $conn->real_escape_string($_POST['rumpun']);
+    $jabatan = $conn->real_escape_string($_POST['jabatan']);
+    $rumpun = $conn->real_escape_string($_POST['rumpun']);
+    $rekom_ip = $conn->real_escape_string($_POST['rekom_ip']);
+    $penetapan_menpan = $conn->real_escape_string($_POST['penetapan_menpan']);
     $kategori = $conn->real_escape_string($_POST['kategori']);
-    $lingkup  = $conn->real_escape_string($_POST['lingkup']);
-    $pembina  = $conn->real_escape_string($_POST['pembina']);
+    $lingkup = $conn->real_escape_string($_POST['lingkup']);
+    $pembina = $conn->real_escape_string($_POST['pembina']);
     $created_by = $_SESSION['fullname'];
 
     // Check duplicate
@@ -79,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // --- Insert into DB ---
-    $stmt = $conn->prepare("INSERT INTO jf_bkn (jabatan, rumpun, kategori, lingkup, pembina, image_path, created_at, created_by) VALUES (?,?,?,?,?,?,NOW(),?)");
-    $stmt->bind_param("sssssss", $jabatan, $rumpun, $kategori, $lingkup, $pembina, $image_path, $created_by);
+    $stmt = $conn->prepare("INSERT INTO jf_bkn (jabatan, rumpun, rekom_ip, penetapan_menpan, kategori, lingkup, pembina, image_path, created_at) VALUES (?,?,?,?,?,?,?,?,NOW())");
+    $stmt->bind_param("ssssssss", $jabatan, $rumpun, $rekom_ip, $penetapan_menpan, $kategori, $lingkup, $pembina, $image_path);
     $stmt->execute();
     $stmt->close();
 
@@ -157,6 +159,8 @@ function compressImage($source, $destination, $quality = 80)
             <form method="POST" enctype="multipart/form-data">
                 <input type="text" name="jabatan" placeholder="Nama Jabatan Fungsional">
                 <input type="text" name="rumpun" placeholder="Rumpun Jabatan">
+                <input type="text" name="rekom_ip" placeholder="Rekomendasi Instansi Pembina">
+                <input type="text" name="penetapan_menpan" placeholder="Penetapan Menpan-RB">
                 <input type="text" name="kategori" placeholder="Kategori">
                 <input type="text" name="lingkup" placeholder="Lingkup">
                 <input type="text" name="pembina" placeholder="Instansi Pembina">
@@ -170,28 +174,46 @@ function compressImage($source, $destination, $quality = 80)
         </div>
       
   <div class="rightSide">
-    <div class="container">
       <h2 style="text-align: center;">Daftar Jabatan Fungsional</h2>
 
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cari nama jabatan atau instansi pembina" title="Type in a name">
-      
-      <div style="width:100%; height:1000px; overflow:auto; border:1px solid #ccc; margin:auto;">  
-        <table id="userTable" border="1" width="100%" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
+
+      <div style="height:1000px; border:1px solid #ccc; margin:auto;">  
+        <table id="userTable1" border="1" cellspacing="0" cellpadding="8" style="background:#fff; border-collapse:collapse; text-align:center;">
           <tr>
             <th>Nomor</th>
-            <th>Jabatan Fungsional</th>
+            <th style="width: 30%;">Jabatan Fungsional</th>
             <th>Rumpun Jabatan</th>
+            <th>Rekomendasi Instansi Pembina</th>
+            <th>Penetapan Menpan-RB</th>
             <th>Kategori</th>
             <th>Ruang Lingkup</th>
             <th>Instansi Pembina</th>
             <th>Informasi Detail</th>
-            <th style="width: 130px;">Actions</th>
+            <th>Actions</th>
           </tr>
           <?php while ($row = $result->fetch_assoc()): ?>
             <tr data-id="<?= $row['id'] ?>">
               <td style="text-align:center;"><?php echo $row['id']; ?></td>
               <td><?php echo $row['jabatan']; ?></td>
               <td><?php echo $row['rumpun']; ?></td>
+              <td style="text-align:center;">
+
+              <?php if (!empty($row['rekom_ip'])): ?>
+                <a href="<?php echo $row['rekom_ip']; ?>" target="_blank">
+                  <button class="lihatBtn">Lihat</button> 
+                </a>
+                <?php endif; ?>
+              </td>
+
+              <td style="text-align:center;">
+                <?php if (!empty($row['penetapan_menpan'])): ?>
+                <a href="<?php echo $row['penetapan_menpan']; ?>" target="_blank">
+                  <button class="lihatBtn">Lihat</button> 
+                </a>
+                <?php endif; ?>
+              </td>
+
               <td><?php echo $row['kategori']; ?></td>
               <td><?php echo $row['lingkup']; ?></td>
               <td><?php echo $row['pembina']; ?></td>
@@ -213,7 +235,6 @@ function compressImage($source, $destination, $quality = 80)
 
         </table>
       </div>
-    </div>
   </div>
 
     <!-- Modal for Edit -->
@@ -225,6 +246,8 @@ function compressImage($source, $destination, $quality = 80)
 
           <input type="text" name="jabatan" id="edit_title" placeholder="Nama Jabatan Fungsional">
           <input type="text" name="rumpun" id="edit_rumpun" placeholder="Rumpun Jabatan">
+          <input type="text" name="rekom_ip" id="edit_rekom_ip" placeholder="Rekomendasi Instansi Pembina">
+          <input type="text" name="penetapan_menpan" id="edit_penetapan_menpan" placeholder="Penetapan Menpan-RB">
           <input type="text" name="kategori" id="edit_kategori" placeholder="Kategori">
           <input type="text" name="lingkup" id="edit_lingkup" placeholder="Lingkup">
           <input type="text" name="pembina" id="edit_pembina" placeholder="Instansi Pembina">
@@ -280,6 +303,8 @@ $(document).ready(function(){
     let id = row.data("id");
     let jabatan = row.find(".jabatan").text();
     let rumpun = row.find(".rumpun").text();
+    let rekom_ip = row.find(".rekom_ip").text();
+    let penetapan_menpan = row.find(".penetapan_menpan").text();
     let kategori = row.find(".kategori").text();
     let lingkup = row.find(".lingkup").text();
     let image_path = row.find(".image_path").text();
@@ -287,6 +312,8 @@ $(document).ready(function(){
     $("#edit_id").val(id);
     $("#edit_jabatan").val(jabatan);
     $("#edit_rumpun").val(rumpun);
+    $("#edit_rekom_ip").val(rekom_ip);
+    $("#edit_penetapan_menpan").val(penetapan_menpan);
     $("#edit_kategori").val(kategori);
     $("#edit_lingkup").val(lingkup);
     $("#edit_image_path").val(image_path);

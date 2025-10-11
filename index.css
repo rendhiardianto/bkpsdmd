@@ -186,24 +186,31 @@ body {
 	font-size: 30px;
 	color: #0077b6;
 }
-.asn-rekap h2 p {
+.asn-rekap p {
 	font-family: Bahnschrift;
 	font-size: 20px;
 	text-align: center;
 	color: #0077b6;
 	margin-top: 0px;
 }
+
 .chart-rekap {
 	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-	margin-top: 50px;
-	margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #ffffff;
+	gap: 40px 20px;
 }
-.chart-rekap .chart {
-	padding: 20px;
+#myPlot0 {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.chart-rekap canvas{
-	padding-bottom: 0px;
+.chart-donat{
+  
 }
+
+
 

@@ -1,0 +1,37 @@
+<!--<div class="chart-rekap" style="justify-content:center">
+
+			<div class="chart">
+			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%204&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+			
+			<div class="chart">
+			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%202&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+
+			<div class="chart">
+			<iframe width="325" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%201&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+
+			<div class="chart">
+			<iframe width="535" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%205&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+			
+			<div class="chart">
+			<iframe width="535" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%209&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+			
+			<div class="chart">
+			<iframe width="327" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%207&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+			
+			<div class="chart">
+			<iframe width="458" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%2011&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+			
+			<div class="chart">
+			<iframe width="458" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%2010&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>
+
+			<div class="chart">
+			<iframe width="326" height="287" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/8ef122d5280ec801/IQSO9Lmf51jOT78Wk8csCS7eAQ-61IXDUuLdtoS4tRr7DjU?em=2&wdAllowInteractivity=False&Item=Chart%208&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+			</div>-->

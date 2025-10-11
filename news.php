@@ -2,7 +2,7 @@
 include "cms/db.php"; // your DB connection file
 
 // Fetch latest news
-$result = $conn->query("SELECT * FROM news ORDER BY created_at DESC LIMIT 10");
+$result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at DESC LIMIT 10");
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +35,7 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC LIMIT 10");
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
 			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
@@ -132,7 +133,7 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC LIMIT 10");
     <h3>Berita Terkini</h3>
     <ul>
       <?php
-      $latest = $conn->query("SELECT slug, title FROM news ORDER BY created_at DESC LIMIT 5");
+      $latest = $conn->query("SELECT slug, title FROM news WHERE visible = 1 ORDER BY created_at DESC LIMIT 5");
       while ($n = $latest->fetch_assoc()):
       ?>
         <li><a href="cms/berita/news_detail.php?slug=<?php echo $n['slug']; ?>" target="_blank"><?php echo $n['title']; ?></a></li>
@@ -150,7 +151,7 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC LIMIT 10");
     </ul>
   </div>
 </div>
-<!------------------- FOOTER ----------------------------------->	
+<!------------------- FOOTER ----------------------------------->
 	
 <div class="row">
   <div class="column first">
