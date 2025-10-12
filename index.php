@@ -241,7 +241,7 @@ while ($row = $result->fetch_assoc()) {
 </div>
 	
 <div class="asn-rekap">
-	<h2>STATISTIK<br><p>Rekapitulasi ASN Kabupaten Merangin (per Desember 2024)</p></h2>
+	<h2>STATISTIK<br><p>Rekapitulasi ASN Kabupaten Merangin</p></h2>
 			
 	<div class="chart-rekap">
 		<div class="chart-donat" id="myPlot0"></div>
@@ -315,7 +315,7 @@ while ($row = $result->fetch_assoc()) {
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script src="JavaScript/script.js"></script>
-<script src="JavaScript/chart_rekapASN.js"></script>
+<script src="JavaScript/chart_rekap_asn.js"></script>
 <script src="JavaScript/back_to_top.js"></script>
 
 <script>

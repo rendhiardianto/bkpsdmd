@@ -27,36 +27,46 @@ const data0 = [{
 Plotly.newPlot("myPlot0", data0, layout0);
 
 // ======================== PNS - Jenis Kelamin =========================
-const xArray1 = ["Laki-laki", "Perempuan"];
-const yArray1 = [1943, 2718];
-const barColors1 = ["#339cff", "#ff33bb"];
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jenis%20Kelamin&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    const xArray1 = data.map(row => row.label);
+    const yArray1 = data.map(row => parseInt(row.jumlah));
 
-const layout1 = {
-    title:"PNS - Jenis Kelamin", height:350, width:350, 
-    font: {size: 14, color: '#000'},
-    showlegend:true,
-    legend: {"orientation": "h", x:-0.1, y:-0.5},
-    margin: {l:50, r:50, b:100, t:100, pad:4},
-};
+    const barColors1 = ["#339cff", "#ff33bb"];
+    const layout1 = {
+        title:"PNS - Jenis Kelamin", height:350, width:350, 
+        font: {size: 14, color: '#000'},
+        showlegend:true,
+        legend: {"orientation": "h", x:-0.1, y:-0.5},
+        margin: {l:50, r:50, b:100, t:100, pad:4},
+    };
 
-const data1 = [{
-  labels:xArray1, 
-  values:yArray1, 
-  hole:.5, 
-  type:"pie", 
-  marker: {
-    colors: barColors1
-  },
-  textinfo: "value+percent", 
-  textposition: "outside",
-  automargin: true, 
-}];
+    const data1 = [{
+      labels:xArray1, 
+      values:yArray1, 
+      hole:.5, 
+      type:"pie", 
+      marker: { colors: barColors1 },
+      textinfo: "value+percent", 
+      textposition: "outside",
+      automargin: true, 
+    }];
 
-Plotly.newPlot("myPlot1", data1, layout1);
+    Plotly.newPlot("myPlot1", data1, layout1);
+  })
+  .catch(err => {
+    console.error("Error fetching data:", err);
+  });
+
 
 // ======================== PPPK - Jenis Kelamin =========================
-const xArray2 = ["Laki-laki", "Perempuan"];
-const yArray2 = [1943, 2718];
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PPPK&sub_kategori=Jenis%20Kelamin&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    const xArray2 = data.map(row => row.label);
+    const yArray2 = data.map(row => parseInt(row.jumlah));
+
 const barColors2 = ["#339cff", "#ff33bb"];
 
 const layout2 = {
@@ -81,10 +91,13 @@ const data2 = [{
 }];
 
 Plotly.newPlot("myPlot2", data2, layout2);
-
+})
+  .catch(err => {
+    console.error("Error fetching data:", err);
+  });
 // ======================== PPPK Paruh Waktu - Jenis Kelamin =========================
 const xArray3 = ["Laki-laki", "Perempuan"];
-const yArray3 = [1943, 2718];
+const yArray3 = [1510, 2000];
 const barColors3 = ["#339cff", "#ff33bb"];
 
 const layout3 = {

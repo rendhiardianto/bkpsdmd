@@ -149,8 +149,8 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="flex-item-main">
-      <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/fungsional.png"></a><br>INPUT REKAP ASN</p>
+      <p><a href="rekap_asn_merangin/dashboard_input_rekap_asn.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/rekap_asn.png"></a><br>INPUT REKAP ASN</p>
     </div>
 
 </div>

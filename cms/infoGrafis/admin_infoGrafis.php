@@ -16,7 +16,7 @@ $backLinks = [
 ];
 $backUrl = $backLinks[$role];
 
-$result = $conn->query("SELECT * FROM infografis ORDER BY created_at DESC");
+$result = $conn->query("SELECT * FROM infografis ORDER BY created_at ASC");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $caption = $_POST['caption'];

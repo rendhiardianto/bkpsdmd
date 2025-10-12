@@ -195,8 +195,8 @@ function compressImage($source, $destination, $quality = 80)
           <?php while ($row = $result->fetch_assoc()): ?>
             <tr data-id="<?= $row['id'] ?>">
               <td style="text-align:center;"><?php echo $row['id']; ?></td>
-              <td><?php echo $row['jabatan']; ?></td>
-              <td><?php echo $row['rumpun']; ?></td>
+              <td class="jabatan"><?php echo $row['jabatan']; ?></td>
+              <td class="rumpun"><?php echo $row['rumpun']; ?></td>
               <td style="text-align:center;">
 
               <?php if (!empty($row['rekom_ip'])): ?>
@@ -214,11 +214,11 @@ function compressImage($source, $destination, $quality = 80)
                 <?php endif; ?>
               </td>
 
-              <td><?php echo $row['kategori']; ?></td>
-              <td><?php echo $row['lingkup']; ?></td>
-              <td><?php echo $row['pembina']; ?></td>
+              <td class="kategori"><?php echo $row['kategori']; ?></td>
+              <td class="lingkup"><?php echo $row['lingkup']; ?></td>
+              <td class="pembina"><?php echo $row['pembina']; ?></td>
 
-              <td>
+              <td class="image_path">
                 <?php if ($row['image_path']): ?>
                   <img src="uploads/detail_image/<?= $row['image_path'] ?>" alt="Image">
                 <?php else: ?>
@@ -238,13 +238,13 @@ function compressImage($source, $destination, $quality = 80)
   </div>
 
     <!-- Modal for Edit -->
-    <div id="editModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);">
+    <div id="editModal" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);">
       <div style="background:#fff; padding:20px; width:400px; margin:100px auto; border-radius:12px; position:relative;">
         <h3>Edit Jabatan Fungsional</h3>
         <form id="editForm" enctype="multipart/form-data">
           <input type="hidden" name="id" id="edit_id">
 
-          <input type="text" name="jabatan" id="edit_title" placeholder="Nama Jabatan Fungsional">
+          <input type="text" name="jabatan" id="edit_jabatan" placeholder="Nama Jabatan Fungsional">
           <input type="text" name="rumpun" id="edit_rumpun" placeholder="Rumpun Jabatan">
           <input type="text" name="rekom_ip" id="edit_rekom_ip" placeholder="Rekomendasi Instansi Pembina">
           <input type="text" name="penetapan_menpan" id="edit_penetapan_menpan" placeholder="Penetapan Menpan-RB">
@@ -307,6 +307,7 @@ $(document).ready(function(){
     let penetapan_menpan = row.find(".penetapan_menpan").text();
     let kategori = row.find(".kategori").text();
     let lingkup = row.find(".lingkup").text();
+    let pembina = row.find(".pembina").text();
     let image_path = row.find(".image_path").text();
 
     $("#edit_id").val(id);
@@ -316,6 +317,7 @@ $(document).ready(function(){
     $("#edit_penetapan_menpan").val(penetapan_menpan);
     $("#edit_kategori").val(kategori);
     $("#edit_lingkup").val(lingkup);
+    $("#edit_pembina").val(pembina);
     $("#edit_image_path").val(image_path);
 
     $("#editModal").show();
