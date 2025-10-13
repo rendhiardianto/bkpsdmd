@@ -40,19 +40,29 @@ $user = $result->fetch_assoc();
 </head>
 <body>
   <div class="header">
+    <div class="logo">
+      <a href="../index.php" target="_blank"><img src="../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
+    </div>
 
-            <div class="logo">
-            	<a href="../index.php" target="_blank"><img src="../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
-            </div>
+    <div class="startlogoDD">
+      <button onclick="toggleStartMenu()" class="startbtn"> <?php if (!empty($user['profile_pic'])): ?>
+        <img src="uploads/profile_pics/<?php echo $user['profile_pic']; ?>" class="profile-pic">
+        <?php else: ?>
+          <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
+        <?php endif; ?>
+      </button>
+      <div id="myStart" class="start-content">
+        <a href="edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
+        <a href="logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
+      </div>
+    </div>
 
-            <div class="navbar">
-              <a href="logout.php" class="logout" style="text-decoration: none;">Logout &#10006;</a>
-            </div> 
   </div>
+  
   <div class="roleHeader">
     <h1>👑 Super Admin Dashboard 👑</h1>
   </div>
-
+  
 <div class="content">
 
     <div class="leftSide">
@@ -158,6 +168,8 @@ $user = $result->fetch_assoc();
   <div class="footer">
     <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
   </div>
+
+<script src="/JavaScript/script.js"></script>
 
 </body>
 </html>

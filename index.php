@@ -53,8 +53,9 @@ while ($row = $result->fetch_assoc()) {
 			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
-			<a href="#" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
+			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
+			<a href="#" target="_blank"><img src="/icon/tracking.png" width="20px"> MyTicket Tracking</a>
 		</div>
 	</div>
 	<div class="navLogo">
@@ -249,7 +250,12 @@ while ($row = $result->fetch_assoc()) {
 		<div class="chart-donat" id="myPlot2"></div>
 		<div class="chart-donat" id="myPlot3"></div>
 
-		<div class="chart100" id="myPlot100"></div>
+		<div class="chart-bar" id="myPlot100"></div>
+		<div class="chart-bar" id="myPlot99"></div>
+		<div class="chart-bar" id="myPlot98"></div>
+		<div class="chart-bar" id="myPlot97"></div>
+		<div class="chart-bar" id="myPlot96"></div>
+		<div class="chart-bar" id="myPlot95"></div>
     </div>
 
 </div>
@@ -317,60 +323,7 @@ while ($row = $result->fetch_assoc()) {
 <script src="JavaScript/script.js"></script>
 <script src="JavaScript/chart_rekap_asn.js"></script>
 <script src="JavaScript/back_to_top.js"></script>
-
-<script>
-  let slideIndex = 1;
-  let slideTimer;
-
-  function showSlides(n) {
-    let slides = document.getElementsByClassName("slides");
-    let dots = document.getElementsByClassName("dot");
-    let thumbs = document.querySelectorAll(".thumbnail-row img");
-
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    thumbs.forEach(img => img.classList.remove("active-thumb"));
-
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
-    thumbs[slideIndex-1].classList.add("active-thumb");
-  }
-
-  function plusSlides(n) {
-    clearInterval(slideTimer);
-    slideIndex += n;
-    showSlides(slideIndex);
-    autoSlide();
-  }
-
-  function currentSlide(n) {
-    clearInterval(slideTimer);
-    slideIndex = n;
-    showSlides(slideIndex);
-    autoSlide();
-  }
-
-  function autoSlide() {
-    slideTimer = setInterval(() => {
-      slideIndex++;
-      if (slideIndex > document.getElementsByClassName("slides").length) { slideIndex = 1 }
-      showSlides(slideIndex);
-    }, 4000); // 4 seconds
-  }
-
-  // Initialize
-  showSlides(slideIndex);
-  autoSlide();
-</script>
+<script src="JavaScript/image_slides.js"></script>
 
 </body>
 </html>

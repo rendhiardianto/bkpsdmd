@@ -123,35 +123,245 @@ const data3 = [{
 
 Plotly.newPlot("myPlot3", data3, layout3);
 
-// ======================== Top 10 Penjabat Jabatan Fungsional =========================
-const xArray100 = [
-    "GURU AHLI PERTAMA", "GURU AHLI MUDA", "GURU AHLI MADYA", 
-    "BIDAN TERAMPIL", "PERAWAT PENYELIA", "ANALIS KEBIJAKAN AHLI MUDA"
-];
-const yArray100 = [1996, 654, 495, 152, 101, 86];
+// ======================== PNS - Pendidikan =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Pendidikan&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
 
-const total = [4561].reduce((a, b) => a + b, 0);
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
 
-// bikin array text berisi "value (percent%)"
-const textLabels = yArray100.map(v => `${v.toLocaleString("id-ID")} (${((v/total)*100).toFixed(1)}%)`);
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
 
-const layout100 = {
-    title:"Top 10 Jabatan Fungsional",
-    height:350, 
-    width:600, 
-    font: {size: 15, color: '#000'},
-};
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
 
-const data100 = [{
-  x: xArray100,
-  y: yArray100,
-  type: "bar",
-  text: textLabels,
-  textposition: "outside",
-  orientation:"v",
-  marker: {color:"rgba(0,0,255)"}
-}];
+    const layout = {
+      title: "PNS - Pendidikan",
+      height: 500,
+      width: 700,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
 
-Plotly.newPlot("myPlot100", data100, layout100);
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot100", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Pendidkan PNS:", err);
+  });
+
+// ======================== PNS - Usia =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Usia&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
+
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
+
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
+
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
+
+    const layout = {
+      title: "PNS - Usia",
+      height: 500,
+      width: 700,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
+
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot99", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Usia PNS:", err);
+  });
+
+  // ======================== PNS - Golongan =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Golongan&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
+
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
+
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
+
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
+
+    const layout = {
+      title: "PNS - Golongan",
+      height: 400,
+      width: 450,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
+
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot98", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Golongan PNS:", err);
+  });
+
+  // ======================== PNS - Eselon =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Eselon&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
+
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
+
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
+
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
+
+    const layout = {
+      title: "PNS - Eselon",
+      height: 400,
+      width: 450,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
+
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot97", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Eselon PNS:", err);
+  });
+
+ // ======================== PNS - Jabatan =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jabatan&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
+
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
+
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
+
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
+
+    const layout = {
+      title: "PNS - Jabatan",
+      height: 400,
+      width: 450,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
+
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot96", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Jabatan PNS:", err);
+  });
+
+
+  // ======================== PNS - Kenaikan Pangkat =========================
+fetch("/cms/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Kenaikan Pangkat&semester=2")
+  .then(response => response.json())
+  .then(data => {
+    // xArray: nama jabatan
+    const xArray = data.map(row => row.label);
+
+    // yArray: jumlah
+    const yArray = data.map(row => parseInt(row.jumlah));
+
+    // total jumlah untuk persentase
+    const total = yArray.reduce((a, b) => a + b, 0);
+
+    // bikin array text berisi "value (percent%)"
+    const textLabels = yArray.map(v => `${v.toLocaleString("id-ID")} (${((v / total) * 100).toFixed(1)}%)`);
+
+    const layout = {
+      title: "PNS - Kenaikan Pangkat 2024",
+      height: 400,
+      width: 700,
+      font: { size: 15, color: '#000' },
+      margin: { t: 80, b: 150 }
+    };
+
+    const chartData = [{
+      x: xArray,
+      y: yArray,
+      type: "bar",
+      text: textLabels,
+      textposition: "outside",
+      orientation: "v",
+      marker: { color: "#0077b6" }
+    }];
+
+    Plotly.newPlot("myPlot95", chartData, layout);
+  })
+  .catch(err => {
+    console.error("Error fetching Kenaikan Pangkat PNS:", err);
+  });
 
 // ======================== End of File =========================

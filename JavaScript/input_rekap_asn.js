@@ -14,7 +14,6 @@ function updateSubOptions() {
 
   subContainer.style.display = "block";
 
-  // Options based on kategori
   const optionsPNS = [
     "Jenis Kelamin",
     "Usia",
@@ -40,12 +39,10 @@ function updateSubOptions() {
   const optionsPPPKParuhWaktu = [
     "Jenis Kelamin", 
     "Usia", 
-    "Pendidikan", 
+    "Pendidikan"
   ];
 
-  //const options = kategori === "PNS" ? optionsPNS : optionsPPPK;
-
-let options;
+  let options;
   if (kategori === "PNS") options = optionsPNS;
   else if (kategori === "PPPK") options = optionsPPPK;
   else if (kategori === "PPPK Paruh Waktu") options = optionsPPPKParuhWaktu;
@@ -67,7 +64,7 @@ function showInputForm() {
   form.style.display = "none";
   if (!sub) return;
 
-  // Define all forms and their categories
+  // Forms data with exact casing
   const forms = {
     "Jenis Kelamin": ["Laki-laki", "Perempuan"],
     "Usia": ["18-20 Tahun", "21-25 Tahun", "26-30 Tahun", "31-35 Tahun", "36-40 Tahun", "41-45 Tahun", "45-50 Tahun", "51-55 Tahun", "55-60 Tahun", "Diatas 60 Tahun"],
@@ -85,7 +82,6 @@ function showInputForm() {
   title.textContent = "Input Data: " + sub;
   form.appendChild(title);
 
-  // Build inputs dynamically
   if (forms[sub]) {
     forms[sub].forEach(label => {
       const lbl = document.createElement("label");
@@ -94,24 +90,22 @@ function showInputForm() {
       const input = document.createElement("input");
       input.type = "number";
       input.min = "0";
-      input.name = label.toLowerCase().replace(/\s+/g, "_");
-      input.placeholder = "Masukkan jumlah " + label.toLowerCase();
+      input.name = label; // preserve exact spelling
+      input.placeholder = "Masukkan jumlah " + label; // preserve exact spelling
       input.required = true;
 
-      // Trigger total update when typing
       input.addEventListener("input", calculateTotal);
 
       form.appendChild(lbl);
       form.appendChild(input);
     });
 
-    // Add total field (read-only)
     const totalLabel = document.createElement("label");
     totalLabel.textContent = "Total";
     const totalInput = document.createElement("input");
     totalInput.type = "number";
     totalInput.id = "totalField";
-    totalInput.name = "total";
+    totalInput.name = "Total";
     totalInput.readOnly = true;
     totalInput.placeholder = "Total otomatis";
     totalInput.style.backgroundColor = "#f0f0f0";
@@ -120,7 +114,6 @@ function showInputForm() {
     form.appendChild(totalLabel);
     form.appendChild(totalInput);
 
-    // Add submit button
     const btn = document.createElement("button");
     btn.type = "submit";
     btn.textContent = "Tambahkan";
@@ -130,7 +123,6 @@ function showInputForm() {
   }
 }
 
-// Function to calculate total
 function calculateTotal() {
   const form = document.getElementById("inputForm");
   const inputs = form.querySelectorAll('input[type="number"]:not(#totalField)');
@@ -145,6 +137,8 @@ function calculateTotal() {
   if (totalField) totalField.value = total;
 }
 
+// Add main submit button outside dynamic fields
+const inputForm = document.getElementById("inputForm");
 const submitBtn = document.createElement("button");
 submitBtn.type = "submit";
 submitBtn.textContent = "Simpan Data";
