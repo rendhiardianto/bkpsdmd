@@ -30,7 +30,7 @@ $totalPages1 = ceil($totalUsers1 / $limit);
 
 // Fetch paginated rows
 $result1 = $conn->query("
-    SELECT id, jabatan, total, link
+    SELECT id, jabatan, total
     FROM jf_meranginkab
     WHERE $where1
     ORDER BY $sort $order
@@ -40,31 +40,17 @@ $result1 = $conn->query("
 /* =====================================================
    TABLE 2: jf_bkn (no search, no pagination)
    ===================================================== */
-$where2 = "1=1";
-
-$countResult2 = $conn->query("SELECT COUNT(*) AS total FROM jf_bkn WHERE $where2");
-$totalUsers2 = $countResult2->fetch_assoc()['total'];
-
 $result2 = $conn->query("
     SELECT id, jabatan, pembina
     FROM jf_bkn
-    WHERE $where2
-    ORDER BY $sort $order
 ");
 
 /* =====================================================
    TABLE 3: jf_bkn (different view, no search)
    ===================================================== */
-$where3 = "1=1";
-
-$countResult3 = $conn->query("SELECT COUNT(*) AS total FROM jf_bkn WHERE $where3");
-$totalUsers3 = $countResult3->fetch_assoc()['total'];
-
 $result3 = $conn->query("
     SELECT id, jabatan, rumpun, rekom_ip, penetapan_menpan, kategori, lingkup, pembina, image_path
     FROM jf_bkn
-    WHERE $where3
-    ORDER BY $sort $order
 ");
 ?>
 
@@ -247,12 +233,12 @@ $result3 = $conn->query("
           <tr style="text-align: left;">
             <td style="text-align:center; width: 5%;"><?php echo $row['id']; ?></td>
             <td style="width: 30%;"><?php echo $row['jabatan']; ?></td>
-            <td style="text-align:center; width: 10%;"><?php echo $row['total']; ?></td>
+            <td style="text-align:center; width: 10%;"><b><?php echo $row['total']; ?></b></td>
 
          <!-- <td style="text-align:center; width: 30%;">
             <?php if (!empty($row['link'])): ?>
             <a href="<?php echo $row['link']; ?>" target="_blank">
-              <?php echo $row['link']; ?>
+            <?php echo $row['link']; ?>
             </a>
             <?php else: ?>
               <b>Belum tersedia.</b> Jika Anda memiliki informasi mengenai jabatan ini, silahkan <a href="https://wa.me/6285159997813" target="_blank"> beritahu kami.</a>

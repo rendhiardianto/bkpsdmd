@@ -42,10 +42,10 @@ body {
    justify-content: center;
 }
 h2 {
-    font-size: 40px;
+    font-size: 30px;
     color: #0077b6;
     background-color: #dddddd;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 100px;
 }
 .MyDocumentContent > div {
