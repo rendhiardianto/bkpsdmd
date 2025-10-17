@@ -1,7 +1,7 @@
 <?php
 include "../auth.php";
 
-requireRole(['admin', 'user']);
+requireRole(['super_admin', 'admin']);
 
 // Fetch announcements
 $result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");

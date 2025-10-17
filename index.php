@@ -50,12 +50,12 @@ while ($row = $result->fetch_assoc()) {
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login Cockpit</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
-			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
+			<a href="/MyPresensi/index.php" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
-			<a href="#" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
-			<a href="#" target="_blank"><img src="/icon/tracking.png" width="20px"> MyTicket Tracking</a>
+			<a href="/MyForm/index.php" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
+			<a href="/MyTicket/index.php" target="_blank"><img src="/icon/tracking.png" width="20px"> MyTicket Tracking</a>
 		</div>
 	</div>
 	<div class="navLogo">

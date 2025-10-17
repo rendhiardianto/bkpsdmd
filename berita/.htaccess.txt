@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /berita/
+
+# If the request is not an existing file or folder,
+# redirect it internally to news_detail.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ news_detail.php?slug=$1 [L,QSA]

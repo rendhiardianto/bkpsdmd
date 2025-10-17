@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->setFrom('yourgmail@gmail.com', 'BKPSDMD Kab. Merangin');
             $mail->addAddress($email, $fullname);
 
-            //$resetLink = "https://bkpsdmd.meranginkab.go.id/cms/forgot_password/reset_password.php?token=$token";
             $resetLink = $baseUrl . "/forgot_password/reset_password.php?token=" . urlencode($token);
             $mail->isHTML(true);
             $mail->Subject = "Reset Password Akun CMS";

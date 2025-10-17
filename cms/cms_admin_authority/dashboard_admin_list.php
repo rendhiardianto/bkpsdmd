@@ -8,7 +8,8 @@ header("Expires: 0");
 include "../db.php";
 include "../auth.php";
 
-requireRole('admin');
+requireRole('super_admin');
+
 // Read role (GET first, session fallback)
 $role = $_GET['role'] ?? $_SESSION['role'];
 
@@ -17,12 +18,12 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'admin'  => '../dashboard_super_admin.php',
-    'user'   => '../dashboard_cms_admin.php',
+    'super_admin'  => '../dashboard_super_admin.php',
+    'admin'   => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'super_admin') {
     exit("Unauthorized");
 }
 
@@ -96,8 +97,13 @@ $user = $profileResult->fetch_assoc();
       <input type="text" name="search" id="search" placeholder="Search by name/nip/email">
       <select name="role_filter" id="role_filter">
         <option value="">All Roles</option>
-        <option value="user">Admin</option>
-        <option value="admin">Super Admin</option>
+        <option value="super_admin">Super Admin</option>
+        <option value="admin">Admin</option>
+        <option value="master">Super Admin</option>
+        <option value="verificator_jf">Verificator Jafung</option>
+        <option value="verificator_kp">Verificator KP</option>
+        <option value="verificator_cuti">Verificator Cuti</option>
+        <option value="verificator_presensi">Verificator Presensi</option>
       </select>
       <button type="submit">Filter</button>
     </form>
@@ -122,13 +128,18 @@ $user = $profileResult->fetch_assoc();
         <td><?php echo $row['email']; ?></td>
         <td>
           <select class="role-select" data-id="<?php echo $row['id']; ?>">
-            <option value="user"  <?php if($row['role']=='user') echo 'selected'; ?>>User</option>
+            <option value="super_admin"  <?php if($row['role']=='super_admin') echo 'selected'; ?>>Super Admin</option>
             <option value="admin" <?php if($row['role']=='admin') echo 'selected'; ?>>Admin</option>
+            <option value="master" <?php if($row['role']=='master') echo 'selected'; ?>>Master</option>
+            <option value="verificator_jf" <?php if($row['role']=='verificator_jf') echo 'selected'; ?>>Verificator Jafung</option>
+            <option value="verificator_kp" <?php if($row['role']=='verificator_kp') echo 'selected'; ?>>Verificator KP</option>
+            <option value="verificator_cuti" <?php if($row['role']=='verificator_cuti') echo 'selected'; ?>>Verificator Cuti</option>
+            <option value="verificator_presensi" <?php if($row['role']=='verificator_presensi') echo 'selected'; ?>>Verificator Presensi</option>
           </select>
           <span class="status-msg" style="display:none; font-size:12px; margin-left:6px;"></span>
         </td>
         <td><?php echo $row['created_at']; ?></td>
-        <td>
+        <td style="text-align: center;">
           <button class="delete-btn" data-id="<?php echo $row['id']; ?>" style="background:#e74c3c;color:white;padding:6px 10px;border-radius:5px;border:none;cursor:pointer;">Delete</button>
         </td>
       </tr>

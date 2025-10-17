@@ -3,7 +3,7 @@ include "../db.php";
 session_start();
 
 // Only allow admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'super_admin') {
     exit("Unauthorized");
 }
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = $conn->real_escape_string($_POST['role']);
 
         // Only allow valid roles
-        if (!in_array($role, ['admin', 'user'])) {
+        if (!in_array($role, ['super_admin', 'admin', 'master', 'verificator_jf', 'verificator_kp', 'verificator_cuti', 'verificator_presensi'])) {
             exit("Invalid role");
         }
 

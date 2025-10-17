@@ -1,10 +1,10 @@
 // ======================== Jenis Kelamin =========================
 const xArray1 = ["Laki-laki", "Perempuan"];
-const yArray1 = [2000, 2000];
+const yArray1 = [2000, 3000];
 const barColors = ["#339cff", "#ff33bb"];
 
 const layout1 = {
-    title:"Pejabat Fungsional", height:400, width:600, 
+    title:"Pejabat Fungsional", height:350, width:400, 
     font: {size: 16, color: '#000'},
     showlegend:true,
     legend: {"orientation": "h", x:0.15, y:-0.1},
@@ -29,10 +29,9 @@ Plotly.newPlot("myPlot1", data1, layout1);
 // ======================== Top 10 Penjabat Jabatan Fungsional =========================
 const xArray2 = [
     "GURU AHLI PERTAMA", "GURU AHLI MUDA", "GURU AHLI MADYA", 
-    "BIDAN TERAMPIL", "PERAWAT PENYELIA", "ANALIS KEBIJAKAN AHLI MUDA", 
-    "BIDAN PENYELIA", "BIDAN MAHIR", "PERAWAT AHLI PERTAMA", "PERAWAT TERAMPIL"
+    "BIDAN TERAMPIL", "PERAWAT PENYELIA", "ANALIS KEBIJAKAN AHLI MUDA"
 ];
-const yArray2 = [1996, 654, 495, 152, 101, 86, 78, 68, 48, 41];
+const yArray2 = [1996, 654, 495, 152, 101, 86];
 
 const total = [4561].reduce((a, b) => a + b, 0);
 
@@ -42,6 +41,10 @@ const textLabels = yArray2.map(v => `${v.toLocaleString("id-ID")} (${((v/total)*
 const layout2 = {
     title:"Top 10 Jabatan Fungsional",
     font: {size: 15, color: '#000'},
+    height: 350,
+    width: 500,
+    font: { size: 15, color: '#000' },
+    margin: { t: 80, b: 150 }
 };
 
 const data2 = [{
@@ -51,7 +54,7 @@ const data2 = [{
   text: textLabels,
   textposition: "outside",
   orientation:"v",
-  marker: {color:"rgba(0,0,255)"}
+  marker: { color: "#0077b6" }
 }];
 
 Plotly.newPlot("myPlot2", data2, layout2);

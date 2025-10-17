@@ -1,7 +1,7 @@
 <?php
 include "../db.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'super_admin') {
     exit(json_encode(["status" => "error", "message" => "Unauthorized"]));
 }
 

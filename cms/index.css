@@ -63,33 +63,7 @@ body {
 .logo
 {
 	position:fixed;
-	padding: 10px;
-}
-
-.navbar
-{
-	position: fixed;
-	margin: auto;
-	margin-top:65px;
-	width:100%;
-	background: rgba(0, 0, 0, 0.5);
-	color: white;
-	font-size: 25px;
-	font-family:Bahnschrift;
-	padding:10px;
-}
-.navbar a{
-	float: right;
-}
-.navbar:hover
-{
-	background-color: #00b4d8;
-	transition-duration: 0.5s;
-}
-a {
-	text-decoration:none;
-	color:inherit;
-	
+	margin: 10px;
 }
 
 .flex-container {

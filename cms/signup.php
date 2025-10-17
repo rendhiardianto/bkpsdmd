@@ -7,7 +7,6 @@ if (!isset($_SESSION['allow_signup']) || $_SESSION['allow_signup'] !== true) {
     exit();
 }
 include "db.php";
-
 include "config.php"; // make sure path is correct
 
 
@@ -28,6 +27,7 @@ if (empty($prefilledNip) && isset($_GET['nip'])) {
 // Load PHPMailer classes manually (no Composer)
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
@@ -35,18 +35,25 @@ require 'PHPMailer/src/SMTP.php';
 // --- NEW: Preload NIP from verify_nip.php ---
 $nipFromGet = $_GET['nip'] ?? '';   // from URL
 $fullnameFromDB = '';
+$jabatanFromDB = '';
+$organisasiFromDB = '';
+$organisasiIndukFromDB = '';
 
 if (!empty($nipFromGet)) {
-    // Fetch employee info from data_pegawai
-    $stmt = $conn->prepare("SELECT fullname FROM data_pegawai WHERE nip=?");
+    // ✅ Fetch employee info from data_pegawai_bkd (created by add_user.php)
+    $stmt = $conn->prepare("SELECT fullname, jabatan, organisasi, organisasi_induk FROM data_pegawai_bkd WHERE nip=?");
     $stmt->bind_param("s", $nipFromGet);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
         $fullnameFromDB = $row['fullname'];
+        $jabatanFromDB = $row['jabatan'];
+        $organisasiFromDB = $row['organisasi'];
+        $organisasiIndukFromDB = $row['organisasi_induk'];
     }
     $stmt->close();
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -146,8 +153,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Email sudah terdaftar!');</script>";
     } else {
         $token = bin2hex(random_bytes(16));
-        $sql = "INSERT INTO users (nip, fullname, email, password, profile_pic, role, verified, verify_token)
-                VALUES ('$nip', '$fullname', '$email', '$password', '$profilePic', 'user', 0, '$token')";
+        $sql = "INSERT INTO users 
+        (nip, fullname, jabatan, organisasi, organisasi_induk, email, password, profile_pic, role, verified, verify_token)
+        VALUES 
+        ('$nip', '$fullname', 
+         '" . $conn->real_escape_string($jabatanFromDB ?? '') . "', 
+         '" . $conn->real_escape_string($organisasiFromDB ?? '') . "', 
+         '" . $conn->real_escape_string($organisasiIndukFromDB ?? '') . "', 
+         '$email', '$password', '$profilePic', 'admin', 0, '$token')";
 
         if ($conn->query($sql)) {
             $mail = new PHPMailer(true);

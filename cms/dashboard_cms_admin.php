@@ -7,7 +7,7 @@ header("Expires: 0");
 include "db.php";
 include "auth.php";
 
-requireRole('user');
+requireRole('admin');
 ?>
 
 <?php
@@ -29,7 +29,7 @@ $user = $result->fetch_assoc();
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMS User Dashboard</title>
+  <title>CMS Admin Dashboard</title>
   <link href="dashboard_cms_admin.css" rel="stylesheet" type="text/css">
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="/icon/button/logo2.png">
@@ -45,7 +45,7 @@ $user = $result->fetch_assoc();
             </div>
     </div>
     <div class="roleHeader">
-      <h1>CMS User Dashboard</h1>
+      <h1>CMS Admin Dashboard</h1>
     </div>
 
 <div class="content">
@@ -148,7 +148,7 @@ $user = $result->fetch_assoc();
 </div><!-- CONTENT CLOSE-->
 
   <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
   </div>
 
 </body>

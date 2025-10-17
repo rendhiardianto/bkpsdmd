@@ -75,7 +75,7 @@ $result3 = $conn->query("
 <link href="headerFooter.css" rel="stylesheet" type="text/css">
 <link href="fungsional.css" rel="stylesheet" type="text/css">
 
-<title>POJOK FUNGSIONAL - BKPSDMD Kabupaten Merangin</title>
+<title>Pojok Fungsional - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="icon/IconWeb.png">
 </head>
 

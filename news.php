@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Berita ASN - BKPSDMD Kab. Merangin</title>
+  <title>Berita - BKPSDMD Kab. Merangin</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -122,7 +122,7 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
           <h2><?php echo $row['title']; ?></h2>
           <p><?php echo substr($row['content'], 0, 120) . "..."; ?></p>
           <!--<a href="cms/berita/news_detail.php?id=<?php echo $row['id']; ?>" target="_blank">Read More</a>-->
-		  <a href="cms/berita/news_detail.php?slug=<?php echo $row['slug']; ?>" target="_blank">Baca selengkapnya</a>
+		  <a href="berita/news_detail.php?slug=<?php echo urlencode($row['slug']); ?>" target="_blank">Baca selengkapnya</a>
 
         </div>
       </div>
@@ -137,7 +137,7 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
       $latest = $conn->query("SELECT slug, title FROM news WHERE visible = 1 ORDER BY created_at DESC LIMIT 5");
       while ($n = $latest->fetch_assoc()):
       ?>
-        <li><a href="cms/berita/news_detail.php?slug=<?php echo $n['slug']; ?>" target="_blank"><?php echo $n['title']; ?></a></li>
+        <li><a href="berita/news_detail.php?slug=<?php echo $n['slug']; ?>" target="_blank"><?php echo $n['title']; ?></a></li>
       <?php endwhile; ?>
     </ul>
 
@@ -147,7 +147,7 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
       $cats = $conn->query("SELECT DISTINCT category FROM news");
       while ($c = $cats->fetch_assoc()):
       ?>
-        <li><a href="news.php?category=<?php echo urlencode($c['category']); ?>" target="_blank"> <?php echo $c['category']; ?></a></li>
+        <li><a href="news.php?category=<?php echo urlencode($c['category']); ?>"> <?php echo $c['category']; ?></a></li>
       <?php endwhile; ?>
     </ul>
   </div>

@@ -4,7 +4,7 @@ session_start();
 include "../db.php";
 include "../auth.php";
 
-requireRole(['admin', 'user']);
+requireRole(['super_admin', 'admin']);
 
 // Read role (GET first, session fallback)
 $role = $_GET['role'] ?? $_SESSION['role'];
@@ -14,8 +14,8 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'admin'  => '../dashboard_super_admin.php',
-    'user'   => '../dashboard_cms_admin.php',
+    'super_admin'  => '../dashboard_super_admin.php',
+    'admin'   => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
@@ -61,27 +61,30 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC");
 
   <table>
     <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Created</th>
-      <th>Action</th>
+      <th style="text-align: center;">ID</th>
+      <th style="text-align: center;">Title</th>
+      <th style="text-align: center;">Category</th>
+      <th style="text-align: center;">Created</th>
+      <th style="text-align: center;">Action</th>
     </tr>
     <?php while ($row = $result->fetch_assoc()): ?>
-    <tr>
+    <tr <?php if (!$row['visible']) echo 'style="background-color: #f8d7da;"'; ?>>
       <td><?php echo $row['id']; ?></td>
       <td><?php echo $row['title']; ?></td>
       <td><?php echo $row['category']; ?></td>
       <td><?php echo $row['created_at']; ?></td>
-      <td>
+      <td style="text-align: center;">
         <a href="edit_news.php?id=<?php echo $row['id']; ?>" class="button edit">Edit</a>
         <a href="delete_news.php?id=<?php echo $row['id']; ?>" class="button red" onclick="return confirm('Hapus berita ini?');">Delete</a>
         
         <?php if ($row['visible']): ?>
           <a href="toggle_visibility.php?id=<?php echo $row['id']; ?>" class="button gray">Hide</a>
         <?php else: ?>
-          <a href="toggle_visibility.php?id=<?php echo $row['id']; ?>" class="button green">Unhide</a>
+          <a href="toggle_visibility.php?id=<?php echo $row['id']; ?>" class="button blue">Unhide</a>
         <?php endif; ?>
+
+        <a href="/berita/news_detail.php?slug=<?php echo $row['slug']; ?>" target="_blank" class="button lihat">Lihat</a>
+
       </td>
 
     </tr>
@@ -89,7 +92,7 @@ $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC");
   </table>
 
 <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
 </div>
 
 </body>

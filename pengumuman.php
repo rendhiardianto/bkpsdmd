@@ -25,7 +25,7 @@ $result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
 <link href="headerFooter.css" rel="stylesheet" type="text/css">
 <link href="pengumuman.css" rel="stylesheet" type="text/css">
 
-<title>BKPSDMD Kabupaten Merangin</title>
+<title>Pengumuman - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="icon/IconWeb.png">
 </head>
 

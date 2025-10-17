@@ -34,8 +34,8 @@
 }
 body {
 	margin: 0;
-    font-family: Arial; 
-    background:#f4f6f9; 
+  font-family: Arial;
+  background:#f4f6f9; 
 }
 .header
 {
@@ -44,19 +44,22 @@ body {
 	width:100%;
 	height: 65px;
 	background-color: #0077b6;
+  z-index: 99;
 }
 .logo
 {
 	position:fixed;
 	padding: 10px;
 }
-
-
 .startlogoDD
 {
   float: right;
   color: white;
   margin: auto;
+  display: flex;
+  align-items: center;  /* Vertically center */
+  font-family: SegoeUI;
+  font-size: 18px;
   margin-right: 10px;
   margin-top: 10px;
 }
@@ -70,9 +73,11 @@ body {
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #ffffff;
+  margin-left: 10px;
 }
 .startbtn img:hover {
-  filter: opacity(0.5);
+  border: 3px solid #33ff00;
+  z-index: 2;
 }
 .start-content {
   display: none;
@@ -80,10 +85,11 @@ body {
   background-color: #0084ffd8;
   margin: auto;
   right: 0;
-  margin-top: 10px;
-  width: 130px;
+  top: 65px;
+
+  width: 150px;
   justify-content: left;
-  overflow: auto;
+  overflow: hidden;
   box-shadow: 0px 0px 5px rgb(14, 14, 14);
   z-index: 1;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -92,7 +98,7 @@ body {
   display: block;
   width: 100%;
   color: rgb(255, 255, 255);
-  padding: 10px 15px;
+  padding: 15px 15px;
   text-decoration: none;
   text-align: left;         /* 👈 ensure text is left-aligned */
   float: none;              /* 👈 remove float for cleaner layout */
@@ -123,30 +129,17 @@ body {
 
 .content {  
   display: flex;
-  margin-bottom: 70px;
 }
 .leftSide {
     flex: 20%;
-    padding: 20px;
     background-color: #ffffff;
-}
-.userBio {
-    text-align:center;
-    font-family:sans-serif;
-    margin-bottom: 20px;
-    color: #0077b6;
 }
 .greetings {
   font-family: Lobster;
   font-size: 30px;
-}
-.namaProfil {
-  font-family: 'Franklin Gothic Medium';
-  font-size: 22px;
-}
-.nipProfil {
-  font-family: 'Lucida Sans';
-  font-size: 15px;
+  color: #0077b6;
+  text-align:center;
+  margin-bottom: 5px;
 }
 .fotoProfil {
     display: flex;
@@ -154,41 +147,82 @@ body {
 }
 .fotoProfil img{
     width: 200px; 
-    height: 200px;
     border-radius: 8px;
     box-shadow: 0px 0px 5px #818181;
 }
-
-* {
-    box-sizing: border-box;
+.userBio {
+  text-align:center;
+  margin-bottom: 20px;
+  color: #0077b6;
+  font-family: Raleway-Medium;
 }
-
+.namaProfil {
+  font-size: 22px;
+}
+.nipProfil {
+  font-size: 15px;
+}
+.tab {
+  position: sticky;
+  top: 65px;             /* stick just under topnav */
+  align-self: flex-start; /* important inside flex/grid */
+  height: 50%;          /* natural height */
+  background-color: #f1f1f1;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ddd;
+}
 
 .rightSide {
-    background-color: #ebebeb;
-    display: flex;
-    flex: 80%;
-    
-    flex-wrap: wrap;
-    align-content: space-evenly;
-
-    padding: 20px;
-    
-    text-align: center;
-    justify-content: center;
+  flex: 80%;
+  font-family: Segoe UI;
 }
-.rightSide > div {
-    background-color: #dddddd;
-    color: #023e8a;
-    padding: 10px;
-    margin: 20px;
-    font-family: trebuchet;
-    font-size: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 0px 10px grey;
+.tabcontent {
+  display: flex;               /* activate flexbox */
+  flex-wrap: wrap;             /* allow wrapping to next row */
+  justify-content: center;     /* center items horizontally */
+  align-items: flex-start;     /* align top */
+  gap: 20px;                   /* spacing between items */
+  flex: 1; 
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #ddd;
+  z-index: 11;
+  font-size: 17px;
+}
 
-    width: 200px;
-    text-align: center;
+.tabcontent > .flex-item-main {
+  background-color: #dddddd;
+  color: #023e8a;
+  padding: 10px;
+  margin: 20px;
+  font-family: Raleway-Medium;
+  font-size: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px grey;
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s;
 }
 .flex-item-main:hover{  
     width: 210px;
@@ -209,7 +243,7 @@ body {
   .rightSide {   
     padding: 0px;
   }
-  .rightSide > div {   
+  .tabcontent > div {   
     width: 150px;
     padding: 0px;
   }
@@ -220,6 +254,7 @@ body {
     width: 170px;
 }
 }
+
 .footer
 {
 	position: fixed;

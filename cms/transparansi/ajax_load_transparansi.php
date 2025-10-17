@@ -1,6 +1,7 @@
 <?php
 include "../auth.php";
-requireRole(['admin', 'user']);
+
+requireRole(['super_admin', 'admin']);
 
 $limit = 5; // number per page
 $page = isset($_POST['page']) ? intval($_POST['page']) : 1;

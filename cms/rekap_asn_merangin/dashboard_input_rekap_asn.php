@@ -9,8 +9,8 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'admin'  => '../dashboard_super_admin.php',
-    'user'   => '../dashboard_cms_admin.php',
+    'super_admin'  => '../dashboard_super_admin.php',
+    'admin'   => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div id="toast"></div>
 
 <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
 </div>
 <script src="/JavaScript/searchable_table.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

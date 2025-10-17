@@ -9,8 +9,8 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'admin'  => '../dashboard_super_admin.php',
-    'user'   => '../dashboard_cms_admin.php',
+    'super_admin'  => '../dashboard_super_admin.php',
+    'admin'   => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
@@ -18,9 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullname = $conn->real_escape_string($_POST['fullname']);
     $nip    = $conn->real_escape_string($_POST['nip']);
     $jabatan    = $conn->real_escape_string($_POST['jabatan']);
-    $divisi    = $conn->real_escape_string($_POST['divisi']);
+    $organisasi    = $conn->real_escape_string($_POST['organisasi']);
+    $organisasi_induk    = $conn->real_escape_string($_POST['organisasi_induk']);
 
-    $cek = mysqli_query($conn, "SELECT * FROM data_pegawai WHERE nip='$nip'");
+    $cek = mysqli_query($conn, "SELECT * FROM data_pegawai_bkd WHERE nip='$nip'");
     if (mysqli_num_rows($cek) > 0) {
         $error = "";
         ?><script>
@@ -28,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.location.href='add_user.php';
         </script><?php
     } else {
-        $insert = mysqli_query($conn, "INSERT INTO data_pegawai (nip, fullname, jabatan, divisi)
-        VALUES ('$nip','$fullname','$jabatan', '$divisi')");
+        $insert = mysqli_query($conn, "INSERT INTO data_pegawai_bkd (nip, fullname, jabatan, organisasi, organisasi_induk)
+        VALUES ('$nip','$fullname','$jabatan', '$organisasi', '$organisasi_induk')");
           if ($insert) {
             $success = "";
             ?><script>
@@ -88,11 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <input type="text" name="nip" placeholder="Nomor Induk Pegawai (NIP)" required>
       <input type="text" name="fullname" placeholder="Nama Lengkap" required>
       <input type="text" name="jabatan" placeholder="Jabatan" required>
-      <select type="text" name="divisi">
-        <option value="">(Pilih Divisi)</option>
+
+      <select type="text" name="organisasi" placeholder="Organisasi" required>
+        <option value="">(Pilih Organisasi)</option>
          <option value="SEKRETARIAT">SEKRETARIAT</option>
          <option value="BIDANG KEPEGAWAIAN">BIDANG KEPEGAWAIAN</option>
          <option value="BIDANG PENGEMBANGAN SDM">BIDANG PENGEMBANGAN SDM</option>
+      </select>
+      <select type="text" name="organisasi_induk" placeholder="Organisasi Induk" required>
+        <option value="">(Pilih Organisasi Induk)</option>
+         <option value="Badang Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah">
+          Badang Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah</option>
       </select>
 
       <button type="submit">Tambahkan</button>
@@ -102,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
 </div>
 
 </body>

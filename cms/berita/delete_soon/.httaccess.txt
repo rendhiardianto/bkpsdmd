@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /cms/berita/
+
+# Only rewrite if the requested file or folder does NOT exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Capture slug and route to news_detail.php
+RewriteRule ^([^/]+)/?$ news_detail.php?slug=$1 [L,QSA]

@@ -1,5 +1,4 @@
 <?php
-
 // Prevent back button after logout
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -14,6 +13,8 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 include "db.php";
+include "config.php"; // make sure path is correct
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
     session_destroy();
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $_SESSION['role'] = $user['role'];
             $_SESSION['fullname'] = $user['fullname'];
 
-            if ($user['role'] === 'admin') {
+            if ($user['role'] === 'super_admin') {
                 header("Location: dashboard_super_admin.php");
             } else {
                 header("Location: dashboard_cms_admin.php");
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
             echo "<script>alert('Akun anda sudah diverfikasi, Silahkan Login.');</script>";
         } else {
             $token = bin2hex(random_bytes(16));
-            $conn->query("UPDATE users SET verifY_token='$token' WHERE email='$email'");
+            $conn->query("UPDATE users SET verify_token='$token' WHERE email='$email'");
 
             $mail = new PHPMailer(true);
             try {
@@ -82,12 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
                 $mail->setFrom('yourgmail@gmail.com', 'BKPSDMD Merangin');
                 $mail->addAddress($email, $user['fullname']);
 
-                $verifyLink = "http://localhost/bkpsdmd-cms/cms/verify.php?token=$token";
+                $verifyLink = $baseUrl . "/verify.php?token=" . urlencode($token);
                 $mail->isHTML(true);
                 $mail->Subject = "Verifikasi Akun Anda";
                 $mail->Body = "
                 Halo #KantiASN, $fullname,<br><br>
-                Mohon untuk verifikasi email anda terlebih dahulu, klik tombol di bawah ini:<br><br>
+                Mohon untuk verifikasi ulang email anda terlebih dahulu, klik tombol di bawah ini:<br><br>
 
                 <a href='$verifyLink' 
                   style='display:inline-block; padding:12px 24px; 
@@ -120,27 +121,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
 <!DOCTYPE HTML>
 <html hreflang="id">
 <head>
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-65T4XSDM2Q"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-65T4XSDM2Q');
-  </script>
 <meta charset="UTF-8">
+    <!-- Google Analytics (deferred) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-65T4XSDM2Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-65T4XSDM2Q');
+    </script>
+    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
 
-<title>Masuk ke CMS - BKPSDMD Kabupaten Merangin</title>
+<title>Masuk ke Cockpit - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="/icon/button/logo2.png">
 
 <link href="index.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+
+
 </head>
 <body>
-    <video autoplay muted loop id="myVideo" width="100%">
+    <video autoplay muted loop id="myVideo" width="100%" preload="metadata">
         <source src="../videos/CMSVideo.mp4" type="video/mp4">
     </video>
 
@@ -156,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
         
         <div class="flex-item-right">
             <form action="" method="POST">
-                <h2>Login into CMS</h2>
+                <h2>Login into Cockpit</h2>
                 <p><label>NIP</label>
                 <br><input type="nip" placeholder="Nomor Induk Pegawai" name="nip" required></p>
 
@@ -177,10 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
         
     </div>
     <div class="footer">
-        <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+        <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
     </div>
-
-</body>
 
 <script>
 var myIndex = 0;
@@ -198,17 +200,7 @@ function carousel() {
 }
 </script>
 
-<script>
-  (function() {
-    var cx = '008927343735519909654:w8bciv_yp7u';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
+
 
 <script>
 document.getElementById("togglePassword").addEventListener("click", function() {
@@ -224,7 +216,17 @@ document.getElementById("togglePassword").addEventListener("click", function() {
     }
 });
 </script>
+<!-- Load Google CSE only after page finishes -->
+<script>
+window.addEventListener('load', function() {
+  var cx = '008927343735519909654:w8bciv_yp7u';
+  var gcse = document.createElement('script');
+  gcse.type = 'text/javascript';
+  gcse.async = true;
+  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+  document.body.appendChild(gcse);
+});
+</script>
 
-
-
+</body>
 </html>

@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog ASN - BKPSDMD Kabupaten Merangin</title>
+  <title>Blog - BKPSDMD Kabupaten Merangin</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

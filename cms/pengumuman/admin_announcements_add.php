@@ -1,8 +1,9 @@
 <?php
 include "../db.php";
-requireRole(['admin', 'user']);
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+requireRole(['super_admin', 'admin']);
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'super_admin') {
     header("Location: admin_dashboard.php");
     exit;
 }

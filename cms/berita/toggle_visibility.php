@@ -2,7 +2,7 @@
 include "../db.php";
 include "../auth.php";
 
-requireRole(['admin', 'user']);
+requireRole(['super_admin', 'admin']);
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);

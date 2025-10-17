@@ -2,7 +2,7 @@
 include "../db.php";
 include "../auth.php";
 
-requireRole(['admin', 'user']);
+requireRole(['super_admin', 'admin']);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = intval($_POST['id']);

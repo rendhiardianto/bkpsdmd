@@ -8,14 +8,14 @@ header("Expires: 0");
 include "db.php";
 include "auth.php";
 
-requireRole('admin');
-$role = 'admin';
+requireRole('super_admin');
+$role = 'super_admin';
 
 ?>
 
 <?php
 $userId = $_SESSION['user_id'];
-$result = $conn->query("SELECT nip, fullname, profile_pic FROM users WHERE id=$userId");
+$result = $conn->query("SELECT nip, fullname, jabatan, organisasi, profile_pic FROM users WHERE id=$userId");
 $user = $result->fetch_assoc();
 ?>
 
@@ -45,18 +45,19 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="startlogoDD">
+      Halo, <?php echo $user['fullname']; ?>
       <button onclick="toggleStartMenu()" class="startbtn"> <?php if (!empty($user['profile_pic'])): ?>
         <img src="uploads/profile_pics/<?php echo $user['profile_pic']; ?>" class="profile-pic">
         <?php else: ?>
           <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
         <?php endif; ?>
       </button>
+      
       <div id="myStart" class="start-content">
         <a href="edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
         <a href="logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
       </div>
     </div>
-
   </div>
   
   <div class="roleHeader">
@@ -65,11 +66,8 @@ $user = $result->fetch_assoc();
   
 <div class="content">
 
-    <div class="leftSide">
-
-      <div class="userBio">
-        <!--<h2 style="font-family: FreeHand;">Selamat Datang,</h2>-->
-        <div class="greetings">
+  <div class="leftSide">
+    <div class="greetings">
           <?php
             date_default_timezone_set('Asia/Jakarta');
             $a = date ("H");
@@ -82,12 +80,12 @@ $user = $result->fetch_assoc();
             elseif (($a>=11) && ($a<=15))
             {
               echo "Selamat Siang ";
-              echo "&#9729;";
+              echo "&#9788;";
             }
-            elseif (($a>=16) && ($a<=18))
+            elseif (($a>=16) && ($a<=17))
             {
               echo "Selamat Sore ";
-              echo "&#9788;";
+              echo "&#9729;";
             }
             else
             {
@@ -96,15 +94,11 @@ $user = $result->fetch_assoc();
             }
           ?>
         </div>
-        <div class="namaProfil">
-          <br><?php echo $user['fullname']; ?>
-        </div>
-        <div class="nipProfil">
-          NIP: <?php echo $user['nip']; ?>
+        <div style="text-align:center; margin-bottom: 20px; font-family: Raleway-Medium; color: #0077b6; font-size: 14px;">
+          <?php echo date("l, d F Y");?>
         </div>
         
-      </div>
-
+    <div class="userBio">
       <div class="fotoProfil">
         <?php if ($user['profile_pic']): ?>
         <img src="uploads/profile_pics/<?php echo $user['profile_pic']; ?>" alt="Profile Picture">
@@ -113,63 +107,98 @@ $user = $result->fetch_assoc();
         <?php endif; ?>
       </div>
 
+      <div class="namaProfil">
+        <br><?php echo $user['fullname']; ?>
+      </div>
+
+      <div class="nipProfil">
+          <?php echo $user['nip']; ?>
+        </div>
+        
+      <div class="jabatanProfil">
+          <br><?php echo $user['jabatan']; ?>
+      </div>
+
+      <div class="organisasiProfil">
+        <b><?php echo $user['organisasi']; ?></b>
+      </div>
+      <br><hr>
     </div>
-  
+
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'tab1')" id="defaultOpen">User Authorithy</button>
+      <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
+      <button class="tablinks" onclick="openCity(event, 'tab3')">BKPSDMD Service</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')">Website CMS</button>
+    </div>
+
+  </div><!--leftSide-->
+
   <div class="rightSide">
-
-    <div class="flex-item-main">
-      <p><a href="cms_admin_authority/add_user.php?role=<?php echo urlencode($role); ?>">
-      <img src="../icon/button/add_user.png" alt="Add User"> </a><br>ADD CMS USER</p>
+    
+    <div id="tab1" class="tabcontent">
+      <div class="flex-item-main">
+        <p><a href="cms_admin_authority/add_user.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/add_user.png" alt="Add User"> </a><br>ADD CMS USER</p>
+      </div>
+      
+      <div class="flex-item-main">
+        <p><a href="cms_admin_authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/profil.png" ></a><br>CMS USER LIST</p>
+      </div>
     </div>
 
-
-    <div class="flex-item-main">
-      <p><a href="cms_admin_authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/profil.png" ></a><br>CMS USER LIST</p>
+    <div id="tab2" class="tabcontent">
     </div>
 
-    <div class="flex-item-main">
-      <p><a href="pengumuman/dashboard_pengumuman.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/announcement.png" ></a><br>PENGUMUMAN</p>
+    <div id="tab3" class="tabcontent">
     </div>
 
-    <div class="flex-item-main">
-      <p><a href="berita/admin_news.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/news.png" ></a><br>BERITA</p>
-    </div>
+    <div id="tab4" class="tabcontent">
+      <div class="flex-item-main">
+        <p><a href="pengumuman/dashboard_pengumuman.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/announcement.png" ></a><br>PENGUMUMAN</p>
+      </div>
 
-    <div class="flex-item-main">
-      <p><a href="blog/admin_blog.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/blog.png" ></a><br>BLOG</p>
-    </div>
+      <div class="flex-item-main">
+        <p><a href="berita/admin_news.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/news.png" ></a><br>BERITA</p>
+      </div>
 
-    <div class="flex-item-main">
-      <p><a href="infoGrafis/admin_infoGrafis.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/graphics.png" ></a><br>INFOGRAFIS</p>
-    </div>
+      <div class="flex-item-main">
+        <p><a href="blog/admin_blog.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/blog.png" ></a><br>BLOG</p>
+      </div>
 
-    <div class="flex-item-main">
-      <p><a href="transparansi/dashboard_transparansi.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/transparansi.png"></a><br>TRANSPARANSI</p>
-    </div>
+      <div class="flex-item-main">
+        <p><a href="infoGrafis/admin_infoGrafis.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/graphics.png" ></a><br>INFOGRAFIS</p>
+      </div>
 
-    <div class="flex-item-main">
-      <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
-    </div>
+      <div class="flex-item-main">
+        <p><a href="transparansi/dashboard_transparansi.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/transparansi.png"></a><br>TRANSPARANSI</p>
+      </div>
 
-    <div class="flex-item-main">
-      <p><a href="rekap_asn_merangin/dashboard_input_rekap_asn.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/rekap_asn.png"></a><br>INPUT REKAP ASN</p>
-    </div>
+      <div class="flex-item-main">
+        <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
+      </div>
 
-</div>
+      <div class="flex-item-main">
+        <p><a href="rekap_asn_merangin/dashboard_input_rekap_asn.php?role=<?php echo urlencode($role); ?>">
+          <img src="../icon/button/rekap_asn.png"></a><br>INPUT REKAP ASN</p>
+      </div>
+    </div><!--tab4-->
+  </div><!--rightSide-->
+
+</div><!--content-->
 
   <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
   </div>
 
 <script src="/JavaScript/script.js"></script>
-
+<script src="/JavaScript/tab_switching.js"></script>
 </body>
 </html>

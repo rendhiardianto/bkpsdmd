@@ -2,14 +2,14 @@
 include "../db.php";
 include "../auth.php";
 
-requireRole(['admin', 'user']);
+requireRole(['super_admin', 'admin']);
 
 // Read role and back URL
 $role = $_GET['role'] ?? $_SESSION['role'];
 $fromPage = $_GET['from'] ?? null;
 $backLinks = [
-    'admin' => '../dashboard_super_admin.php',
-    'user'  => '../dashboard_cms_admin.php',
+    'super_admin' => '../dashboard_super_admin.php',
+    'admin'  => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 

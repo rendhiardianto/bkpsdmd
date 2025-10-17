@@ -1,6 +1,8 @@
 <?php include "../db.php";
 require_once("../auth.php");
 
+requireRole(['super_admin', 'admin']);
+
 // Read role (GET first, session fallback)
 $role = $_GET['role'] ?? $_SESSION['role'];
 
@@ -9,8 +11,8 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'admin'  => '../dashboard_super_admin.php',
-    'user'   => '../dashboard_cms_admin.php',
+    'super_admin'  => '../dashboard_super_admin.php',
+    'admin'   => '../dashboard_cms_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
@@ -93,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <div class="footer">
-    <p>Copyright &copy; 2025. Tim PUSDATIN - BKPSDMD Kabupaten Merangin.</p>
+    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
 </div>
 
 </body>

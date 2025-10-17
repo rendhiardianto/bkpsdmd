@@ -17,7 +17,7 @@
 <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 <link href="index.css" rel="stylesheet" type="text/css">
 
-<title>MyDocuments - BKPSDMD Kabupaten Merangin</title>
+<title>MyPresensi - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 
@@ -100,13 +100,13 @@
 	
 <!------------------- CONTENT ----------------------------------->
 
-<div class="MyDocumentContent">
-	<h2>BKPSDMD Merangin - MyDocuments</h2>
+<div class="presensiContent">
+	<h2>Presensi ASN Kabupaten Merangin</h2>
 
     <div class="flex-item-main">
-      <h4>DOWNLOAD DOKUMEN PPPK</h4>
-      <a href="https://script.google.com/macros/s/AKfycbwQfPziQEPDsQEGVCe39gZDz00F58khSWIVVx-bqKaXdGXIrwJx2EM_knhkN7Y-Pwa9pg/exec"><img src="/icon/download_doc.png"></a>
-      <p>(SK PPPK, SK JF, SPT, SK CPPPK)</p>
+      <h4>Jumlah Pegawai : 50</h4>
+      <a href=""><img src="/icon/download_doc.png"></a>
+      <p></p>
     </div>
 
 </div>

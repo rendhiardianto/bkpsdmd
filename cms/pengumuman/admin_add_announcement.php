@@ -1,6 +1,7 @@
 <?php
 include "../auth.php"; 
-requireRole(['admin', 'user']);
+
+requireRole(['super_admin', 'admin']);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $conn->real_escape_string($_POST['title']);

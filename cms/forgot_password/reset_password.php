@@ -28,9 +28,9 @@ if (isset($_GET['token'])) {
   <title>Reset Password</title>
   <style>
     body { font-family: Arial; background:#f4f6f9; padding:30px; }
-    .form-box { max-width:400px; margin:auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-    input, button { width:100%; padding:12px; margin:8px 0; border-radius:6px; border:1px solid #ccc; }
-    button { background:#3498db; border:none; color:white; font-weight:bold; cursor:pointer; }
+    .form-box { max-width:500px; margin:auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+    input, button { width:95%; padding:12px; margin:8px 0;  border:1px solid #ccc; }
+    button { background:#3498db; margin: auto; display: block; border:none; width:50%; color:white; font-weight:bold; cursor:pointer; }
     button:hover { background:#2980b9; }
   </style>
 </head>
