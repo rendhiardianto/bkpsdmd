@@ -8,10 +8,14 @@ header("Expires: 0");
 include "db.php";
 include "auth.php";
 include "datetime_helper.php";
+include "verification/jafung/jf_counthelper.php";
 
 requireRole('super_admin');
 $role = 'super_admin';
 
+// define filter default so it's always available
+$filter = $_GET['filter'] ?? 'all';
+$counts = getSubmissionCounts($conn);
 ?>
 
 <?php
@@ -34,7 +38,7 @@ $user = $result->fetch_assoc();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Super Admin Dashboard</title>
-  <link href="dashboard_super_admin.css" rel="stylesheet" type="text/css">
+  <link href="dashboard_style.css" rel="stylesheet" type="text/css">
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="/icon/button/logo2.png">
 
@@ -52,11 +56,11 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="startlogoDD">
-      Halo, <?php echo $user['fullname']; ?>
+      <div class="namaProfil">Halo, <?php echo $user['fullname']; ?></div>
       <button onclick="toggleStartMenu()" class="startbtn"> <?php if (!empty($user['profile_pic'])): ?>
         <img src="uploads/profile_pics/<?php echo $user['profile_pic']; ?>" class="profile-pic">
         <?php else: ?>
-          <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
+          <img src="uploads/profile_pics/default.png" alt="Default" class="profile-pic">
         <?php endif; ?>
       </button>
       
@@ -132,8 +136,8 @@ $user = $result->fetch_assoc();
 
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
-      <button class="tablinks" onclick="openCity(event, 'tab3')">Services Verification</button>
-      <button class="tablinks" onclick="openCity(event, 'tab4')" id="defaultOpen">Website CiviCore</button>
+      <button class="tablinks" onclick="openCity(event, 'tab3')" id="defaultOpen">Services Verification</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')" >Website CiviCore</button>
       <button class="tablinks" onclick="openCity(event, 'tab1')">User Authorithy</button>
     </div>
 
@@ -155,12 +159,25 @@ $user = $result->fetch_assoc();
     <div id="tab2" class="tabcontent">
     </div>
 
+      
+
     <div id="tab3" class="tabcontent">
+      <!--<div class="filter-bar">
+        <?php
+          $filters = ['all' => 'All']; 
+          foreach ($filters as $key => $label) {
+            $count = $counts[$key] ?? 0;
+            $active = ($filter === $key) ? 'active' : '';
+          }
+        ?>
+      </div>-->
       <div class="flex-item-main">
-        <p><a href="verification/jafung/verify_documents.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/fungsional.png" ></a><br>VERIFIKASI JABATAN FUNGSIONAL</p>
+        <span class="badge"><?= $counts['all'] ?? 0; ?></span>
+        <p><a href="verification/jafung/verify_documents.php?role=<?= urlencode($role); ?>">
+          <img src="../icon/button/fungsional.png"></a><br>VERIFIKASI JABATAN FUNGSIONAL</p>
       </div>
     </div>
+
 
     <div id="tab4" class="tabcontent">
       
@@ -208,6 +225,7 @@ $user = $result->fetch_assoc();
   </div>
 
 <script src="/JavaScript/script.js"></script>
+
 <script>
   // JavaScript code to handle tab switching
 function openCity(evt, cityName) {
@@ -228,5 +246,6 @@ function openCity(evt, cityName) {
 document.getElementById("defaultOpen").click();
 
 </script>
+
 </body>
 </html>

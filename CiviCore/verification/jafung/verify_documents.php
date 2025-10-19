@@ -17,7 +17,7 @@ $fromPage = $_GET['from'] ?? null;
 
 // Define back links for each role
 $backLinks = [
-    'super_admin'  => '../../dashboard_super_admin.php#tab3',
+    'super_admin'  => '../../dashboard_super_admin.php',
 ];
 $backUrl = $backLinks[$role];
 
@@ -87,13 +87,29 @@ $user = $result->fetch_assoc();
 <body>
 
 <div class="header">
+
     <div class="navbar">
       <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" 
       style="text-decoration: none; color:white;">&#10094; Kembali</a>
     </div>
     
     <div class="roleHeader">
-      Dashboard Verifikasi Jafung 
+      <h1>Dashboard Verifikasi Jafung</h1>
+    </div>
+
+    <div class="startlogoDD">
+      Halo, <?php echo $user['fullname']; ?>
+      <button onclick="toggleStartMenu()" class="startbtn"> <?php if (!empty($user['profile_pic'])): ?>
+        <img src="../../uploads/profile_pics/<?php echo $user['profile_pic']; ?>" class="profile-pic">
+        <?php else: ?>
+          <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
+        <?php endif; ?>
+      </button>
+      
+      <div id="myStart" class="start-content">
+        <a href="../../edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
+        <a href="../../logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
+      </div>
     </div>
 </div>
 
@@ -183,6 +199,7 @@ $user = $result->fetch_assoc();
     </tbody>
   </table>
 </div>
+<script src="/JavaScript/script.js"></script>
 <script>
 document.getElementById("liveSearch").addEventListener("keyup", function() {
   const input = this.value.toLowerCase();

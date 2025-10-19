@@ -62,6 +62,7 @@ body {
   font-family: Bahnschrift;
   color: white;
 }
+
 .startlogoDD
 {
   display: flex;
@@ -71,8 +72,12 @@ body {
   justify-content: end;
   font-family: SegoeUI;
   color: white;
-  font-size: 18px;
 }
+.startlogoDD > .namaProfil {
+  font-family: SegoeUI;
+  color: white;
+  font-size: 18px;
+} 
 .startbtn {
   border: none;
   background-color: transparent;
@@ -120,7 +125,17 @@ body {
   background-color: #0054a3d8;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+  .logo {
+    justify-content: left;
+    margin-left: 10px;
+  }
+  .roleHeader {
+    display: none;
+  }
+  .namaProfil{
+    display: none;
+  }
   .content {   
     flex-direction: column;
   }
@@ -128,6 +143,7 @@ body {
     font-size: 25px;
   }
 }
+
 .liveClock {
   position: fixed;
   margin: auto;
@@ -215,14 +231,33 @@ body {
   height: 100%;
   padding-top: 20px;
   overflow-y: auto;
-
   z-index: 11;
 }
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #ff0000;
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: Bahnschrift;
+  line-height: 1;
+  box-shadow: 0 0 5px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease;
+}
+.flex-item-main:hover .badge {
+  transform: scale(1.2);
+}
+
 .tabcontent > .flex-item-main {
+  position: relative;
   background-color: #dddddd;
   color: #023e8a;
-  padding: 10px;
   margin: 20px;
+  padding: 10px;
   font-family: Raleway-Medium;
   font-size: 20px;
   border-radius: 12px;
@@ -232,6 +267,8 @@ body {
   text-align: center;
   transition: all 0.3s;
 }
+
+
 .flex-item-main:hover{  
     width: 210px;
     transition: width 0.5s;
@@ -246,6 +283,7 @@ body {
 .flex-item-main img{
   width: 100px;
 }
+
 
 @media screen and (max-width: 600px) {
   .tabcontent {

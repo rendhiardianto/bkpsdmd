@@ -7,8 +7,10 @@ header("Expires: 0");
 
 include "db.php";
 include "auth.php";
+include "datetime_helper.php";
 
 requireRole('admin');
+
 $role = 'admin';
 
 ?>
@@ -33,15 +35,21 @@ $user = $result->fetch_assoc();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
-  <link href="dashboard_super_admin.css" rel="stylesheet" type="text/css">
+  <link href="dashboard_style.css" rel="stylesheet" type="text/css">
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="/icon/button/logo2.png">
 
 </head>
 <body>
+
   <div class="header">
+
     <div class="logo">
       <a href="../index.php" target="_blank"><img src="../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
+    </div>
+
+    <div class="roleHeader">
+      <h1>Admin Dashboard</h1>
     </div>
 
     <div class="startlogoDD">
@@ -59,13 +67,14 @@ $user = $result->fetch_assoc();
       </div>
     </div>
   </div>
-  
-  <div class="roleHeader">
-    <h1>Admin Dashboard</h1>
-  </div>
-  
-<div class="content">
+ 
 
+<div class="liveClock">
+  <?php echo renderLiveClock(); ?>
+</div>
+
+<div class="content">
+  
   <div class="leftSide">
     <div class="greetings">
           <?php
@@ -93,9 +102,6 @@ $user = $result->fetch_assoc();
               echo "&#9790;";
             }
           ?>
-        </div>
-        <div style="text-align:center; margin-bottom: 20px; font-family: Raleway-Medium; color: #0077b6; font-size: 14px;">
-          <?php echo date("l, d F Y");?>
         </div>
         
     <div class="userBio">
@@ -126,12 +132,16 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="tab">
-      <button class="tablinks" onclick="openCity(event, 'tab4')" id="defaultOpen">Website CMS</button>
+      <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')" id="defaultOpen">Website CiviCore</button>
     </div>
 
   </div><!--leftSide-->
 
   <div class="rightSide">
+
+    <div id="tab2" class="tabcontent">
+    </div>
 
     <div id="tab4" class="tabcontent">
       

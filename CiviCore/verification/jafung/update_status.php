@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../db.php';
-require_once __DIR__ . '/../../api_notification';
+require_once __DIR__ . '/../../api_notification.php';
 
 $id = $_POST['id'];
 $action = $_POST['action'];

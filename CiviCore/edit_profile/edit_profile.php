@@ -19,7 +19,10 @@ $backLinks = [
 $backUrl = $backLinks[$role];
 
 $userId = $_SESSION['user_id'];
-$result = $conn->query("SELECT nip, fullname, jabatan, organisasi, organisasi_induk, organisasi_induk_singkatan, email, profile_pic, role FROM users WHERE id=$userId");
+$result = $conn->query("SELECT id, nip, fullname, jabatan, organisasi, 
+organisasi_induk, organisasi_induk_singkatan, email, profile_pic, role FROM users WHERE id=$userId");
+
+
 $user = $result->fetch_assoc();
 if (!$user) {
     die("User not found.");
@@ -67,11 +70,18 @@ if (!$user) {
       <input type="text" value="<?php echo $user['nip']; ?>" disabled>
       <input type="hidden" name="nip" value="<?php echo $user['nip']; ?>">
 
-      <label>Ganti Foto Profil</label>
-      <?php if ($user['profile_pic']): ?>
-        <img src="/cms/uploads/profile_pics/<?php echo htmlspecialchars($user['profile_pic']); ?>" 
-             alt="Profile Picture"
-             style="width:100px; height:100px; object-fit:cover; border-radius:50%; margin:auto; display:block; margin-bottom:10px;">
+      <label>Ganti Foto Profil (Maks. 2MB)</label>
+      <?php if (!empty($user['profile_pic'])): ?>
+        <div id="profile-pic-container" style="text-align:center;">
+          <img src="/CiviCore/uploads/profile_pics/<?php echo htmlspecialchars($user['profile_pic']); ?>" 
+              alt="Profile Picture"
+              id="profile-pic-preview"
+              style="width:100px; height:100px; object-fit:cover; border-radius:50%; display:block; margin:auto; margin-bottom:10px;">
+          <button type="button" id="delete-pic-btn"
+                  style="background-color:#dc2626; color:white; border:none; padding:5px 5px; border-radius:6px; cursor:pointer;">
+            🗑️ Hapus Foto
+          </button>
+        </div>
       <?php endif; ?>
       <input type="file" name="profile_pic" accept="image/*">
       
@@ -121,6 +131,33 @@ if (!$user) {
 <div class="footer">
     <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const deleteBtn = document.getElementById("delete-pic-btn");
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", function() {
+      if (confirm("Yakin ingin menghapus foto profil?")) {
+        fetch("delete_profile_pic.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "user_id=<?php echo $user['id']; ?>"
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+          
+          if (data.success) {
+            document.getElementById("profile-pic-preview").src = "/CiviCore/uploads/profile_pics/default.png";
+            alert(data.message);
+          }
+        })
+        .catch(error => console.error("Error:", error));
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>
