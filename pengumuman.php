@@ -1,5 +1,5 @@
 <?php
-include "cms/db.php";
+include "CiviCore/db.php";
 
 $result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
 ?>
@@ -35,7 +35,7 @@ $result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -117,15 +117,15 @@ $result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
 
         <div class="card">
             <?php if ($row['thumbnail']): ?>
-              <img src="cms/pengumuman/uploads/thumbnails/<?= $row['thumbnail'] ?>" alt="Thumbnail">
+              <img src="CiviCore/pengumuman/uploads/thumbnails/<?= $row['thumbnail'] ?>" alt="Thumbnail">
             <?php endif; ?>
             
             <h2 style="font-family:Raleway-Medium"><?= htmlspecialchars($row['title']) ?></h2>
             <p><?= nl2br(htmlspecialchars($row['content'])) ?></p>
 
             <?php if ($row['attachment']): ?>
-				<iframe src="cms/pengumuman/uploads/files/<?= $row['attachment'] ?>" width="100%" height="400px"></iframe><br>
-              <br><a class="download" style="float: left;" href="cms/pengumuman/uploads/files/<?= $row['attachment'] ?>" download>📄 Unduh lampiran</a>
+				<iframe src="CiviCore/pengumuman/uploads/files/<?= $row['attachment'] ?>" width="100%" height="400px"></iframe><br>
+              <br><a class="download" style="float: left;" href="CiviCore/pengumuman/uploads/files/<?= $row['attachment'] ?>" download>📄 Unduh lampiran</a>
             <?php endif; ?>
 
             <small style="float: right; font-family:Raleway-Medium">Dipublish oleh: <?= $row['created_by'] ?> | <?php echo date("j F Y, H:i", strtotime($row['created_at'])); ?></small>

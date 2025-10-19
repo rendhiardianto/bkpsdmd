@@ -1,0 +1,249 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("/file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("/file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("/file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("/file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("/file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("/file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("/file/Font/segoeui.ttf");
+}
+
+body {
+	margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background:#f4f6f9; 
+}
+.header
+{
+	position: fixed;
+  top: 0;
+	width:100%;
+	height: 65px;
+	background-color: #0077b6;
+  z-index: 99;
+}
+.navbar
+{
+  float: left;
+  margin-left: 10px;
+  margin-top:10px;
+  text-align:center;
+  cursor: pointer;
+  padding:10px 15px; 
+  color:white; 
+  padding:10px 15px; 
+  background:#21be02; 
+  border:none; 
+  border-radius:4px; 
+}
+.navbar:hover{
+    background: #199400;
+}
+.roleHeader {
+    margin: auto;
+    margin-top:15px;
+    color: #ffffff;
+    text-align:center;
+    font-size: 30px;
+    font-family: Bahnschrift;
+}
+.liveClock {
+  float: right;
+  margin: auto;
+  margin-right: 10px;
+  font-size: 15px;
+}
+.content {
+  padding: 80px 10px 20px 10px;
+  margin: auto;
+}
+h2 {
+  margin-bottom: 20px;
+}
+.filter-bar { 
+  margin-bottom: 20px;
+}
+    
+.filter-bar a {    
+  display: inline-block;   
+  margin-right: 10px;      
+  padding: 6px 14px;     
+  border-radius: 6px; 
+  text-decoration: none;     
+  background: #e5e7eb;
+  color: #333;      
+  transition: 0.2s;   
+}
+    
+.filter-bar a.active {      
+  background: #2563eb;      
+  color: white;      
+  font-weight: bold;   
+}
+    
+.filter-bar a:hover {      
+  background: #3b82f6;      
+  color: white;    
+}
+
+    
+table {      
+  width: 100%;      
+  border-collapse: collapse;      
+  background: white;      
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);    
+}
+    
+th, td {      
+  border: 1px solid #ddd;      
+  padding: 10px;      
+  text-align: left;   
+}
+    
+th {      
+  background: #f3f4f6;      
+  font-weight: 600;    
+}
+
+    
+.status-badge {      
+  padding: 4px 8px;      
+  border-radius: 5px;      
+  font-weight: 600;      
+  font-size: 13px;    
+}
+    
+.status-pending {     
+  background: #fff3cd;     
+  color: #856404;   
+}
+    
+.status-approved {      
+  background: #d4edda;      
+  color: #155724;    
+}
+    
+.status-rejected {      
+  background: #f8d7da;      
+  color: #721c24;    
+}
+
+    
+.approve-btn, .reject-btn {      
+  border: none;      
+  padding: 6px 10px;      
+  border-radius: 5px;      
+  cursor: pointer;      
+  margin-left: 3px;   
+}
+    
+.approve-btn {      
+  background: #16a34a;      
+  color: white;    
+}
+    
+.reject-btn {      
+  background: #dc2626;      
+  color: white;   
+}
+    
+.note-input {      
+  width: 160px;      
+  padding: 5px;      
+  border: 1px solid #ccc;      
+  border-radius: 4px;    
+}
+    
+tr:hover {     
+  background-color: #f9fafb;   
+}
+  /* ====== BADGE COLORS ====== */
+.filter-bar .badge {
+  border-radius: 12px;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+/* default (All) */
+.badge-all {
+  background: #9ca3af; /* gray */
+  color: white;
+}
+
+/* pending = yellow */
+.badge-pending {
+  background: #facc15;
+  color: #78350f;
+}
+
+/* approved = green */
+.badge-approved {
+  background: #16a34a;
+  color: white;
+}
+
+/* rejected = red */
+.badge-rejected {
+  background: #dc2626;
+  color: white;
+}
+
+/* active button color inversion */
+.filter-bar a.active .badge-all {
+  background: white;
+  color: #374151;
+}
+.filter-bar a.active .badge-pending {
+  background: white;
+  color: #b45309;
+}
+.filter-bar a.active .badge-approved {
+  background: white;
+  color: #15803d;
+}
+.filter-bar a.active .badge-rejected {
+  background: white;
+  color: #991b1b;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+#liveSearch {
+  width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+#liveSearch:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}

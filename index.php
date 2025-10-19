@@ -1,5 +1,5 @@
 <?php
-include "cms/db.php";
+include "CiviCore/db.php";
 $result = $conn->query("SELECT * FROM infografis ORDER BY created_at DESC");
 
 $ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -50,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login Cockpit</a>
+			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="/MyPresensi/index.php" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -131,62 +131,62 @@ while ($row = $result->fetch_assoc()) {
 <div class="slideshow-container">
 	
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/1.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/1.png" alt="">
     <div class="caption"> <?php echo $captions[1]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/2.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/2.png" alt="">
     <div class="caption"><?php echo $captions[2]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/3.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/3.png" alt="">
     <div class="caption"><?php echo $captions[3]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/4.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/4.png" alt="">
     <div class="caption"><?php echo $captions[4]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/5.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/5.png" alt="">
     <div class="caption"><?php echo $captions[5]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/6.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/6.png" alt="">
     <div class="caption"><?php echo $captions[6]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/7.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/7.png" alt="">
     <div class="caption"><?php echo $captions[7]; ?> </div>
   </div>
 
   <div class="slides">
-    <img src="cms/infoGrafis/uploads/images/8.png" alt="">
+    <img src="CiviCore/infoGrafis/uploads/images/8.png" alt="">
     <div class="caption"><?php echo $captions[8]; ?> </div>
   </div>
 
   <div class="slides">
-	<img src="cms/infoGrafis/uploads/images/9.png" alt="">
+	<img src="CiviCore/infoGrafis/uploads/images/9.png" alt="">
 	<div class="caption"><?php echo $captions[9]; ?> </div>
   </div>
 
   <div class="slides">
-	<img src="cms/infoGrafis/uploads/images/10.png" alt="">
+	<img src="CiviCore/infoGrafis/uploads/images/10.png" alt="">
 	<div class="caption"><?php echo $captions[10]; ?> </div>
   </div>
 
   <div class="slides">
-	<img src="cms/infoGrafis/uploads/images/11.png" alt="">
+	<img src="CiviCore/infoGrafis/uploads/images/11.png" alt="">
 	<div class="caption"><?php echo $captions[11]; ?> </div>
   </div>
 
   <div class="slides">
-	<img src="cms/infoGrafis/uploads/images/12.png" alt="">
+	<img src="CiviCore/infoGrafis/uploads/images/12.png" alt="">
 	<div class="caption"><?php echo $captions[12]; ?> </div>
   </div>
 
@@ -210,18 +210,18 @@ while ($row = $result->fetch_assoc()) {
 
 	<!-- Thumbnail navigation -->
 	<div class="thumbnail-row">
-	<img src="cms/infoGrafis/uploads/images/1.png" onclick="currentSlide(1)">
-	<img src="cms/infoGrafis/uploads/images/2.png" onclick="currentSlide(2)">
-	<img src="cms/infoGrafis/uploads/images/3.png" onclick="currentSlide(3)">
-	<img src="cms/infoGrafis/uploads/images/4.png" onclick="currentSlide(4)">
-	<img src="cms/infoGrafis/uploads/images/5.png" onclick="currentSlide(5)">
-	<img src="cms/infoGrafis/uploads/images/6.png" onclick="currentSlide(6)">
-	<img src="cms/infoGrafis/uploads/images/7.png" onclick="currentSlide(7)">
-	<img src="cms/infoGrafis/uploads/images/8.png" onclick="currentSlide(8)">
-	<img src="cms/infoGrafis/uploads/images/9.png" onclick="currentSlide(9)">
-	<img src="cms/infoGrafis/uploads/images/10.png" onclick="currentSlide(10)">
-	<img src="cms/infoGrafis/uploads/images/11.png" onclick="currentSlide(11)">
-	<img src="cms/infoGrafis/uploads/images/12.png" onclick="currentSlide(12)">
+	<img src="CiviCore/infoGrafis/uploads/images/1.png" onclick="currentSlide(1)">
+	<img src="CiviCore/infoGrafis/uploads/images/2.png" onclick="currentSlide(2)">
+	<img src="CiviCore/infoGrafis/uploads/images/3.png" onclick="currentSlide(3)">
+	<img src="CiviCore/infoGrafis/uploads/images/4.png" onclick="currentSlide(4)">
+	<img src="CiviCore/infoGrafis/uploads/images/5.png" onclick="currentSlide(5)">
+	<img src="CiviCore/infoGrafis/uploads/images/6.png" onclick="currentSlide(6)">
+	<img src="CiviCore/infoGrafis/uploads/images/7.png" onclick="currentSlide(7)">
+	<img src="CiviCore/infoGrafis/uploads/images/8.png" onclick="currentSlide(8)">
+	<img src="CiviCore/infoGrafis/uploads/images/9.png" onclick="currentSlide(9)">
+	<img src="CiviCore/infoGrafis/uploads/images/10.png" onclick="currentSlide(10)">
+	<img src="CiviCore/infoGrafis/uploads/images/11.png" onclick="currentSlide(11)">
+	<img src="CiviCore/infoGrafis/uploads/images/12.png" onclick="currentSlide(12)">
 	</div>
 </div>
 

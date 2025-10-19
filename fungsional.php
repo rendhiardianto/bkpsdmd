@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "cms/db.php";
+include "CiviCore/db.php";
 
 // --- Pagination setup (for jf_meranginkab only) ---
 $limit = 10;
@@ -85,7 +85,7 @@ $result3 = $conn->query("
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
       <a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -658,7 +658,7 @@ $result3 = $conn->query("
 
             <td style="text-align: center;">
               <?php if (!empty($row['image_path'])): ?>
-              <button class="detailBtn" data-img="<?php echo 'cms/pojokjafung/uploads/detail_image/' . htmlspecialchars($row['image_path']); ?>"> 
+              <button class="detailBtn" data-img="<?php echo 'CiviCore/pojokjafung/uploads/detail_image/' . htmlspecialchars($row['image_path']); ?>"> 
                 Lihat
               </button>
               <?php endif; ?>

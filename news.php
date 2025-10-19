@@ -1,5 +1,5 @@
 <?php
-include "cms/db.php"; // your DB connection file
+include "CiviCore/db.php"; // your DB connection file
 
 // Fetch latest news
 $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at DESC LIMIT 10");
@@ -34,7 +34,7 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -116,12 +116,12 @@ $result = $conn->query("SELECT * FROM news WHERE visible = 1 ORDER BY created_at
     <?php while ($row = $result->fetch_assoc()): ?>
       <div class="news-item">
 
-        <img src="cms/berita/<?php echo $row['image']; ?>" alt="News">
+        <img src="CiviCore/berita/<?php echo $row['image']; ?>" alt="News">
 
         <div class="news-content">
           <h2><?php echo $row['title']; ?></h2>
           <p><?php echo substr($row['content'], 0, 120) . "..."; ?></p>
-          <!--<a href="cms/berita/news_detail.php?id=<?php echo $row['id']; ?>" target="_blank">Read More</a>-->
+          <!--<a href="CiviCore/berita/news_detail.php?id=<?php echo $row['id']; ?>" target="_blank">Read More</a>-->
 		  <a href="berita/news_detail.php?slug=<?php echo urlencode($row['slug']); ?>" target="_blank">Baca selengkapnya</a>
 
         </div>

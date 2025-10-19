@@ -1,5 +1,5 @@
 <?php
-include "cms/db.php"; // your DB connection file
+include "CiviCore/db.php"; // your DB connection file
 
 // Fetch latest news
 $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
@@ -34,7 +34,7 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -115,12 +115,12 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
   <div class="blog-list">
     <?php while ($row = $result->fetch_assoc()): ?>
       <div class="blog-item">
-        <img src="cms/blog/<?php echo $row['image']; ?>" alt="Blog">
+        <img src="CiviCore/blog/<?php echo $row['image']; ?>" alt="Blog">
         <div class="blog-content">
           <h2><?php echo $row['title']; ?></h2>
           <p><?php echo substr($row['content'], 0, 120) . "..."; ?></p>
-          <!--<a href="cms/berita/news_detail.php?id=<?php echo $row['id']; ?>" target="_blank">Read More</a>-->
-		  <a href="cms/blog/blog_detail.php?slug=<?php echo $row['slug']; ?>" target="_blank">Baca selengkapnya</a>
+          <!--<a href="CiviCore/berita/news_detail.php?id=<?php echo $row['id']; ?>" target="_blank">Read More</a>-->
+		  <a href="CiviCore/blog/blog_detail.php?slug=<?php echo $row['slug']; ?>" target="_blank">Baca selengkapnya</a>
 
         </div>
       </div>
@@ -135,7 +135,7 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
       $latest = $conn->query("SELECT id, title FROM blog ORDER BY created_at DESC LIMIT 5");
       while ($n = $latest->fetch_assoc()):
       ?>
-        <li><a href="cms/blog/blog_detail.php?id=<?php echo $n['id']; ?>"><?php echo $n['title']; ?></a></li>
+        <li><a href="CiviCore/blog/blog_detail.php?id=<?php echo $n['id']; ?>"><?php echo $n['title']; ?></a></li>
       <?php endwhile; ?>
     </ul>
   </div>

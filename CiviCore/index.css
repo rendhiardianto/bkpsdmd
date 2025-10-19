@@ -1,0 +1,250 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("../file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("../file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("../file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("../file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("../file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("../file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("../file/Font/segoeui.ttf");
+}
+@font-face {
+   font-family: Lobster;
+   src: url("../file/Font/Lobster.otf");
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full screen height */
+}
+
+#myVideo {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width:100%;
+	height: 65px;
+	background-color: #0077b6;
+	z-index: 1;
+}
+.logo
+{
+	position:fixed;
+	margin: 10px;
+}
+
+.flex-container {
+	flex: 1;
+  	display: flex;
+   justify-content: center;
+   align-items: center;  
+   gap: 20px;
+   padding: 20px;
+}
+
+@media screen and (max-width:800px) {
+	.flex-item-left {
+		display: none;
+	}
+	.flex-item-right {
+		flex: 90%;
+	}
+	.flex-item-right h2 {
+		font-size: 10px;
+	}
+}
+
+.flex-item-left
+{
+	position: relative;
+	align-items: center;
+	font-family: 'Trebuchet MS';
+	text-shadow:rgb(from color r g b);
+	text-shadow: 5px 5px 5px black;
+	color: white;
+	text-align: center;
+	flex: 70%;
+	padding: 30px;
+}
+
+.flex-item-left h2{
+	font-size: 55px;
+}
+.flex-item-left h2 p {
+	font-size: 20px;
+	margin-top: 0px;
+	padding: 0px 120px;
+}
+
+.flex-item-right
+{
+	position: relative;
+	color: white;
+	font-family:Bahnschrift;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 10px 30px 0px 20px;
+	flex: 30%;
+	margin-top: 20px;
+}
+.subtitle{
+	font-family: Raleway-Light;
+	font-size: 15px;
+	color: #ffffff;
+}
+.flex-item-right h2
+{
+	display: block;
+	margin: auto;
+	text-align: center;
+	font-size: 40px;
+	padding-bottom: 10px;
+}
+@media screen and (max-width:800px) {
+	.flex-item-right h2 {
+		font-size: 25px;
+	}
+}
+
+.flex-item-right label
+{
+	font-size:20px;
+	justify-content: left;
+}
+
+.flex-item-right input[type=nip]
+{
+	width: 100%;
+	height: 30px;
+	background: transparent;
+	border: 1px solid white;
+	color: white;
+	font-size: 15px;
+	font-weight: 400px;
+	padding: 6px;
+	margin-top: 10px;
+	font-family:Bahnschrift;
+}
+
+.input-with-icon {
+	position: relative;
+	width: 104%;
+}
+
+.input-with-icon input {
+	width: 100%;
+	height: 45px;               /* match your original password box */
+	background: transparent;
+	border: 1px solid white;
+	color: white;
+	font-size: 15px;
+	font-family: Bahnschrift;
+	padding: 6px;
+	padding-right: 0px;        /* make space for the icon */
+	box-sizing: border-box;
+}
+
+.input-with-icon .toggle-eye {
+	position: absolute;
+	right: 10px;                /* inside box */
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	font-size: 14px;
+	color: rgb(255, 255, 255);
+	user-select: none;
+}
+
+.flex-item-right input[type=submit]
+{
+	display: block;
+	margin: auto;
+	width: 70%;
+	height: 50px;
+	background: #00b4d8;
+	border: none;
+	cursor: pointer;
+	transition-duration: 0.4s;
+	color: white;
+	font-size: 20px;
+	font-family:Bahnschrift;
+}
+
+.flex-item-right input[type=submit]:hover{
+	opacity: 0.8;
+}
+
+.flex-item-right input[type=nip]:focus{
+	outline: none;
+	border: 1px solid #FFC600;
+}
+
+.flex-item-right input[type=password]:focus{
+	outline: none;
+	border: 1px solid #FFC600;
+}
+
+.flex-item-right input[type=submit]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+.footer
+{
+	position: fixed;
+	background-color: #0096c7;
+	bottom: 0;
+	width:100%;
+	color: white;
+	font-family: Raleway-Medium;
+	text-align: center;
+	font-size: 15x;
+}
+@media screen and (max-width:800px) {
+	.footer {
+		font-size: 12px;
+	}
+}

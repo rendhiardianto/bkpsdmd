@@ -1,5 +1,5 @@
 <?php
-include "../cms/db.php";
+include "../CiviCore/db.php";
 
 // Directly set the value you want:
 $tipe_dokumen = 'APBD'; // or 'Perbup'
@@ -42,7 +42,7 @@ $result = $stmt->get_result();
 	<div class="startlogoDD">
 		<button onclick="toggleStartMenu()" class="startbtn"><img src="/icon/LogoStart.png"></button>
 		<div id="myStart" class="start-content">
-			<a href="/cms/index.php" target="_blank"><img src="/icon/cms.png" width="20px"> Login CMS</a>
+			<a href="/CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
 			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
 			<a href="#" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
@@ -130,11 +130,11 @@ $result = $stmt->get_result();
 		<td><?= htmlspecialchars($row['judul']) ?></td>
 		<td><?= htmlspecialchars($row['nomor']) ?></td>
 		<td><?= htmlspecialchars($row['tahun']) ?></td>
-		<td><a href="../cms/transparansi/uploads/files/<?= htmlspecialchars($row['attachment']) ?>" class="unduh" download><button class="btn"><i class="fa fa-download"></i> Unduh</button></a></td>
+		<td><a href="../CiviCore/transparansi/uploads/files/<?= htmlspecialchars($row['attachment']) ?>" class="unduh" download><button class="btn"><i class="fa fa-download"></i> Unduh</button></a></td>
 	</tr>
 	
 </table>
-<iframe src="../cms/transparansi/uploads/files/<?= htmlspecialchars($row['attachment']) ?>" width="80%" height="500px"></iframe>
+<iframe src="../CiviCore/transparansi/uploads/files/<?= htmlspecialchars($row['attachment']) ?>" width="80%" height="500px"></iframe>
 <?php endwhile; ?>
 
 	

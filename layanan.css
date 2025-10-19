@@ -56,7 +56,20 @@ body {
 .LogoBKD {
 	width: 200px;
 }
-
+.ajukanButton {
+  background-color: #0077b6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Bahnschrift;
+  margin-bottom: 10px;
+}
+.ajukanButton:hover {
+  background-color: #005f87;
+}
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 600px) {
 	.layananBKD h1{
@@ -108,12 +121,11 @@ body {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items:center;
     background-color: #ebebeb;
-    align-content: space-evenly;
 }
-.flex-container > div {
+.flex-container > .flex-item-main {
     margin: 10px;
     background-color: #dddddd;
     color: #023e8a;
