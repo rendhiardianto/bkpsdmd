@@ -34,7 +34,7 @@ $query = "
     s.status,
     s.admin_note,
     s.submitted_at
-  FROM service_submissions s
+  FROM jafung_submissions s
   LEFT JOIN asn_merangin u ON u.id = s.user_id
   $whereSQL
   ORDER BY s.submitted_at DESC

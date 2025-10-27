@@ -133,7 +133,7 @@ $user = $result->fetch_assoc();
 
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
-      <button class="tablinks" onclick="openCity(event, 'tab4')" id="defaultOpen">Website CiviCore</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')" id="defaultOpen">Website CMS</button>
     </div>
 
   </div><!--leftSide-->

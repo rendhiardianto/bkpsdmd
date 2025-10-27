@@ -1,5 +1,5 @@
 <?php
-include "../cms/db.php";
+include "../CiviCore/db.php";
 
 // Check for slug in URL
 if (isset($_GET['slug']) && $_GET['slug'] !== '') {
@@ -37,7 +37,7 @@ if (isset($_GET['slug']) && $_GET['slug'] !== '') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $news['title']; ?></title>
-  <link href="../cms/berita/news_detail.css" rel="stylesheet" type="text/css">
+  <link href="../CiviCore/berita/news_detail.css" rel="stylesheet" type="text/css">
   <link href="../headerFooter.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -49,7 +49,7 @@ if (isset($_GET['slug']) && $_GET['slug'] !== '') {
     <br><br>Category: <?php echo $news['category']; ?></div>
 
   <figure>
-    <img src="../cms/berita/<?php echo $news['image']; ?>" alt="Trulli" style="width:100%">
+    <img src="../CiviCore/berita/<?php echo $news['image']; ?>" alt="Trulli" style="width:100%">
     <figcaption style="text-align: center;"><?php echo $news['image_desc']; ?></figcaption>
   </figure>
 

@@ -24,7 +24,7 @@ function getSubmissionCounts($conn) {
     // Query to count by status
     $sql = "
         SELECT status, COUNT(*) AS total
-        FROM service_submissions
+        FROM jafung_submissions
         GROUP BY status
     ";
     $result = $conn->query($sql);
@@ -46,7 +46,7 @@ function getSubmissionCounts($conn) {
  * Optional: Get count for a specific status only
  */
 function getCountByStatus($conn, $status) {
-    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM service_submissions WHERE status = ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM jafung_submissions WHERE status = ?");
     $stmt->bind_param("s", $status);
     $stmt->execute();
     $result = $stmt->get_result()->fetch_assoc();

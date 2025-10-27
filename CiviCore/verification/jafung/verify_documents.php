@@ -2,79 +2,74 @@
 
 require_once __DIR__ . '/../../db.php';
 require_once __DIR__ . '/../../auth.php';
-
 include_once __DIR__ . '/../../datetime_helper.php';
 
-
 requireRole('super_admin');
-$role = 'super_admin';
 
-// Read role (GET first, session fallback)
-$role = $_GET['role'] ?? $_SESSION['role'];
-
-// Read “from” page if provided
-$fromPage = $_GET['from'] ?? null;
-
-// Define back links for each role
+// --- Determine role and back link ---
+$role = $_GET['role'] ?? $_SESSION['role'] ?? 'super_admin';
 $backLinks = [
-    'super_admin'  => '../../dashboard_super_admin.php',
+    'super_admin' => '../../dashboard_super_admin.php',
 ];
-$backUrl = $backLinks[$role];
+$backUrl = $backLinks[$role] ?? '../../dashboard_super_admin.php';
 
-// Handle filter
+// --- Filter setup ---
 $filter = $_GET['filter'] ?? 'all';
 $where = '';
-
 if ($filter !== 'all') {
-  $where = "WHERE s.status = '" . $conn->real_escape_string($filter) . "'";
+    $where = "WHERE s.status = '" . $conn->real_escape_string($filter) . "'";
 }
 
+// --- Main query ---
 $query = "
-  SELECT 
-    s.id AS submission_id,
-    u.fullname,
-    u.phone,
-    s.document_path,
-    s.status,
-    s.admin_note,
-    s.submitted_at
-  FROM service_submissions s
-  LEFT JOIN asn_merangin u ON u.id = s.user_id
-  $where
-  ORDER BY s.submitted_at DESC
+    SELECT 
+        s.id AS submission_id,
+        s.nip,
+        s.fullname,
+        s.jenis_usulan,
+        s.document_paths,
+        s.status,
+        s.admin_note,
+        s.created_at,
+        s.phone
+    FROM jafung_submissions s
+    LEFT JOIN asn_merangin a ON a.nip = s.nip
+    $where
+    ORDER BY s.created_at DESC
 ";
-
 $result = $conn->query($query);
 
-// Get counts for each status
+// --- Count query ---
 $countQuery = "
-  SELECT 
-    status,
-    COUNT(*) AS total
-  FROM service_submissions
-  GROUP BY status
+    SELECT status, COUNT(*) AS total
+    FROM jafung_submissions
+    GROUP BY status
 ";
 $countResult = $conn->query($countQuery);
 
+// --- Initialize counters for all new statuses ---
 $counts = [
-  'pending' => 0,
-  'approved' => 0,
-  'rejected' => 0,
-  'all' => 0
+    'new' => 0,
+    'accepted' => 0,
+    'rejected' => 0,
+    'approved' => 0,
+    'completed' => 0,
+    'all' => 0
 ];
 
 if ($countResult && $countResult->num_rows > 0) {
-  while ($row = $countResult->fetch_assoc()) {
-    $counts[strtolower($row['status'])] = (int)$row['total'];
-    $counts['all'] += (int)$row['total'];
-  }
+    while ($row = $countResult->fetch_assoc()) {
+        $key = strtolower($row['status']);
+        if (isset($counts[$key])) {
+            $counts[$key] = (int)$row['total'];
+        }
+        $counts['all'] += (int)$row['total'];
+    }
 }
-?>
-
-<?php
+// --- Current user info ---
 $userId = $_SESSION['user_id'];
-$result = $conn->query("SELECT nip, fullname, jabatan, organisasi, profile_pic FROM users WHERE id=$userId");
-$user = $result->fetch_assoc();
+$resultUser = $conn->query("SELECT nip, fullname, jabatan, organisasi, profile_pic FROM users WHERE id=$userId");
+$user = $resultUser->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -83,64 +78,60 @@ $user = $result->fetch_assoc();
   <meta charset="UTF-8">
   <title>Dashboard - Verifikasi Jafung</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  
 </head>
 <body>
 
 <div class="header">
-
-    <div class="navbar">
-      <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" 
-      style="text-decoration: none; color:white;">&#10094; Kembali</a>
+  <div class="navbar">
+    <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" style="text-decoration: none; color:white;">&#10094; Kembali</a>
+  </div>
+  <div class="roleHeader">
+    <h1>Daftar Pengajuan JAFUNG </h1>
+  </div>
+  <div class="startlogoDD">
+    Halo, <?php echo htmlspecialchars($user['fullname']); ?>
+    <button onclick="toggleStartMenu()" class="startbtn">
+      <?php if (!empty($user['profile_pic'])): ?>
+        <img src="../../uploads/profile_pics/<?php echo htmlspecialchars($user['profile_pic']); ?>" class="profile-pic">
+      <?php else: ?>
+        <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
+      <?php endif; ?>
+    </button>
+    <div id="myStart" class="start-content">
+      <a href="../../edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
+      <a href="../../logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
     </div>
-    
-    <div class="roleHeader">
-      <h1>Dashboard Verifikasi Jafung</h1>
-    </div>
-
-    <div class="startlogoDD">
-      Halo, <?php echo $user['fullname']; ?>
-      <button onclick="toggleStartMenu()" class="startbtn"> <?php if (!empty($user['profile_pic'])): ?>
-        <img src="../../uploads/profile_pics/<?php echo $user['profile_pic']; ?>" class="profile-pic">
-        <?php else: ?>
-          <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
-        <?php endif; ?>
-      </button>
-      
-      <div id="myStart" class="start-content">
-        <a href="../../edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
-        <a href="../../logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
-      </div>
-    </div>
+  </div>
 </div>
 
 <div class="content">
-  
+
   <div class="liveClock">
     <?php echo renderLiveClock(); ?>
   </div>
 
+  <!-- 🔹 Filter Buttons -->
   <div class="filter-bar">
     <?php
       $filters = [
-        'all' => 'All',
-        'pending' => 'Pending',
-        'approved' => 'Approved',
-        'rejected' => 'Rejected'
+        'all' => 'Semua',
+        'new' => 'Baru',
+        'accepted' => 'Diterima',
+        'approved' => 'Disetujui',
+        'rejected' => 'Ditolak',
+        'completed' => 'Selesai'
       ];
       foreach ($filters as $key => $label) {
         $active = ($filter === $key) ? 'active' : '';
         $count = $counts[$key] ?? 0;
-        echo "
-          <a href='#' data-filter='$key' class='$active filter-$key'>
-            $label
-            <span class='badge badge-$key'>$count</span>
-          </a>
-        ";
+        echo "<a href='?filter=$key' class='$active'>$label <span class='badge'>$count</span></a>";
       }
     ?>
   </div>
+
   <div class="search-bar">
-    <input type="text" id="liveSearch" placeholder="🔍 Search by name, phone, or note...">
+    <input type="text" id="liveSearch" placeholder="🔍 Search by NIP, Name, or Note...">
   </div>
 
   <table>
@@ -148,138 +139,157 @@ $user = $result->fetch_assoc();
       <tr>
         <th>No</th>
         <th>Tanggal Pengajuan</th>
-        <th>NIP</th>
-        <th>Nama</th>
-        <th>Phone</th>
-        <th>Jenis Usulan</th>
         <th>Status</th>
-        <th>Admin Note</th>
+        <th>NIP</th>
+        <th>Nama Lengkap</th>
+        <th>No HP</th>
+        <th>Jenis Pengajuan</th>
+        <th>Dokumen</th>
+        <th>Instruksi</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <?php
-      $no = 1;
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          $statusClass = "status-" . strtolower($row['status']);
-      ?>
-        <tr>
-          <td><?= $no++; ?></td>
-          <td><?= htmlspecialchars($row['fullname']); ?></td>
-          <td><?= htmlspecialchars($row['fullname']); ?></td>
-          <td><?= htmlspecialchars($row['fullname']); ?></td>
-          <td><?= htmlspecialchars($row['phone']); ?></td>
-          <td>
-            <?php if (!empty($row['document_path'])): ?>
-              <a href="/layanan/jafung/uploads/documents/<?= urlencode($row['document_path']); ?>" target="_blank">📄 View</a>
-            <?php else: ?>
-              <span style="color:gray;">No File</span>
-            <?php endif; ?>
-          </td>
-          <td><span class="status-badge <?= $statusClass; ?>"><?= ucfirst($row['status']); ?></span></td>
+    <?php
+    $no = 1;
 
-          <td><?= htmlspecialchars($row['admin_note']); ?></td>
-          <td>
-            <form method="POST" action="update_status.php" style="display:inline;">
-              <input type="hidden" name="id" value="<?= $row['submission_id']; ?>">
-              <input type="hidden" name="phone" value="<?= $row['phone']; ?>">
-              <input type="text" name="note" class="note-input" placeholder="Reason (if reject)">
-              <button type="submit" name="action" value="approve" class="approve-btn">✅</button>
-              <button type="submit" name="action" value="reject" class="reject-btn">❌</button>
-            </form>
-          </td>
-        </tr>
-      <?php
-        }
-      } else {
-        echo '<tr><td colspan="7" style="text-align:center;">No submissions found for this filter.</td></tr>';
+    // --- Mapping jenis_usulan ---
+    $jenisMap = [
+      'JF4' => '(JF4) Kenaikan Jenjang JF',
+      'JF3' => '(JF3) Pengangkatan Kembali ke dalam JF',
+      'JF2' => '(JF2) Perpindahan dari Jabatan Lain ke dalam JF',
+      'JF1' => '(JF1) Pengangkatan Pertama dalam JF'
+    ];
+
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $statusClass = "status-" . strtolower($row['status']);
+        $docs = json_decode($row['document_paths'], true);
+        $jenisCode = $row['jenis_usulan'] ?? '';
+        $displayJenis = $jenisMap[$jenisCode] ?? htmlspecialchars($jenisCode);
+    ?>
+      <tr>
+        <td><?= $no++; ?></td>
+        <td><?= formatTanggalIndonesia($row['created_at']); ?></td>
+        <td style="text-align:center"><span class="status-badge <?= $statusClass; ?>"><?= ucfirst($row['status']); ?></span></td>
+        <td><?= htmlspecialchars($row['nip']); ?></td>
+        <td><?= htmlspecialchars($row['fullname']); ?></td>
+        <td><?= htmlspecialchars($row['phone']); ?></td>
+        <td><?= $displayJenis; ?></td>
+        <td style="text-align: center;">
+          <?php 
+            if (!empty($docs)) {
+              $status = strtolower($row['status']);
+
+              // show detail button only for accepted & approved
+              if (in_array($status, ['accepted', 'revised'])) {
+                echo "<a href='detail_document.php?id={$row['submission_id']}' class='detail-btn'>Verifikasi Berkas</a><br>";
+              }
+              // show upload final doc only when status = complete
+              if ($status === 'completed') {
+                echo "<a href='upload_final_document.php?id={$row['submission_id']}' class='upload-final-btn'>Upload SK PERTEK</a><br>";
+              }
+              // 🧩 show rejection note if rejected
+              if ($status === 'rejected' && !empty($row['admin_note'])) {
+                echo "<div style='margin-top:8px; color:#b30000; font-size:13px; background:#ffeaea; border:1px solid #f5c2c2; padding:6px; border-radius:8px; text-align:left;'>
+                        <strong>Alasan Penolakan:</strong><br>" . nl2br(htmlspecialchars($row['admin_note'])) . "
+                      </div>";
+              }
+            } else {
+              echo "<span style='color:gray;'>No File</span>";
+            }
+          ?>
+        </td>
+        <td style="text-align: center; color:red;">
+          <?php 
+            if (!empty($docs)) {
+              if (strtolower($row['status']) === 'new') {
+                echo "Terima berkas!";
+              }
+              if (strtolower($row['status']) === 'accepted') {
+                echo "Verifikasi Berkas terlebih dahulu dan langsung usulkan melalui I-MUT BKN. 
+                <br> Lalu Setujui atau Tolak!";
+              }
+              if (strtolower($row['status']) === 'rejected') {
+                echo "Tunggu, berkas sedang diperbaiki oleh Pegawai bersangkutan.";
+              }
+              if (strtolower($row['status']) === 'approved') {
+                echo "Berkas sudah diusulkan melalui I-MUT BKN, jika SK sudah terbit, 
+                klik Selesai!";
+              }
+              if (strtolower($row['status']) === 'revised') {
+                echo "Berkas sudah direvisi, silahkan periksa kembali! <br> Lanjut usulkan melalui I-MUT BKN.
+                <br> Lalu Setujui atau Tolak!";
+              }
+              if (strtolower($row['status']) === 'completed') {
+                echo "Silahkan Upload SK PERTEK!";
+              }
+            } else {
+              echo "<span style='color:gray;'>No File</span>";
+            }
+          ?>
+        </td>
+        <td>
+          <form method="POST" action="update_status.php" class="action-form">
+            <input type="hidden" name="id" value="<?= $row['submission_id']; ?>">
+            <input type="hidden" name="phone" value="<?= htmlspecialchars($row['phone']); ?>">
+            
+            <?php 
+              $status = strtolower($row['status']);
+              switch ($status) {
+                case 'new':
+                  echo '<button type="submit" name="action" value="accepted" class="accept-btn">✔️ Terima</button>';
+                  break;
+                case 'accepted':
+                  echo '<button type="submit" name="action" value="approved" class="approve-btn">✔️ Setujui</button>';
+                  echo '<button type="submit" name="action" value="rejected" class="reject-btn">❌ Tolak</button>';
+                  echo '<input type="text" name="note" class="note-input" placeholder="Alasan penolakan">';
+                  break;
+                case 'revised':
+                  echo '<button type="submit" name="action" value="approved" class="approve-btn">✔️ Setujui</button>';
+                  echo '<button type="submit" name="action" value="rejected" class="reject-btn">❌ Tolak</button>';
+                  echo '<input type="text" name="note" class="note-input" placeholder="Alasan penolakan">';
+                  break;
+                case 'approved':
+                  echo '<button type="submit" name="action" value="completed" class="complete-btn">🏁 Selesai</button>';
+                  break;
+                case 'rejected':
+                  // Show delete button for rejected cases
+                  echo '<button type="submit" name="action" value="delete" class="delete-btn">🗑️ Hapus</button>';
+                  break;
+                default:
+                  echo '<span style="color:gray;">No Action</span>';
+              }
+            ?>
+          </form>
+        </td>
+        
+      </tr>
+    <?php
       }
-      ?>
+    } else {
+      echo '<tr><td colspan="10" style="text-align:center;">No submissions found.</td></tr>';
+    }
+    ?>
     </tbody>
   </table>
 </div>
+
+<div class="footer">
+  <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
+</div>
+
 <script src="/JavaScript/script.js"></script>
+
 <script>
 document.getElementById("liveSearch").addEventListener("keyup", function() {
   const input = this.value.toLowerCase();
   const rows = document.querySelectorAll("table tbody tr");
-
   rows.forEach(row => {
     const text = row.innerText.toLowerCase();
     row.style.display = text.includes(input) ? "" : "none";
   });
 });
-</script>
-<script>
-const tableBody = document.querySelector("table tbody");
-const searchInput = document.getElementById("liveSearch");
-const filterLinks = document.querySelectorAll(".filter-bar a");
-
-let currentFilter = "all";
-let typingTimer;
-
-function fetchSubmissions() {
-  const search = searchInput.value.trim();
-  fetch(`ajax_get_submissions.php?filter=${currentFilter}&search=${encodeURIComponent(search)}`)
-    .then(res => res.json())
-    .then(data => {
-      tableBody.innerHTML = "";
-
-      if (data.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;">No submissions found.</td></tr>`;
-        return;
-      }
-
-      data.forEach((row, index) => {
-        const statusClass = "status-" + row.status.toLowerCase();
-        const note = row.admin_note ? row.admin_note : "";
-        const document = row.document_path 
-          ? `<a href="/layanan/jafung/uploads/documents/${encodeURIComponent(row.document_path)}" target="_blank">📄 View</a>`
-          : `<span style="color:gray;">No File</span>`;
-
-        tableBody.innerHTML += `
-          <tr>
-            <td>${index + 1}</td>
-            <td>${row.fullname}</td>
-            <td>${row.phone}</td>
-            <td>${document}</td>
-            <td><span class="status-badge ${statusClass}">${row.status.charAt(0).toUpperCase() + row.status.slice(1)}</span></td>
-            <td>${note}</td>
-            <td>
-              <form method="POST" action="update_status.php" style="display:inline;">
-                <input type="hidden" name="id" value="${row.submission_id}">
-                <input type="hidden" name="phone" value="${row.phone}">
-                <input type="text" name="note" class="note-input" placeholder="Reason (if reject)">
-                <button type="submit" name="action" value="approve" class="approve-btn">✅</button>
-                <button type="submit" name="action" value="reject" class="reject-btn">❌</button>
-              </form>
-            </td>
-          </tr>
-        `;
-      });
-    });
-}
-
-// 🧠 Live search (with 300ms delay)
-searchInput.addEventListener("keyup", () => {
-  clearTimeout(typingTimer);
-  typingTimer = setTimeout(fetchSubmissions, 300);
-});
-
-// 🧭 Filter buttons
-filterLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    filterLinks.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-    currentFilter = link.dataset.filter;
-    fetchSubmissions();
-  });
-});
-
-// 🔄 Load initial data
-fetchSubmissions();
 </script>
 
 </body>

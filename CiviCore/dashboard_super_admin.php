@@ -137,7 +137,7 @@ $user = $result->fetch_assoc();
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
       <button class="tablinks" onclick="openCity(event, 'tab3')" id="defaultOpen">Services Verification</button>
-      <button class="tablinks" onclick="openCity(event, 'tab4')" >Website CiviCore</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')" >Website CMS</button>
       <button class="tablinks" onclick="openCity(event, 'tab1')">User Authorithy</button>
     </div>
 
@@ -146,20 +146,24 @@ $user = $result->fetch_assoc();
   <div class="rightSide">
     <div id="tab1" class="tabcontent">
       <div class="flex-item-main">
-        <p><a href="CiviCore_admin_authority/add_user.php?role=<?php echo urlencode($role); ?>">
+        <p><a href="authority/add_user.php?role=<?php echo urlencode($role); ?>">
         <img src="../icon/button/add_user.png" alt="Add User"> </a><br>ADD CIVICORE USER</p>
       </div>
       
       <div class="flex-item-main">
-        <p><a href="CiviCore_admin_authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
+        <p><a href="authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
           <img src="../icon/button/profil.png" ></a><br>CIVICORE USER LIST</p>
       </div>
+
+      <div class="flex-item-main">
+        <p><a href="authority/add_asn_merangin.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/add_asn.png" alt="Add User"> </a><br>ADD ASN MERANGIN</p>
+      </div>
+
     </div>
 
     <div id="tab2" class="tabcontent">
     </div>
-
-      
 
     <div id="tab3" class="tabcontent">
       <!--<div class="filter-bar">
@@ -177,7 +181,6 @@ $user = $result->fetch_assoc();
           <img src="../icon/button/fungsional.png"></a><br>VERIFIKASI JABATAN FUNGSIONAL</p>
       </div>
     </div>
-
 
     <div id="tab4" class="tabcontent">
       

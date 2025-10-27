@@ -1,0 +1,203 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("/file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("/file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("/file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("/file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("/file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("/file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("/file/Font/segoeui.ttf");
+}
+@font-face {
+   font-family: Lobster;
+   src: url("/file/Font/Lobster.otf");
+}
+@font-face {
+   font-family: Aptos-Bold;
+   src: url("/file/Font/Aptos-Bold.ttf");
+}
+@font-face {
+   font-family: Aptos-Display;
+   src: url("/file/Font/Aptos-Display.ttf");
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background:#f4f6f9; 
+}
+.header{
+    display: flex;
+	position: fixed;
+    top: 0;
+	width:100%;
+	height: 65px;
+	background-color: #0077b6;
+    z-index: 99;
+}
+.logo {
+    display: flex;
+    flex: 10%;
+    align-items:center;
+    justify-content: start;
+    margin-left: 10px;
+}
+.roleHeader {
+    display: flex;
+    flex: 90%;
+    align-items:center;
+    justify-content: center;
+    font-family: Bahnschrift;
+    color: white;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .logo {
+    justify-content: left;
+    margin-left: 10px;
+  }
+  .roleHeader {
+    display: none;
+  } 
+}
+
+.liveClock {
+    position: fixed;
+    margin: auto;
+    right: 10px;
+    margin-top: -85px;
+    z-index: 100;
+}
+
+.content {
+  display: flex;
+  margin: auto;
+  margin: 100px 40px 40px 40px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.363);
+  border-radius: 10px;
+}
+
+.revise-btn:hover {
+  background-color: #c0392b;
+}
+
+.leftSide {
+    flex: 55%;
+    padding: 30px;
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+}
+.leftSide h2 {
+    font-family: Aptos-Bold;
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #0077b6;
+}
+.leftSide p {
+    font-family: Segoe UI;
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: justify;
+}
+iframe {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border: none;
+    width: 100%;
+    height: 400px;
+}
+
+
+.rightSide {
+    flex: 40%;
+    font-family: Segoe UI;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.top-right-button {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+.revise-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.form-box {   
+	margin: auto;
+    display: block;
+    width: 85%; 
+    background:#fff; 
+    padding: 20px; 
+    background: transparent;
+	border: 1px solid white;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1); 
+}
+.form-box h2 {
+    text-align: center;
+}
+input, button { 
+    width: 90%; 
+    padding:15px; 
+    margin-bottom: 20px;
+    border:1px solid #ccc; 
+}
+button { 
+    margin: auto;
+    width:50%;
+    display: block;
+    background:#3498db; 
+    border:none; 
+    color:white; 
+    font-weight:bold; 
+    cursor:pointer; 
+    transition: 0.3s;
+}
+button:hover { 
+    background:#2980b9; 
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    flex-direction: column;
+  }
+  .leftSide, .rightSide {
+    flex: 100%;
+  }
+  .rightSide {
+    margin: 20px 0px;
+  }
+  .form-box{
+    margin-top: 80px;
+  }
+}

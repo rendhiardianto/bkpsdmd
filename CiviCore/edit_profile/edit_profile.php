@@ -97,7 +97,7 @@ if (!$user) {
       <label>Organisasi Induk</label>
       <input type="text" name="organisasi_induk" value="<?php echo htmlspecialchars($user['organisasi_induk']); ?>" disabled>
 
-      <button type="submit">Update Profile</button>
+      <button type="submit">Simpan</button>
     </form>
 
     <br><hr><br>
@@ -110,7 +110,7 @@ if (!$user) {
       <label>Email Baru</label>
       <input type="email" name="new_email" placeholder="Masukkan email baru" required>
 
-      <button type="submit">Ganti Email</button>
+      <button type="submit">Simpan</button>
     </form>
 
     <br><hr><br>
@@ -123,7 +123,7 @@ if (!$user) {
       <label>Kata Sandi Baru</label>
       <input type="password" name="new_password" placeholder="Masukkan kata sandi baru" required>
 
-      <button type="submit">Ganti Kata Sandi</button>
+      <button type="submit">Simpan</button>
     </form>
 </div>
 

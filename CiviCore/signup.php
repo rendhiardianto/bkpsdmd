@@ -6,6 +6,7 @@ if (!isset($_SESSION['allow_signup']) || $_SESSION['allow_signup'] !== true) {
     header("Location: verify_nip.php"); // adjust path
     exit();
 }
+
 include "db.php";
 include "config.php"; // make sure path is correct
 
@@ -211,6 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

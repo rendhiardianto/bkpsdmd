@@ -1,0 +1,290 @@
+
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("/file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("/file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("/file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("/file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("/file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("/file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("/file/Font/segoeui.ttf");
+}
+body {
+    margin: 0;
+    font-family: Arial;
+    background:#f4f6f9; 
+}
+.header{
+  display: flex;
+  position: fixed;
+  top: 0;
+	width:100%;
+	height: 65px;
+	background-color: #0077b6;
+  z-index: 99;
+}
+.logo {
+    display: flex;
+    flex: 10%;
+    align-items:center;
+    justify-content: start;
+    margin-left: 10px;
+}
+.roleHeader {
+    display: flex;
+    flex: 90%;
+    align-items:center;
+    justify-content: center;
+    font-family: Bahnschrift;
+    color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .logo {
+    justify-content: left;
+    margin-left: 10px;
+  }
+  .roleHeader {
+    display: none;
+  } 
+  .roleHeader h1 {
+    font-size: 25px;
+  }
+}
+
+.liveClock {
+  position: fixed;
+  margin: auto;
+  right: 10px;
+  margin-top: -55px;
+  z-index: 100;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  padding: 20px;
+}
+
+.info-box {
+  font-family: SegoeUI;
+  display: flex;
+  flex-direction: row;  /* 👈 ensures 3 stacked rows */
+  align-items: center;
+  justify-content: left;
+  padding: 20px;
+  gap: 20px;               /* space between rows */
+  background: #ffffff;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.fotoProfil{
+  width: 10%;
+  margin: auto;
+  justify-items: left;
+  align-items: center;
+}
+/* 1️⃣ Profile photo */
+.fotoProfil img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+}
+
+/* 2️⃣ Info table */
+.infoTable {
+  border-collapse: collapse;
+  width: 70%;
+  background: #fff;
+  overflow: hidden;
+}
+
+.infoTable td {
+  padding: 8px 12px;
+}
+
+.infoTable tr:nth-child(even) {
+  background: #f3f6ff;
+}
+
+/* 3️⃣ Select dropdown section */
+.inputPhone {
+  text-align: center;
+  width: 20%;
+  max-width: 300px;
+}
+
+.inputPhone h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.inputPhone input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.inputPhone input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,123,255,0.3);
+}
+
+/* 🖥️ Desktop layout: photo + table side by side */
+@media screen and (max-width: 600px) {
+  .info-box {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .fotoProfil {
+    text-align: center;
+  }
+  .inputPhone {
+    grid-column: span 2; /* Dropdown takes full width below */
+    text-align: center;
+  }
+  .fotoProfil, .infoTable, .inputPhone{
+    width: 100%;
+  }
+}
+
+.form-box {
+  width: 100%;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 0px 20px 20px 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Arial, sans-serif;
+  
+}
+
+.form-box h2 {
+  text-align: center;
+  color: #1d3b8b;
+  font-size: 25px;
+}
+
+.form-box form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 40px;
+  align-items: start;
+}
+
+.formFile {
+  background: #fff;
+  border: 1px solid #d6e4ff;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.formFile label {
+  font-weight: 600;
+  color: #1d3b8b;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.formFile input[type="file"] {
+  border: 1px solid #cdd9f0;
+  padding: 8px;
+  width: 90%;
+  background: #f8fbff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.formFile input[type="file"]:hover {
+  border-color: #2b7cff;
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+  margin-left: 2px;
+}
+.note {
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+  margin-top: 10px;
+  text-align: center;
+}
+/* Submit button */
+button[type="submit"] {
+  font-family: Bahnschrift;
+  grid-column: span 2;
+  width: 20%;
+  margin: 30px auto 0 auto; /* centers horizontally */
+  display: block;
+  padding: 15px 20px;
+  background: #2b7cff;
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.25s;
+  text-align: center;
+}
+
+button[type="submit"]:hover {
+  background-color: #0077b6;
+}
+
+/* Responsive (for mobile) */
+@media (max-width: 768px) {
+  .form-box form {
+    grid-template-columns: 1fr;
+  }
+
+  button[type="submit"] {
+    grid-column: 1;
+    width: 60%;         /* slightly wider on small screens */
+    margin: 25px auto 0 auto;
+  }
+}
+
+.footer {
+	position: relative;
+	background-color: #0096c7;
+	bottom: 0;
+  margin-top: 10px;
+	width:100%;
+  padding: 10px;
+	color: white;
+	font-family: Raleway-Medium;
+	text-align: center;
+	font-size: 15x;
+}
