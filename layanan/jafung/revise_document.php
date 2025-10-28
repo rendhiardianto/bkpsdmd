@@ -85,7 +85,9 @@ $stmt->close();
 // --- Handle file replacement & phone update ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedDocs = $docs;
-    $newPhone = trim($_POST['phone'] ?? '');
+    $newPhoneInput = trim($_POST['phone'] ?? '');
+    $newPhone = !empty($newPhoneInput) ? $newPhoneInput : $phoneFromDB;
+
 
     foreach ($_FILES as $key => $file) {
         if ($file['error'] === UPLOAD_ERR_OK) {
@@ -93,15 +95,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $oldFilePath = __DIR__ . "/uploads/documents/" . basename($docs[$key]);
                 if (file_exists($oldFilePath)) unlink($oldFilePath);
             }
-
+            
             $uploadDir = __DIR__ . "/uploads/documents/";
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
 
-            $filename = $verified_nip . "_" . $key . "_" . time() . "_" . basename($file['name']);
-            $targetPath = $uploadDir . $filename;
-            move_uploaded_file($file['tmp_name'], $targetPath);
+            // ✅ Keep original stored filename (from database)
+            if (!empty($docs[$key])) {
+                $targetPath = $uploadDir . basename($docs[$key]); 
+            } else {
+                // fallback if somehow the old name missing
+                $targetPath = $uploadDir . basename($file['name']);
+            }
 
-            $updatedDocs[$key] = $filename;
+            // overwrite old file with new upload
+            if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                $updatedDocs[$key] = basename($targetPath);
+            }
         }
     }
 
@@ -118,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateStmt->execute();
     $updateStmt->close();
 
-    echo "<script>alert('✅ Dokumen berhasil direvisi dan nomor HP diperbarui.'); window.location.href='jafung_index.php';</script>";
+    echo "<script>alert('✅ Berkas berhasil direvisi.'); window.location.href='jafung_index.php';</script>";
     exit;
 }
 ?>
@@ -195,16 +204,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </table>
 
     <div class="inputPhone">
-  <h3>Masukkan No WhatsApp Aktif</h3>
-  <input 
-    type="text" 
-    name="phone" 
-    placeholder="Contoh: 081234567890"
-    value="<?= htmlspecialchars($phoneFromDB ?? '') ?>"
-    required
-  >
-</div>
-
+      <h3>Masukkan No WhatsApp Aktif</h3>
+      <input 
+        type="text" 
+        name="phone" 
+        placeholder="Contoh: 081234567890"
+        value="<?= htmlspecialchars($phoneFromDB ?? '') ?>"
+        required
+      >
+    </div>
 
   </div>
 

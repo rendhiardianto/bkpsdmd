@@ -33,22 +33,24 @@ body {
 }
 
 /* ============================================ CONTENT ==============================*/
-.MyDocumentContent {
-   text-align: center;
-   margin-bottom: 100px;
-   font-family: Bahnschrift;
-   color: #333333;
-   display: block;
-   justify-content: center;
-}
 h2 {
     font-size: 30px;
     color: #0077b6;
     background-color: #dddddd;
     padding: 10px;
     margin-bottom: 100px;
+    font-family: Bahnschrift;
+    text-align: center;
 }
-.MyDocumentContent > div {
+
+.content { 
+   margin-bottom: 100px;
+   font-family: Bahnschrift;
+   color: #333333;
+   display: flex;
+   justify-content: center;
+}
+.content > div {
     background-color: #dddddd;
     color: #023e8a;
     padding: 10px;

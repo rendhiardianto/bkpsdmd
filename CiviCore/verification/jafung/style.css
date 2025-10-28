@@ -181,69 +181,72 @@ h2 {
   font-size: 15px; 
 }
 .status-new { 
-  background:#007bff7c; 
+  background:#007bff; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;  
 }
 .status-accepted { 
-  background:#28a7468c; 
+  background:#00ce30; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;  
 }
 .status-rejected { 
-  background:#d4102383; 
+  background:#d30015; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;   
 }
 .status-approved { 
-  background:#f3d00a86; 
+  background:#e7c503; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;  
 }
 .status-revised { 
-  background:#f30a9285; 
+  background:#ff0095; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;  
 }
 .status-completed { 
-  background:#bdc2c779; 
+  background:#bdc2c7; 
   color:white; 
   width: 80px;
   margin: auto;
   display: block;  
 }
 
-    
-.detail-btn, .accept-btn, .review-btn, .reject-btn, .approve-btn, .complete-btn, .delete-btn  {      
+.detail-btn, .accept-btn, .review-btn, .reject-btn, .approve-btn, .complete-btn, .delete-btn, .upload-final-btn  {      
   border: none;      
   padding: 10px 10px;      
   border-radius: 5px;      
   cursor: pointer;      
-  width: 150px;
+  width: 130px;
   margin: auto;
-  display: block;  
+  display: block; 
 }
 .detail-btn {
   background: #0254ce;      
   color: white;
   text-decoration: none;
-}   
+}
+.upload-final-btn {
+  background: #09ce02;      
+  color: white;
+  text-decoration: none;
+}
 .approve-btn {      
   background: #16a34a;      
   color: white;
      
 }
-  
 .reject-btn {      
   background: #dc2626;      
   color: white;

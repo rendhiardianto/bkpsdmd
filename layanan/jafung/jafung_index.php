@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // ✅ If previous process finished/rejected, allow new upload
                     $_SESSION['allow_update'] = true;
                     $_SESSION['verified_nip'] = $nip;
-                    header("Location: upload_document.php?nip=" . urlencode($nip));
+                    header("Location: upload_form.php?nip=" . urlencode($nip));
                     exit();
                 }
             } else {
                 // ✅ No previous submission — allow upload
                 $_SESSION['allow_update'] = true;
                 $_SESSION['verified_nip'] = $nip;
-                header("Location: upload_document.php?nip=" . urlencode($nip));
+                header("Location: upload_form.php?nip=" . urlencode($nip));
                 exit();
             }
         }
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="rightSide">
     <div class="top-right-button">
-      <a href="revise_index.php" class="revise-btn">Revisi Dokumen</a>
+      <a href="revise_index.php" class="revise-btn">Revisi Berkas</a>
     </div>
     
     <div class="form-box">

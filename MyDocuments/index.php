@@ -99,14 +99,17 @@
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
-
-<div class="MyDocumentContent">
-	<h2>BKPSDMD Merangin - MyDocuments</h2>
+<h2>BKPSDMD Merangin - MyDocuments</h2>
+<div class="content">
 
     <div class="flex-item-main">
+      <h4>DOWNLOAD SK JAFUNG</h4>
+      <a href="download_sk_jafung.php"><img src="/icon/download_doc.png"></a>
+    </div>
+
+	<div class="flex-item-main">
       <h4>DOWNLOAD DOKUMEN PPPK</h4>
       <a href="https://script.google.com/macros/s/AKfycbwQfPziQEPDsQEGVCe39gZDz00F58khSWIVVx-bqKaXdGXIrwJx2EM_knhkN7Y-Pwa9pg/exec"><img src="/icon/download_doc.png"></a>
-      <p>(SK PPPK, SK JF, SPT, SK CPPPK)</p>
     </div>
 
 </div>

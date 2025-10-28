@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $uploadDir = __DIR__ . '/uploads/final_docs/';
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
 
-            $newFileName = $data['nip'] . '_FINAL_' . time() . '.' . $ext;
+            $newFileName = $data['nip'] . '_SK_JAFUNG_' . date('Y') . '.' . $ext;
             $targetPath = $uploadDir . $newFileName;
 
             if (move_uploaded_file($file['tmp_name'], $targetPath)) {

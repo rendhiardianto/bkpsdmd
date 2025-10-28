@@ -83,23 +83,54 @@ $stmt = $conn->prepare("UPDATE jafung_submissions SET status=?, admin_note=?, ve
 $stmt->bind_param("ssi", $status, $note, $id);
 $stmt->execute();
 
-// 💬 WhatsApp message based on status
+// 🧩 Fetch user data (ticket_number, fullname, phone)
+$getUser = $conn->prepare("SELECT ticket_number, fullname, phone FROM jafung_submissions WHERE id = ?");
+$getUser->bind_param("i", $id);
+$getUser->execute();
+$resUser = $getUser->get_result();
+$user = $resUser->fetch_assoc();
+$getUser->close();
+
+$fullname = $user['fullname'] ?? 'ASN';
+$phone = $user['phone'] ?? $phone; // fallback to POST value if missing
+$ticket_no = $user['ticket_number'];
+
+/// 💬 WhatsApp message based on status
 switch ($status) {
     case 'accepted':
-        $message = "📥 Berkas Anda sudah *diterima* untuk direview oleh admin.";
+        $message = "📥 Halo #KantiASN *{$fullname}*,\n\n".
+                   "Berkas Pengajuan Jabatan Fungsional Anda sudah *diterima* dan sedang diperiksa oleh Tim JAFUNG. ".
+                   "Berkas Anda masih mungkin *Disetujui* atau *Ditolak*. Terima kasih 🙏";
         break;
+
     case 'approved':
-        $message = "✅ Selamat! berkas Anda *sudah disetujui*, sekarang berkas Anda sudah diusulkan ke BKN.";
+        $message = "✅ Halo #KantiASN *{$fullname}*,\n\n".
+                   "Selamat! Berkas Anda sudah *disetujui* dan saat ini telah diusulkan ke *BKN*. ".
+                   "Mohon ditunggu proses selanjutnya.\n\n".
+                   "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n";
         break;
+
     case 'rejected':
-        $message = "❌ Mohon maaf, berkas Anda *ditolak*. Alasan: $note";
+        $message = "❌ Halo #KantiASN *{$fullname}*,\n\n".
+                   "Mohon maaf, Berkas Pengajuan Jabatan Fungsional Anda *ditolak*.\n".
+                   "Alasan: {$note}\n\nSilakan perbaiki sesuai catatan di atas.";
         break;
+
     case 'completed':
-        $message = "🏁 Berkas Pengajuan Jabatan Fungsional Anda sudah *terbit*. Terima kasih.";
+        $message = "🏁 Halo #KantiASN *{$fullname}*,\n\n".
+                   "SK Pengajuan Jabatan Fungsional Anda sudah *terbit*. 🎉\n\n".
+                   "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n\n".
+                   "Silahkan download SK Anda di website resmi *BKPSDMD Merangin*:\n".
+                   "👉 https://bkpsdmd.meranginkab.go.id/MyDocuments/\n\n". 
+                   "Terima kasih atas kerja samanya 🙏\n\n". 
+                   "#ASNMerangin #BerAkhlak #BanggaMelayaniBangsa";
         break;
+
     default:
-        $message = "ℹ️ Status update: $status";
+        $message = "ℹ️ Halo #KantiASN *{$fullname}*,\n\n".
+                   "Status pengajuan Anda saat ini: *{$status}*.";
 }
+
 
 // 📱 Send WhatsApp notification
 if (sendWhatsAppNotification($phone, $message)) {
@@ -108,7 +139,8 @@ if (sendWhatsAppNotification($phone, $message)) {
     echo "⚠️ Status '$status' updated but failed to send WhatsApp notification.";
 }
 
-// 🚫 No redirect (if you want AJAX), or keep redirect if using normal form submit
+// 🚫 No redirect (if AJAX) or redirect if using normal form submit
 header("Location: verify_documents.php");
 exit;
+
 ?>

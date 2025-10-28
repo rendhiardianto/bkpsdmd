@@ -29,6 +29,7 @@ $query = "
         s.jenis_usulan,
         s.document_paths,
         s.status,
+        s.final_doc,
         s.admin_note,
         s.created_at,
         s.phone
@@ -66,6 +67,7 @@ if ($countResult && $countResult->num_rows > 0) {
         $counts['all'] += (int)$row['total'];
     }
 }
+
 // --- Current user info ---
 $userId = $_SESSION['user_id'];
 $resultUser = $conn->query("SELECT nip, fullname, jabatan, organisasi, profile_pic FROM users WHERE id=$userId");
@@ -187,7 +189,7 @@ $user = $resultUser->fetch_assoc();
               }
               // show upload final doc only when status = complete
               if ($status === 'completed') {
-                echo "<a href='upload_final_document.php?id={$row['submission_id']}' class='upload-final-btn'>Upload SK PERTEK</a><br>";
+                echo "<a href='upload_final_document.php?id={$row['submission_id']}' class='upload-final-btn'>Upload SK</a><br>";
               }
               // 🧩 show rejection note if rejected
               if ($status === 'rejected' && !empty($row['admin_note'])) {
@@ -222,7 +224,11 @@ $user = $resultUser->fetch_assoc();
                 <br> Lalu Setujui atau Tolak!";
               }
               if (strtolower($row['status']) === 'completed') {
-                echo "Silahkan Upload SK PERTEK!";
+                  if (!empty($row['final_doc'])) {
+                      echo "SK sudah diupload, selesai.";
+                  } else {
+                      echo "Silahkan Upload SK Jafung";
+                  }
               }
             } else {
               echo "<span style='color:gray;'>No File</span>";

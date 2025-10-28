@@ -236,7 +236,7 @@ body {
 .formFile input[type="text"] {
   border: 1px solid #cdd9f0;
   padding: 8px;
-  width: 50%;
+  width: 100%;
   background: #f8fbff;
   font-size: 13px;
   transition: border-color 0.2s;
