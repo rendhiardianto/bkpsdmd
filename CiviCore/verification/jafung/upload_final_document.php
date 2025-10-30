@@ -121,7 +121,7 @@ a.back:hover { text-decoration: underline; }
   <form method="POST" enctype="multipart/form-data">
       <label><strong>Pilih Dokumen Final (PDF):</strong></label>
       <input type="file" name="final_doc" accept=".pdf" required>
-      <button type="submit">Upload & Tandai Selesai</button>
+      <button type="submit">Upload SK</button>
   </form>
 </div>
 

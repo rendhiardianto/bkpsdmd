@@ -13,7 +13,7 @@ if ($submissionId <= 0) {
 
 // Fetch submission
 $stmt = $conn->prepare("
-    SELECT nip, fullname, jenis_usulan, document_paths, status, created_at 
+    SELECT nip, fullname, jenis_usulan, document_paths, no_serkom, status, created_at 
     FROM jafung_submissions 
     WHERE id = ?
 ");
@@ -45,60 +45,14 @@ $displayJenis = $jenisMap[$data['jenis_usulan']] ?? htmlspecialchars($data['jeni
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <title>Detail Dokumen - <?= htmlspecialchars($data['fullname']); ?></title>
-<link href="style.css" rel="stylesheet" type="text/css">
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #f4f4f4;
-}
-.container {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  max-width: 900px;
-  margin: auto;
-}
-h2 { text-align: center; }
-.pdf-container {
-  margin-top: 20px;
-}
-.pdf-item {
-  margin-bottom: 25px;
-}
-iframe {
-  width: 100%;
-  height: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.back-btn {
-  display: inline-block;
-  background: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  text-decoration: none;
-  margin-bottom: 15px;
-}
-.back-btn:hover {
-  background: #0056b3;
-}
-.file-label {
-  text-decoration: none;
-}
-.file-label span {
-  text-transform: uppercase;
-  text-decoration: none;
-}
-</style>
+<link href="detail_document.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div class="container">
-  <a href="verify_documents.php" class="back-btn">← Kembali</a>
+  <a href="verify_documents.php" class="back-btn">&#10094; Kembali</a>
 
   <h2>Detail Dokumen - <?= htmlspecialchars($data['fullname']); ?></h2>
   <p><strong>NIP:</strong> <?= htmlspecialchars($data['nip']); ?></p>
@@ -106,15 +60,25 @@ iframe {
   <p><strong>Status:</strong> <?= ucfirst($data['status']); ?></p>
   <p><strong>Tanggal Pengajuan:</strong> <?= formatTanggalIndonesia($data['created_at']); ?></p>
 
+  <?php if (!empty($data['no_serkom'])): ?>
+    <p><strong>Nomor Sertifikat Uji Kompetensi:</strong> 
+      <?= htmlspecialchars($data['no_serkom']); ?>
+    </p>
+  <?php endif; ?>
+
   <hr>
 
   <div class="pdf-container">
     <?php if (!empty($docs)): ?>
       <?php foreach ($docs as $label => $filename): ?>
         <div class="pdf-item">
-          <h4 style="text-decoration:none;">
-            📄 <?= strtoupper(str_replace('_', ' ', htmlspecialchars($label))); ?>
-          </h4>
+          <h3 style="text-decoration:none;">
+            &#10148; <?= strtoupper(str_replace('_', ' ', htmlspecialchars($label))); ?>
+          </h3>
+          <a href="/layanan/jafung/uploads/documents/<?= urlencode($filename); ?>" 
+              download="<?= htmlspecialchars($filename); ?>" class="download-btn">
+              <i class="fas fa-download"></i> Download
+          </a>
           <iframe src="/layanan/jafung/uploads/documents/<?= urlencode($filename); ?>"></iframe>
         </div>
       <?php endforeach; ?>

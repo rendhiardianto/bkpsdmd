@@ -8,6 +8,7 @@ $action = strtolower(trim($_POST['action'] ?? ''));
 $phone = trim($_POST['phone'] ?? '');
 $note = trim($_POST['note'] ?? '');
 $status = $action;
+
 // ✅ Define allowed status values
 $allowedStatuses = ['accepted', 'approved', 'rejected', 'completed', 'delete', 'revised'];
 
@@ -98,32 +99,36 @@ $ticket_no = $user['ticket_number'];
 /// 💬 WhatsApp message based on status
 switch ($status) {
     case 'accepted':
-        $message = "📥 Halo #KantiASN *{$fullname}*,\n\n".
+        $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
                    "Berkas Pengajuan Jabatan Fungsional Anda sudah *diterima* dan sedang diperiksa oleh Tim JAFUNG. ".
-                   "Berkas Anda masih mungkin *Disetujui* atau *Ditolak*. Terima kasih 🙏";
+                   "Berkas Anda masih mungkin *Disetujui* atau *Ditolak*. Terima kasih 🙏\n\n\n".
+                   "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";
         break;
 
     case 'approved':
-        $message = "✅ Halo #KantiASN *{$fullname}*,\n\n".
-                   "Selamat! Berkas Anda sudah *disetujui* dan saat ini telah diusulkan ke *BKN*. ".
+        $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
+                   "✅ Selamat! Berkas Anda sudah *disetujui* dan saat ini telah diusulkan ke *BKN*. ".
                    "Mohon ditunggu proses selanjutnya.\n\n".
-                   "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n";
+                   "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n\n\n".
+                   "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";
         break;
 
     case 'rejected':
-        $message = "❌ Halo #KantiASN *{$fullname}*,\n\n".
-                   "Mohon maaf, Berkas Pengajuan Jabatan Fungsional Anda *ditolak*.\n".
-                   "Alasan: {$note}\n\nSilakan perbaiki sesuai catatan di atas.";
+        $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
+                   "❌ Mohon maaf, Berkas Pengajuan Jabatan Fungsional Anda *ditolak*.\n\n".
+                   "Alasan: {$note}\n\nSilakan perbaiki sesuai catatan di atas.\n\n".
+                   "Kunjungi halaman Pengajuan Jafung untuk memperbaiki berkas Anda.\n\n\n".
+                   "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";
         break;
 
     case 'completed':
-        $message = "🏁 Halo #KantiASN *{$fullname}*,\n\n".
-                   "SK Pengajuan Jabatan Fungsional Anda sudah *terbit*. 🎉\n\n".
+        $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
+                   "🏁 SK Pengajuan Jabatan Fungsional Anda sudah *terbit*. 🎉\n\n".
                    "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n\n".
                    "Silahkan download SK Anda di website resmi *BKPSDMD Merangin*:\n".
                    "👉 https://bkpsdmd.meranginkab.go.id/MyDocuments/\n\n". 
-                   "Terima kasih atas kerja samanya 🙏\n\n". 
-                   "#ASNMerangin #BerAkhlak #BanggaMelayaniBangsa";
+                   "Terima kasih atas kerja samanya 🙏\n\n\n". 
+                   "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";
         break;
 
     default:

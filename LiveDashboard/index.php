@@ -17,7 +17,7 @@
 <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 <link href="index.css" rel="stylesheet" type="text/css">
 
-<title>MyDocuments - BKPSDMD Kabupaten Merangin</title>
+<title>Live Dashboard - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 
@@ -38,25 +38,18 @@
 	<div class="navLogo">
 		<a href="/index.php"><img src="/icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
 	</div>
-	
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
-<h2>BKPSDMD Merangin - MyDocuments</h2>
+<h2>Live Dashboard Reporting</h2>
 <div class="content">
 
-    <div class="flex-item-main">
-      <h4>DOWNLOAD SK JAFUNG</h4>
-      <a href="download_sk_jafung.php"><img src="/icon/download_doc.png"></a>
-    </div>
-
-	<div class="flex-item-main">
-      <h4>DOWNLOAD DOKUMEN PPPK</h4>
-      <a href="https://script.google.com/macros/s/AKfycbwQfPziQEPDsQEGVCe39gZDz00F58khSWIVVx-bqKaXdGXIrwJx2EM_knhkN7Y-Pwa9pg/exec"><img src="/icon/download_doc.png"></a>
-    </div>
+    <!--<div class="flex-item-main">
+      <h4>CUTI ASN</h4>
+      <a href="download_sk_jafung.php"><img src="/icon/PSDM/sakit.png"></a>
+    </div>-->
 
 </div>
-
 <!------------------- FOOTER ----------------------------------->	
 	
 <div class="row">

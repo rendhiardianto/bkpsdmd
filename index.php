@@ -55,7 +55,7 @@ while ($row = $result->fetch_assoc()) {
 			<a href="/MyPresensi/index.php" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
 			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
 			<a href="/MyForm/index.php" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
-			<a href="/MyTicket/index.php" target="_blank"><img src="/icon/tracking.png" width="20px"> MyTicket Tracking</a>
+			<a href="/LiveDashboard/index.php" target="_blank" style="color:red	"><img src="/icon/live_db.png" width="20px"> Live Dashboard</a>
 		</div>
 	</div>
 	<div class="navLogo">

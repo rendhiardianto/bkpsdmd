@@ -107,10 +107,11 @@ body {
 .flex-item-left h2{
 	font-size: 55px;
 }
-.flex-item-left h2 p {
+.flex-item-left p {
 	font-size: 20px;
-	margin-top: 0px;
+	margin-top: -50px;
 	padding: 0px 120px;
+	font-family: Raleway-Light;
 }
 
 .flex-item-right

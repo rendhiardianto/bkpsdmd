@@ -21,23 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (strcasecmp($jenjang_jabatan, 'Fungsional') !== 0 || strcasecmp($status, 'PNS') !== 0) {
             $error = "Hanya ASN dengan Jabatan 'Fungsional' dan Status Pegawai 'PNS' yang dapat mengakses halaman ini.";
         } else {
-            // 3️⃣ Check if NIP already has submission
-            $userResult = $conn->query("SELECT id, status FROM jafung_submissions WHERE nip='$nip' ORDER BY created_at DESC LIMIT 1");
+            // 3️⃣ Check if NIP already has any submission
+            $userResult = $conn->query("SELECT id FROM jafung_submissions WHERE nip='$nip' LIMIT 1");
 
             if ($userResult->num_rows > 0) {
-                $submission = $userResult->fetch_assoc();
-
-                // ❌ If still processing, prevent new upload
-                if (strcasecmp($submission['status'], 'rejected') !== 0 && strcasecmp($submission['status'], 'completed') !== 0) {
-                    $error = "NIP ini sedang dalam proses Pengajuan Jabatan Fungsional. 
-                    Jika informasi ini tidak benar, silahkan hubungi Tim JAFUNG BKPSDMD Kabupaten Merangin.";
-                } else {
-                    // ✅ If previous process finished/rejected, allow new upload
-                    $_SESSION['allow_update'] = true;
-                    $_SESSION['verified_nip'] = $nip;
-                    header("Location: upload_form.php?nip=" . urlencode($nip));
-                    exit();
-                }
+                // ❌ Already has submission — block access
+                $error = "NIP ini sedang melakukan Pengajuan Jabatan Fungsional, tidak dapat melakukan pengajuan ulang.";
             } else {
                 // ✅ No previous submission — allow upload
                 $_SESSION['allow_update'] = true;
@@ -63,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Layanan Jabatan Fungsional</title>
+  <title>Welcome Dashboard - Pengajuan Jabatan Fungsional</title>
   <link href="jafung_index.css" rel="stylesheet" type="text/css">
   <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 
@@ -78,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="/index.php" target="_blank"><img src="/icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
     </div>
     <div class="roleHeader">
-      <h1>Welcome Dashboard Jabatan Fungsional</h1>
+      <h1>Dashboard Pengajuan Jabatan Fungsional</h1>
     </div>
 </div>
 
@@ -100,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="rightSide">
     <div class="top-right-button">
-      <a href="revise_index.php" class="revise-btn">Revisi Berkas</a>
+      Tombol untuk merevisi berkas Anda. <a href="revise_index.php" class="revise-btn">Revisi Berkas</a> 
     </div>
     
     <div class="form-box">

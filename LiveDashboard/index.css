@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("file/Font/segoeui.ttf");
+}
+body {
+	margin: 0;
+   background-color: #f0f0f0;
+}
+
+/* ============================================ CONTENT ==============================*/
+h2 {
+    font-size: 30px;
+    color: #0077b6;
+    background-color: #dddddd;
+    padding: 10px;
+    margin-bottom: 100px;
+    font-family: Bahnschrift;
+    text-align: center;
+}
+
+.content { 
+   margin-bottom: 100px;
+   font-family: Bahnschrift;
+   color: #333333;
+   display: flex;
+   justify-content: center;
+}
+.content > div {
+    background-color: #dddddd;
+    color: #023e8a;
+    padding: 10px;
+    margin: 20px;
+    font-family: Bahnschrift;
+    font-size: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px grey;
+
+    width: 230px;
+    text-align: center;
+}
+.flex-item-main:hover{  
+    width: 250px;
+    transition: width 0.5s;
+    transform: translate( 0px, -5px);
+    background-color:  rgb(240, 240, 240);
+    box-shadow: 0px 0px 15px rgb(255, 255, 255);
+}
+.flex-item-main img:hover{
+    filter: contrast(50%);
+    transition: 0.3s;
+}
+.flex-item-main img{
+  width: 120px;
+}

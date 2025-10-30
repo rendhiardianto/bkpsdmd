@@ -155,7 +155,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
     </div>
     <div class="flex-container">
         <div class="flex-item-left">
-            <h2>THAT HORIZON MIGHT BE CLOSER THAN YOU THINK!<br><p>Just manage your task from anywhere in the world. Get things done, stay on top of your work, wherever you are.</p></h2>
+            <h2>THAT HORIZON MIGHT BE CLOSER THAN YOU THINK!</h2>
+            <p>Just manage your task from anywhere in the world. Get things done, stay on top of your work, wherever you are.</p>
         </div>
         
         <div class="flex-item-right">

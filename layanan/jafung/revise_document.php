@@ -69,7 +69,7 @@ if (!$submission_id) {
 }
 
 // --- Load submission data ---
-$stmt = $conn->prepare("SELECT document_paths, status, phone FROM jafung_submissions WHERE id = ? AND nip = ?");
+$stmt = $conn->prepare("SELECT document_paths, status, phone, admin_note FROM jafung_submissions WHERE id = ? AND nip = ?");
 $stmt->bind_param("is", $submission_id, $verified_nip);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -79,6 +79,7 @@ if (!$row = $result->fetch_assoc()) {
 }
 
 $phoneFromDB = $row['phone'] ?? '';
+$noteFromDB = $row['admin_note'] ?? '';
 $docs = json_decode($row['document_paths'], true) ?? [];
 $stmt->close();
 
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedDocs = $docs;
     $newPhoneInput = trim($_POST['phone'] ?? '');
     $newPhone = !empty($newPhoneInput) ? $newPhoneInput : $phoneFromDB;
-
+    $userNote = trim($_POST['user_note'] ?? '');
 
     foreach ($_FILES as $key => $file) {
         if ($file['error'] === UPLOAD_ERR_OK) {
@@ -120,10 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ✅ Combine document + phone update in one query
     $updateStmt = $conn->prepare("
         UPDATE jafung_submissions 
-        SET document_paths = ?, status = ?, phone = ?, updated_at = NOW() 
+        SET document_paths = ?, status = ?, phone = ?, user_note = ?, updated_at = NOW() 
         WHERE id = ?
     ");
-    $updateStmt->bind_param("sssi", $jsonDocs, $newStatus, $newPhone, $submission_id);
+    $updateStmt->bind_param("ssssi", $jsonDocs, $newStatus, $newPhone, $userNote, $submission_id);
+
     $updateStmt->execute();
     $updateStmt->close();
 
@@ -171,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="content">
 
   <div class="info-box">
+    
     <div class="fotoProfil">
       <img src="/icon/button/profil.png">
     </div>
@@ -185,6 +188,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <td><strong>Nama Lengkap</strong></td>
         <td><strong>:</strong></td>
         <td><?php echo htmlspecialchars($fullnameFromDB); ?></td>
+      </tr>
+      <tr>
+        <td><strong>Golongan</strong></td>
+        <td><strong>:</strong></td>
+        <td><?php echo htmlspecialchars($golSaatIniFromDB); ?></td>
       </tr>
       <tr>
         <td><strong>Jabatan</strong></td>
@@ -204,14 +212,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </table>
 
     <div class="inputPhone">
-      <h3>Masukkan No WhatsApp Aktif</h3>
+      <h3>No WhatsApp Aktif</h3>
       <input 
         type="text" 
         name="phone" 
         placeholder="Contoh: 081234567890"
         value="<?= htmlspecialchars($phoneFromDB ?? '') ?>"
-        required
-      >
+        required >
+        <br><br>
+      <div style="color: red"> 
+        <h3>Alasan penolakan</h3>
+        <?= htmlspecialchars($noteFromDB ?? '') ?>
+      </div>
     </div>
 
   </div>
@@ -240,6 +252,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="file" name="<?= htmlspecialchars($key); ?>" accept=".pdf">
         </div>
       <?php endforeach; ?>
+
+      <div class="formComment">
+        <label>Beritahu Kami jika ada Revisi (Opsional)</label>
+        <textarea name="user_note" placeholder="Tulis keterangan tambahan mengenai revisi dokumen Anda.">
+        </textarea>
+      </div>
 
         <button type="submit" class="submit">Simpan Revisi</button>
     </form>

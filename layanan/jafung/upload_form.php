@@ -1,4 +1,5 @@
 <?php 
+
 session_start(); 
 
 if (
@@ -176,6 +177,11 @@ if (!empty($verified_nip)) {
         <td><?php echo htmlspecialchars($fullnameFromDB); ?></td>
       </tr>
       <tr>
+        <td><strong>Golongan</strong></td>
+        <td><strong>:</strong></td>
+        <td><?php echo htmlspecialchars($golSaatIniFromDB); ?></td>
+      </tr>
+      <tr>
         <td><strong>Jabatan</strong></td>
         <td><strong>:</strong></td>
         <td><?php echo htmlspecialchars($jabatanFromDB); ?></td>
@@ -219,42 +225,42 @@ if (!empty($verified_nip)) {
       <input type="hidden" name="jenis_usulan" value="JF1"> <!-- change per form -->
 
       <div class="formFile">
-        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span></label>
+        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="surat_usul_opd" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>SK CPNS <span class="required">*</span></label>
+        <label>SK CPNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_cpns" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>SK PNS <span class="required">*</span></label>
+        <label>SK PNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_pns" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>SK KP Terakhir <span class="required">*</span></label>
+        <label>SK KP Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_kp_terakhir" accept=".pdf" required>
       </div>
 
-      <div class="formFile">
-        <label>Ijazah & Transkrip Nilai <span class="required">*</span></label>
+      <div class="formFile"> 
+        <label>Ijazah & Transkrip Nilai <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="ijazah_dan_transkrip_nilai" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span></label>
+        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="ekinerja" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>PAK Awal <span class="required">*</span></label>
+        <label>PAK Awal <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="pak_awal" accept=".pdf" required>
       </div>
 
       <div class="formFile">
-        <label>Syarat lain (jika ada)</label>
+        <label>Syarat lain (jika ada, .pdf, maks. 10MB)</label>
         <input type="file" name="syarat_lain" accept=".pdf">
       </div>
 
@@ -278,31 +284,31 @@ if (!empty($verified_nip)) {
       <input type="hidden" name="jenis_usulan" value="JF2"> <!-- change per form -->
 
       <div class="formFile">
-        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span></label>
+        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="surat_usul_opd" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK CPNS <span class="required">*</span></label>
+        <label>SK CPNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_cpns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK PNS <span class="required">*</span></label>
+        <label>SK PNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_pns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK KP Terakhir <span class="required">*</span></label>
+        <label>SK KP Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_kp_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK Jabatan Terakhir <span class="required">*</span></label>
+        <label>SK Jabatan Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_jabatan_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Ijazah & Transkrip Nilai <span class="required">*</span></label>
+        <label>Ijazah & Transkrip Nilai <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="ijazah_dan_transkrip_nilai" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Sertifikat Uji Kompetensi <span class="required">*</span></label>
+        <label>Sertifikat Uji Kompetensi <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sertifikat_kompetensi" accept=".pdf" required>
       <br><br>
         <label>Nomor Sertifikat Uji Kompetensi <span class="required">*</span></label>
@@ -313,7 +319,7 @@ if (!empty($verified_nip)) {
         <input type="file" name="ekinerja" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>PAK Awal <span class="required">*</span></label>
+        <label>PAK Awal <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="pak_awal" accept=".pdf" required>
       </div>
       <div class="formFile">
@@ -321,11 +327,11 @@ if (!empty($verified_nip)) {
         <input type="file" name="rekomendasi_formasi" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Analisis Jabatan & ABK <span class="required">*</span></label>
+        <label>Analisis Jabatan & ABK <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="anjab_abk" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Syarat lain (jika ada)</label>
+        <label>Syarat lain (jika ada, .pdf, maks. 10MB)</label>
         <input type="file" name="syarat_lain" accept=".pdf">
       </div>
 
@@ -348,43 +354,43 @@ if (!empty($verified_nip)) {
       <input type="hidden" name="jenis_usulan" value="JF3"> <!-- change per form -->
 
       <div class="formFile">
-        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span></label>
+        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="surat_usul_opd" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK CPNS <span class="required">*</span></label>
+        <label>SK CPNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_cpns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK PNS <span class="required">*</span></label>
+        <label>SK PNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_pns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK KP Terakhir <span class="required">*</span></label>
+        <label>SK KP Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_kp_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK Jabatan Terakhir <span class="required">*</span></label>
+        <label>SK Jabatan Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_jabatan_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Ijazah & Transkrip Nilai <span class="required">*</span></label>
+        <label>Ijazah & Transkrip Nilai <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="ijazah_dan_transkrip_nilai" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Keputusan Pemberhentian dari JF <span class="required">*</span></label>
+        <label>Keputusan Pemberhentian dari JF <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_pemberhentian" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span></label>
+        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="ekinerja" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>PAK Terakhir <span class="required">*</span></label>
+        <label>PAK Terakhir <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="pak_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Analisis Jabatan & ABK <span class="required">*</span></label>
+        <label>Analisis Jabatan & ABK <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="anjab_abk" accept=".pdf" required>
       </div>
       <div class="formFile">
@@ -392,7 +398,7 @@ if (!empty($verified_nip)) {
         <input type="text" name="phone" placeholder="Contoh: 081234567890" required>
       </div>
       <div class="formFile">
-        <label>Syarat lain (jika ada)</label>
+        <label>Syarat lain (jika ada, .pdf, maks. 10MB)</label>
         <input type="file" name="syarat_lain" accept=".pdf">
       </div>
       <p class="note">Kolom dengan tanda <span class="required">*</span> wajib diisi.</p>
@@ -409,46 +415,46 @@ if (!empty($verified_nip)) {
       <input type="hidden" name="jenis_usulan" value="JF4"> <!-- change per form -->
 
       <div class="formFile">
-        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span></label>
+        <label>Surat Usul/Pengantar dari OPD <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="surat_usul_opd" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK CPNS <span class="required">*</span></label>
+        <label>SK CPNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_cpns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK PNS <span class="required">*</span></label>
+        <label>SK PNS <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_pns" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK KP Terakhir <span class="required">*</span></label>
+        <label>SK KP Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_kp_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>SK Jabatan Terakhir <span class="required">*</span></label>
+        <label>SK Jabatan Terakhir <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sk_jabatan_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Ijazah & Transkrip Nilai <span class="required">*</span></label>
+        <label>Ijazah & Transkrip Nilai <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="ijazah_dan_transkrip_nilai" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Sertifikat Uji Kompetensi <span class="required">*</span></label>
+        <label>Sertifikat Uji Kompetensi <span class="required">*</span> (.pdf, maks. 500KB)</label>
         <input type="file" name="sertifikat_kompetensi" accept=".pdf" required>
       <br><br>
         <label>Nomor Sertifikat Uji Kompetensi <span class="required">*</span></label>
         <input type="text" name="no_serkom" placeholder="Masukkan Nomor Sertifikat" required>
       </div>
       <div class="formFile">
-        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span></label>
+        <label>E-Kinerja (1 tahun terakhir) <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="ekinerja" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>PAK Terakhir <span class="required">*</span></label>
+        <label>PAK Terakhir <span class="required">*</span> (.pdf, maks. 2MB)</label>
         <input type="file" name="pak_terakhir" accept=".pdf" required>
       </div>
       <div class="formFile">
-        <label>Analisis Jabatan & ABK <span class="required">*</span></label>
+        <label>Analisis Jabatan & ABK <span class="required">*</span> (.pdf, maks. 1MB)</label>
         <input type="file" name="anjab_abk" accept=".pdf" required>
       </div>
       <div class="formFile">
@@ -456,7 +462,7 @@ if (!empty($verified_nip)) {
         <input type="text" name="phone" placeholder="Contoh: 081234567890" required>
       </div>
       <div class="formFile">
-        <label>Syarat lain (jika ada)</label>
+        <label>Syarat lain (jika ada, .pdf, maks. 10MB)</label>
         <input type="file" name="syarat_lain" accept=".pdf">
       </div>
       <p class="note">Kolom dengan tanda <span class="required">*</span> wajib diisi.</p>
@@ -586,7 +592,7 @@ document.querySelectorAll(".jf-form form").forEach(form => {
           icon: "error",
           title: "Gagal!",
           text: data.message || "Terjadi kesalahan saat menyimpan data.",
-          confirmButtonText: "Tutup"
+          confirmButtonText: "OK"
         });
       }
     })
@@ -596,7 +602,7 @@ document.querySelectorAll(".jf-form form").forEach(form => {
         icon: "error",
         title: "Gagal Menghubungi Server",
         text: "Tidak dapat menghubungi server. Silakan coba lagi.",
-        confirmButtonText: "Tutup"
+        confirmButtonText: "OK"
       });
     })
     .finally(() => {

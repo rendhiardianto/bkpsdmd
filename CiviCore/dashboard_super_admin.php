@@ -163,6 +163,7 @@ $user = $result->fetch_assoc();
     </div>
 
     <div id="tab2" class="tabcontent">
+      
     </div>
 
     <div id="tab3" class="tabcontent">
