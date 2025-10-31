@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Dashboard - Pengajuan Jabatan Fungsional</title>
-  <link href="jafung_index.css" rel="stylesheet" type="text/css">
+  <link href="index.css" rel="stylesheet" type="text/css">
   <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />

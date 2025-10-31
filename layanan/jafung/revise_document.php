@@ -14,7 +14,7 @@ $verified_nip = $_SESSION['verified_nip'];
 $nipFromUrl = $_GET['nip'] ?? '';
 
 if ($nipFromUrl !== $verified_nip) {
-    header("Location: jafung_index.php?error=unauthorized");
+    header("Location: index.php?error=unauthorized");
     exit();
 }
 
@@ -63,7 +63,7 @@ if (!$submission_id) {
 if (!$submission_id) {
     echo "<script>
         alert('❌ Data pengajuan tidak ditemukan untuk NIP ini.\\nSilakan lakukan pengajuan baru.');
-        window.location.href = 'jafung_index.php';
+        window.location.href = 'index.php';
     </script>";
     exit;
 }
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateStmt->execute();
     $updateStmt->close();
 
-    echo "<script>alert('✅ Berkas berhasil direvisi.'); window.location.href='jafung_index.php';</script>";
+    echo "<script>alert('✅ Berkas berhasil direvisi.'); window.location.href='index.php';</script>";
     exit;
 }
 ?>
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="header">
     <div class="logo">
-      <a href="jafung_index.php"><img src="/icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
+      <a href="index.php"><img src="/icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
     </div>
     <div class="roleHeader">
       <h1>Dashboard Revisi Dokumen Jabatan Fungsional</h1>

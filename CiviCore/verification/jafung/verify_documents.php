@@ -54,6 +54,7 @@ $counts = [
     'new' => 0,
     'accepted' => 0,
     'rejected' => 0,
+    'revised' => 0,
     'approved' => 0,
     'completed' => 0,
     'all' => 0
@@ -90,7 +91,7 @@ $user = $resultUser->fetch_assoc();
     <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" style="text-decoration: none; color:white;">&#10094; Kembali</a>
   </div>
   <div class="roleHeader">
-    <h1>Daftar Pengajuan JAFUNG </h1>
+    <h1>Daftar Permohonan Pengajuan Jafung</h1>
   </div>
   <div class="startlogoDD">
     Halo, <?php echo htmlspecialchars($user['fullname']); ?>
@@ -136,8 +137,9 @@ $user = $resultUser->fetch_assoc();
         'all' => 'Semua',
         'new' => 'Baru',
         'accepted' => 'Diterima',
-        'approved' => 'Disetujui',
         'rejected' => 'Ditolak',
+        'revised' => 'Direvisi',
+        'approved' => 'Disetujui',
         'completed' => 'Selesai'
       ];
       foreach ($filters as $key => $label) {

@@ -135,15 +135,16 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'tab1')" id="defaultOpen">User Authorithy</button>
+      <button class="tablinks" onclick="openCity(event, 'tab4')">Website CMS</button>
       <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
-      <button class="tablinks" onclick="openCity(event, 'tab3')" id="defaultOpen">Services Verification</button>
-      <button class="tablinks" onclick="openCity(event, 'tab4')" >Website CMS</button>
-      <button class="tablinks" onclick="openCity(event, 'tab1')">User Authorithy</button>
+      <button class="tablinks" onclick="openCity(event, 'tab3')">Services Verification</button>
     </div>
 
   </div><!--leftSide-->
 
   <div class="rightSide">
+    
     <div id="tab1" class="tabcontent">
       <div class="flex-item-main">
         <p><a href="authority/add_user.php?role=<?php echo urlencode($role); ?>">
@@ -156,8 +157,8 @@ $user = $result->fetch_assoc();
       </div>
 
       <div class="flex-item-main">
-        <p><a href="authority/add_asn_merangin.php?role=<?php echo urlencode($role); ?>">
-        <img src="../icon/button/add_asn.png" alt="Add User"> </a><br>ADD ASN MERANGIN</p>
+        <p><a href="authority/list_asn_merangin.php?role=<?php echo urlencode($role); ?>">
+        <img src="../icon/button/add_asn.png" alt="Add User"> </a><br>ASN DATA MANAGEMENT</p>
       </div>
 
     </div>

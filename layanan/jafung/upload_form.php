@@ -10,7 +10,7 @@ if (
     if (!isset($_SESSION['allow_update'])) {
       ob_clean();
       echo json_encode(['status' => 'error', 'message' => 'Akses tidak sah.']);
-      header("Location: jafung_index.php");
+      header("Location: index.php");
       exit;
     }
 }
@@ -24,7 +24,7 @@ $nipFromUrl = $_GET['nip'] ?? '';
 // 🧠 Compare session NIP and URL NIP
 if ($nipFromUrl !== $verified_nip) {
     // Someone is trying to access another NIP manually
-    header("Location: jafung_index.php?error=unauthorized");
+    header("Location: index.php?error=unauthorized");
     exit();
 }
 
@@ -36,7 +36,7 @@ $alertMessage = '';
 $alertType = ''; // success or error
 $redirect = false;
 
-// capture NIP if coming from jafung_index.php
+// capture NIP if coming from index.php
 $prefilledNip = "";
 $readonlyNip = "";
 if (isset($_GET['nip'])) {
@@ -50,7 +50,7 @@ if (empty($prefilledNip) && isset($_GET['nip'])) {
     $readonlyNip  = "readonly";
 }
 
-// --- NEW: Preload NIP from jafung_index.php ---
+// --- NEW: Preload NIP from index.php ---
 $nipFromGet = $_GET['nip'] ?? '';   // from URL
 
 if (!empty($nipFromGet)) {
@@ -585,7 +585,7 @@ document.querySelectorAll(".jf-form form").forEach(form => {
           showConfirmButton: false,
           timer: 2500
         }).then(() => {
-          window.location.href = "jafung_index.php"; // redirect to main page
+          window.location.href = "index.php"; // redirect to main page
         });
       } else {
         Swal.fire({

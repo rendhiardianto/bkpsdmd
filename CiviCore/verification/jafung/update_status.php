@@ -117,7 +117,8 @@ switch ($status) {
         $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
                    "❌ Mohon maaf, Berkas Pengajuan Jabatan Fungsional Anda *ditolak*.\n\n".
                    "Alasan: {$note}\n\nSilakan perbaiki sesuai catatan di atas.\n\n".
-                   "Kunjungi halaman Pengajuan Jafung untuk memperbaiki berkas Anda.\n\n\n".
+                   "Kunjungi halaman Pengajuan Jafung untuk memperbaiki berkas Anda.\n".
+                   "👉 https://bkpsdmd.meranginkab.go.id/layanan/jafung/\n\n\n". 
                    "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";
         break;
 

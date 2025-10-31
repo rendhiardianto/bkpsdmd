@@ -39,15 +39,19 @@ $jenisMap = [
     'JF1' => '(JF1) Pengangkatan Pertama dalam JF'
 ];
 $displayJenis = $jenisMap[$data['jenis_usulan']] ?? htmlspecialchars($data['jenis_usulan']);
+
+// URL untuk download semua berkas
+$downloadAllUrl = "download_all.php?id=" . $submissionId;
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <title>Detail Dokumen - <?= htmlspecialchars($data['fullname']); ?></title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="detail_document.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -61,9 +65,13 @@ $displayJenis = $jenisMap[$data['jenis_usulan']] ?? htmlspecialchars($data['jeni
   <p><strong>Tanggal Pengajuan:</strong> <?= formatTanggalIndonesia($data['created_at']); ?></p>
 
   <?php if (!empty($data['no_serkom'])): ?>
-    <p><strong>Nomor Sertifikat Uji Kompetensi:</strong> 
-      <?= htmlspecialchars($data['no_serkom']); ?>
-    </p>
+    <p><strong>Nomor Sertifikat Uji Kompetensi:</strong> <?= htmlspecialchars($data['no_serkom']); ?></p>
+  <?php endif; ?>
+
+  <?php if (!empty($docs)): ?>
+    <a href="<?= htmlspecialchars($downloadAllUrl); ?>" class="download-all-btn">
+      <i class="fas fa-file-zipper"></i> Download Semua Berkas (.zip)
+    </a>
   <?php endif; ?>
 
   <hr>
@@ -72,9 +80,7 @@ $displayJenis = $jenisMap[$data['jenis_usulan']] ?? htmlspecialchars($data['jeni
     <?php if (!empty($docs)): ?>
       <?php foreach ($docs as $label => $filename): ?>
         <div class="pdf-item">
-          <h3 style="text-decoration:none;">
-            &#10148; <?= strtoupper(str_replace('_', ' ', htmlspecialchars($label))); ?>
-          </h3>
+          <h3>&#10148; <?= strtoupper(str_replace('_', ' ', htmlspecialchars($label))); ?></h3>
           <a href="/layanan/jafung/uploads/documents/<?= urlencode($filename); ?>" 
               download="<?= htmlspecialchars($filename); ?>" class="download-btn">
               <i class="fas fa-download"></i> Download
