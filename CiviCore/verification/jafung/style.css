@@ -155,7 +155,8 @@ h2 {
 }  
 .filter-bar a {    
   display: inline-block;   
-  margin-right: 10px;      
+  margin-right: 10px; 
+  margin-top: 10px;     
   padding: 10px 15px;     
   font-size: 15px;
   text-decoration: none;     
