@@ -291,14 +291,14 @@ body {
     margin-bottom: 40px;
   }
   .tabcontent > .flex-item-main {   
-    width: 120px;
-    height: 100px;
+    width: 150px;
+    height: auto;
     padding: 10px;
-    font-size: 10px;
+    font-size: 18px;
     
   }
   .flex-item-main img {
-    width: 50px;
+    width: 80px;
   }
   .flex-item-main:hover{  
     width: 170px;

@@ -153,7 +153,7 @@ $user = $result->fetch_assoc();
       
       <div class="flex-item-main">
         <p><a href="authority/dashboard_admin_list.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/profil.png" ></a><br>CIVICORE USER LIST</p>
+          <img src="../icon/button/profil.png" ></a><br>CIVICORE USERS</p>
       </div>
 
       <div class="flex-item-main">

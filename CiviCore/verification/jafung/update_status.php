@@ -107,7 +107,7 @@ switch ($status) {
 
     case 'approved':
         $message = "👋 Halo #KantiASN *{$fullname}*,\n\n".
-                   "✅ Selamat! Berkas Anda sudah *disetujui* dan saat ini telah diusulkan ke *BKN*. ".
+                   "✅ Selamat! Berkas Pengajuan Jabatan Fungsional Anda sudah *disetujui* dan saat ini telah diusulkan ke *BKN*. ".
                    "Mohon ditunggu proses selanjutnya.\n\n".
                    "🎫 *No. Tiket berkas Anda : {$ticket_no}*\n\n\n".
                    "_(Pesan ini dikirim otomatis oleh sistem, tidak perlu dibalas)_";

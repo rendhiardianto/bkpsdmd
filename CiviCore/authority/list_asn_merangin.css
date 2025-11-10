@@ -137,7 +137,6 @@ body {
   overflow-y: auto;
   z-index: 11;
 }
-
 .searchInput {
   width:30%; 
   padding:8px; 
@@ -188,13 +187,6 @@ button {
 }
 button:hover {
   background:#219150;
-}
-
-.edit {
-  background:#27ae60;
-}
-.delete {
-  background:#e74c3c;
 }
 
 #toast {

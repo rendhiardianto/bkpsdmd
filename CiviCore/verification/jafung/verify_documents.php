@@ -316,7 +316,7 @@ $user = $resultUser->fetch_assoc();
     <?php
       }
     } else {
-      echo '<tr><td colspan="10" style="text-align:center;">No submissions found.</td></tr>';
+      echo '<tr><td colspan="10" style="text-align:center;">Tidak ada berkas yang ditemukan .</td></tr>';
     }
     ?>
     </tbody>

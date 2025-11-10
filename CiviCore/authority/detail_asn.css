@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+   font-family: Trebuchet;
+   src: url("/file/Font/Trebuchet.ttf");
+}
+@font-face {
+   font-family:Bahnschrift;
+   src: url("/file/Font/Bahnschrift.ttf");
+}
+@font-face {
+   font-family: BebasNeue;
+   src: url("/file/Font/BebasNeue.otf");
+}
+@font-face {
+   font-family: Raleway-Light;
+   src: url("/file/Font/Raleway-Light.ttf");
+}
+@font-face {
+   font-family: Raleway-Medium;
+   src: url("/file/Font/Raleway-Medium.ttf");
+}
+@font-face {
+   font-family: FreeHand;
+   src: url("/file/Font/FreeHand.ttf");
+}
+@font-face {
+   font-family: SegoeUI;
+   src: url("/file/Font/segoeui.ttf");
+}
+body {
+	margin: 0;
+  font-family: Arial;
+  background:#f4f6f9; 
+}
+
+.header
+{
+  font-family: Bahnschrift;
+	position: fixed;
+	top: 0px;
+	width:100%;
+	height: 65px;
+	background-color: #0077b6;
+}
+.navbar
+{
+    float: left;
+    margin: 10px 10px;
+    text-align:center;
+    cursor: pointer;
+    padding:10px 15px; 
+    color:white; 
+    background:#21be02; 
+    border:none; 
+    border-radius:4px;
+    width: 100px;
+}
+.navbar:hover{
+    background: #199400;
+}
+
+.roleHeader h1 {
+    margin: auto;
+    padding: 10px;
+    color: #f4f6f9;
+    text-align:center;
+    font-size: 30px;
+    font-family: Bahnschrift;
+}
+
+@media screen and (max-width: 600px){
+    .roleHeader h1{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    .form-box{
+    margin: 10px;
+}
+}
+.content {
+    margin: 80px 0px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;   
+}
+.detail-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 25px;
+    width: 80%;
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.detail-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.detail-card label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+.detail-card input, .detail-card select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    background: #fafafa;  
+}
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.btn {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.btn-save { background-color: #28a745; }
+.btn-delete { background-color: #dc3545; }
+.btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+.footer
+{
+	position: fixed;
+	background-color: #0096c7;
+	bottom: 0;
+	width:100%;
+	color: white;
+	font-family: Raleway-Medium;
+	text-align: center;
+	font-size: 15x;
+}
+@media screen and (max-width:600px) {
+	.footer {
+		font-size: 12px;
+	}
+}

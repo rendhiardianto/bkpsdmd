@@ -70,6 +70,7 @@ $backUrl = $backLinks[$role];
                 <th>Status Pegawai</th>
                 <th>Jabatan</th>
                 <th>Organisasi</th>
+                <th>Organisasi Induk</th>
                 <th>TTL</th>
                 <th>Aksi</th>
               </tr>
@@ -81,36 +82,6 @@ $backUrl = $backLinks[$role];
         </div>
       </div><!--TabelRekap-->
 </div> <!--- CONTENT CLOSE-->
-
-  <!-- Edit Modal --> 
-  <div id="editModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);"> 
-      <div style="background:#fff; padding:20px; width:400px; margin:100px auto; border-radius:12px;"> 
-          <h3>Edit Data ASN</h3> 
-          <form id="editForm"> <input type="hidden" name="id" id="edit_id"> 
-              <label>NIP:</label><br> <input type="text" name="nip" id="edit_nip"><br> 
-              <label>Nama Lengkap:</label><br> <input type="text" name="fullname" id="edit_fullname"><br> 
-              <label>Jabatan:</label><br> <input type="text" name="jabatan" id="edit_jabatan"><br> 
-              <button type="submit">💾 Save</button> 
-              <button type="button" onclick="$('#editModal').hide()">❌ Cancel</button> 
-          </form> 
-      </div>
-  </div>
-
-
-<!-- Detail Modal -->
-<div id="detailModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-     background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
-    <div style="background:#fff; padding:20px; width:400px; margin:100px auto; border-radius:12px;">
-        <h2>Detail Data</h2>
-        <p><strong>NIP:</strong> <span id="detail_nip"></span></p>
-        <p><strong>Full Name:</strong> <span id="detail_fullname"></span></p>
-        <p><strong>Pangkat:</strong> <span id="detail_pangkat"></span></p>
-        <p><strong>Jabatan:</strong> <span id="detail_jabatan"></span></p>
-        <p><strong>Organisasi:</strong> <span id="detail_skpd"></span></p>
-        <p><strong>Tempat Lahir:</strong> <span id="detail_tempat_lahir"></span></p>
-        <button id="closeDetail">Close</button>
-    </div>
-</div>
 
 <!-- Toast Notification -->
 <div id="toast"></div>
@@ -153,7 +124,7 @@ $(document).ready(function() {
       return;
     }
 
-    $("#searchResults").html("<tr><td colspan='9' style='text-align:center;'>🔍 Mencari...</td></tr>");
+    $("#searchResults").html("<tr><td colspan='9' style='text-align:center;'>Mencari...</td></tr>");
 
     $.get("ajax_search_asn_merangin.php", { q: query }, function(data) {
       $("#searchResults").html(data);
@@ -161,97 +132,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
-<script>
-$(document).ready(function() {
-
-  // --- Delegated click handler for EDIT ---
-  $(document).on("click", ".edit", function() {
-    let row = $(this).closest("tr");
-    let id = row.data("id");
-
-    // Grab cell values (based on column index)
-    let nip = row.children().eq(1).text().trim();
-    let fullname = row.children().eq(2).text().trim();
-    let jabatan = row.children().eq(4).text().trim();
-    let phone = row.children().eq(7).text().trim();
-
-    $("#edit_id").val(id);
-    $("#edit_nip").val(nip);
-    $("#edit_fullname").val(fullname);
-    $("#edit_jabatan").val(jabatan);
-
-    $("#editModal").fadeIn();
-  });
-
-  // --- Close modal when clicking outside ---
-  $(window).on("click", function(e){
-    if ($(e.target).is("#editModal")) {
-      $("#editModal").fadeOut();
-    }
-  });
-
-  // --- Save Edit (AJAX POST) ---
-  $("#editForm").submit(function(e){
-    e.preventDefault();
-    let formData = new FormData(this);
-
-    $.ajax({
-      url: "ajax_edit_asn_merangin.php",
-      type: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function(response){
-        alert(response);
-        $("#editModal").fadeOut();
-        $("#searchInput").keyup(); // refresh current search results
-      }
-    });
-  });
-
-  // --- Delegated click handler for DELETE ---
-  $(document).on("click", ".delete", function() {
-    if (!confirm("Apakah anda ingin menghapus data ini?")) return;
-
-    let id = $(this).closest("tr").data("id");
-
-    $.post("ajax_delete_asn_merangin.php", { id: id }, function(response){
-      alert(response);
-      $("#searchInput").keyup(); // refresh table results
-    });
-  });
-
-});
-
-// --- Delegated click handler for DETAIL ---
-$(document).on("click", ".detail", function() {
-    let row = $(this).closest("tr");
-
-    $("#detail_nip").text(row.children().eq(1).text().trim());
-    $("#detail_fullname").text(row.children().eq(2).text().trim());
-    $("#detail_pangkat").text(row.children().eq(3).text().trim());
-    $("#detail_jabatan").text(row.children().eq(4).text().trim());
-    $("#detail_skpd").text(row.children().eq(5).text().trim());
-    $("#detail_tempat_lahir").text(row.children().eq(6).text().trim());
-
-    $("#detailModal").fadeIn();
-});
-
-// Close detail modal
-$("#closeDetail").click(function(){
-    $("#detailModal").fadeOut();
-});
-
-// Also close modal when clicking outside
-$(window).on("click", function(e){
-    if ($(e.target).is("#detailModal")) {
-        $("#detailModal").fadeOut();
-    }
-});
-
-</script>
-
 
 
 </body>

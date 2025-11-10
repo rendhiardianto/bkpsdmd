@@ -10,7 +10,7 @@ if ($q === '') {
 
 // Search by name, NIP, or jabatan
 $sql = "
-    SELECT id, nip, fullname, status_pegawai, jabatan, organisasi, tempat_lahir, tanggal_lahir, phone
+    SELECT id, nip, fullname, status_pegawai, jabatan, organisasi, organisasi_induk,  tempat_lahir, tanggal_lahir, phone
     FROM asn_merangin
     WHERE fullname LIKE '%$q%' OR nip LIKE '%$q%' OR jabatan LIKE '%$q%'
     ORDER BY fullname ASC
@@ -30,14 +30,19 @@ while ($row = $result->fetch_assoc()) {
         <td>{$no}</td>
         <td>{$row['nip']}</td>
         <td>{$row['fullname']}</td>
-        <td>{$row['status_pegawai']}</td>
+        <td style='text-align: center;'>{$row['status_pegawai']}</td>
         <td>{$row['jabatan']}</td>
         <td>{$row['organisasi']}</td>
+        <td>{$row['organisasi_induk']}</td>
         <td>{$row['tempat_lahir']}, {$row['tanggal_lahir']}</td>
-        <td>
-            <button class='edit'>✏️</button>
-            <button class='delete'>🗑</button>
-            <button class='detail'>Detail</button>
+        <td style='text-align:center;'>
+        <a href='detail_asn.php?id={$row['id']}' 
+            style='background: #007bff; color: white; 
+            padding: 10px 20px; margin: 5px;
+            font-size: 17px;
+            width: 100px; text-decoration:none;'>
+            Detail
+        </a>
         </td>
     </tr>";
     $no++;

@@ -49,25 +49,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $organisasi_induk   = $conn->real_escape_string($_POST['organisasi_induk']);
     $instansi_induk     = $conn->real_escape_string($_POST['instansi_induk']);
 
+     // 🔍 Step 1: Check if NIP already exists
+    $check = $conn->prepare("SELECT nip FROM asn_merangin WHERE nip = ?");
+    $check->bind_param("s", $nip);
+    $check->execute();
+    $check->store_result();
+
+    if ($check->num_rows > 0) {
+        echo "<script>alert('⚠️ NIP sudah terdaftar! Silakan periksa kembali.'); window.history.back();</script>";
+        $check->close();
+        exit;
+    }
+    $check->close();
+
     // Prepare statement
     $stmt = $conn->prepare("
-        INSERT INTO asn_merangin (
-            nip, fullname, gelar_depan, gelar_belakang, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, phone,
-            status_pegawai, gol_awal, gol_saat_ini, tmt_gol, masa_kerja_tahun, masa_kerja_bulan,
-            jenjang_jabatan, jenis_jabatan, jabatan, tmt_jabatan,
-            tingkat_pendidikan, pendidikan, tahun_lulus, lokasi_kerja,
-            organisasi, organisasi_induk, instansi_induk, created_at
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
-    ");
+    INSERT INTO asn_merangin (
+        nip, fullname, gelar_depan, gelar_belakang, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, phone,
+        status_pegawai, gol_awal, gol_saat_ini, tmt_gol, masa_kerja_tahun, masa_kerja_bulan,
+        jenjang_jabatan, jenis_jabatan, jabatan, tmt_jabatan,
+        tingkat_pendidikan, pendidikan, tahun_lulus, lokasi_kerja,
+        organisasi, organisasi_induk, instansi_induk, created_at
+    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
+");
 
-    $stmt->bind_param(
-        "ssssssssssssiiissssssssssss",
-        $nip, $fullname, $gelar_depan, $gelar_belakang, $tempat_lahir, $tanggal_lahir, $jenis_kelamin, $agama, $phone,
-        $status_pegawai, $gol_awal, $gol_saat_ini, $tmt_gol, $masa_kerja_tahun, $masa_kerja_bulan,
-        $jenjang_jabatan, $jenis_jabatan, $jabatan, $tmt_jabatan,
-        $tingkat_pendidikan, $pendidikan, $tahun_lulus, $lokasi_kerja,
-        $organisasi, $organisasi_induk, $instansi_induk
-    );
+$stmt->bind_param(
+    "sssssssssssssiisssssssssss",
+    $nip, $fullname, $gelar_depan, $gelar_belakang, $tempat_lahir, $tanggal_lahir, $jenis_kelamin, $agama, $phone,
+    $status_pegawai, $gol_awal, $gol_saat_ini, $tmt_gol, $masa_kerja_tahun, $masa_kerja_bulan,
+    $jenjang_jabatan, $jenis_jabatan, $jabatan, $tmt_jabatan,
+    $tingkat_pendidikan, $pendidikan, $tahun_lulus, $lokasi_kerja,
+    $organisasi, $organisasi_induk, $instansi_induk
+);
+
 
     if ($stmt->execute()) {
         echo "<script>alert('Data ASN berhasil disimpan!'); window.location='add_new_asn.php';</script>";
@@ -82,61 +96,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-65T4XSDM2Q"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-65T4XSDM2Q');
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Data Pegawai Baru</title>
+  <title>Dashbboard - Tambah Data Pegawai Baru</title>
 
   <link href="add_new_asn.css" rel="stylesheet">
   <link rel="shortcut icon" href="/images/button/logo.png">
-
 </head>
 <body>
 
 <div class="header">
   <div class="navbar">
-    <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" style="text-decoration: none; color:white;">&#10094; Kembali</a>
+    <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-secondary" 
+    style="text-decoration: none; color:white;">&#10094; Kembali</a>
   </div>
   <div class="roleHeader">
-    <h1>Dashboard Management Data ASN Merangin</h1>
+    <h1>Dashboard Tambah Data ASN Baru</h1>
   </div>
 </div>
 
 <div class="form-box">
-  <h2>Tambahkan Data Baru</h2>
+  <!-- 🧭 Progress Bar -->
+<div class="progressbar-container">
+  <div class="progressbar">
+    <div class="progress" id="progress"></div>
+    <div class="progress-step active" data-title="Data Pribadi"></div>
+    <div class="progress-step" data-title="Pendidikan"></div>
+    <div class="progress-step" data-title="Data Kepegawaian"></div>
+  </div>
+</div>
 
-  <form method="POST">
+<form method="POST" id="multiStepForm">
+  <!-- Step 1: Data Pribadi -->
+  <div class="form-step active">
+    
+  <div class="form-group">
     <label>Nomor Induk Pegawai</label>
     <input type="text" name="nip" required>
+  </div>
 
+  <div class="form-group">
     <label>Nama Lengkap</label>
     <input type="text" name="fullname" required>
+  </div>
 
+  <div class="form-group">
     <label>Gelar Depan</label>
     <input type="text" name="gelar_depan">
+  </div>
 
+  <div class="form-group">
     <label>Gelar Belakang</label>
-    <input type="text" name="gelar_belakang" required>
+    <input type="text" name="gelar_belakang">
+  </div>
 
+  <div class="form-group">
     <label>Tempat Lahir</label>
     <input type="text" name="tempat_lahir" required>
+  </div>
 
+  <div class="form-group">
     <label>Tanggal Lahir</label>
     <input type="date" name="tanggal_lahir" required>
+  </div>
 
+  <div class="form-group">
     <label>Jenis Kelamin</label>
     <select name="jenis_kelamin" required>
       <option value="">(Pilih Jenis Kelamin)</option>
       <option value="Laki-laki">Laki-laki</option>
       <option value="Perempuan">Perempuan</option>
     </select>
+  </div>
 
+  <div class="form-group">
     <label>Agama</label>
     <select name="agama" required>
       <option value="">(Pilih Agama)</option>
@@ -147,33 +179,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <option value="Buddha">Buddha</option>
       <option value="Konghucu">Konghucu</option>
     </select>
+  </div>
 
+  <div class="form-group">
     <label>Nomor HP</label>
     <input type="text" name="phone" required>
+  </div>
 
-    <label>Status Pegawai</label>
+  <div class="form-nav">
+    <button type="button" class="next-btn">Lanjut ke Pendidikan ➜</button>
+  </div>
+</div>
+
+
+  <!-- Step 2: Pendidikan -->
+<div class="form-step">
+
+  <div class="form-group">
+    <label>Tingkat Pendidikan</label>
+    <input type="text" name="tingkat_pendidikan" required>
+  </div>
+
+  <div class="form-group">
+    <label>Pendidikan</label>
+    <input type="text" name="pendidikan" required>
+  </div>
+
+  <div class="form-group">
+    <label>Tahun Lulus</label>
+    <input type="text" name="tahun_lulus" required>
+  </div>
+
+  <div class="form-nav">
+    <button type="button" class="back-btn">⬅ Kembali</button>
+    <button type="button" class="next-btn">Lanjut ke Data Kepegawaian ➜</button>
+  </div>
+</div>
+
+<!-- Step 3: Status Kepegawaian -->
+<div class="form-step">
+
+  <div class="form-group">
+    <label>Data Pegawai</label>
     <select name="status_pegawai" required>
       <option value="">(Pilih Status Pegawai)</option>
       <option value="CPNS">CPNS</option>
       <option value="PNS">PNS</option>
       <option value="PPPK">PPPK</option>
     </select>
+  </div>
 
-    <label>Gol Awal</label>
+  <div class="form-group">
+    <label>Golongan Awal</label>
     <input type="text" name="gol_awal" required>
+  </div>
 
-    <label>Gol Saat Ini</label>
+  <div class="form-group">
+    <label>Golongan Saat Ini</label>
     <input type="text" name="gol_saat_ini" required>
+  </div>
 
+  <div class="form-group">
     <label>TMT Golongan</label>
-    <input type="text" name="tmt_gol" required>
+    <input type="date" name="tmt_gol" required>
+  </div>
 
-    <label>Masa Kerja Tahun</label>
-    <input type="text" name="masa_kerja_tahun" required>
+  <div class="form-group">
+    <label>Masa Kerja (Tahun)</label>
+    <input type="number" name="masa_kerja_tahun" required>
+  </div>
 
-    <label>Masa Kerja Bulan</label>
-    <input type="text" name="masa_kerja_bulan" required>
+  <div class="form-group">
+    <label>Masa Kerja (Bulan)</label>
+    <input type="number" name="masa_kerja_bulan" required>
+  </div>
 
+  <div class="form-group">
     <label>Jenjang Jabatan</label>
     <select name="jenjang_jabatan" required>
       <option value="">(Pilih Jenjang Jabatan)</option>
@@ -183,7 +264,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <option value="Administrator">Administrator</option>
       <option value="Jabatan Pimpinan Tinggi">Jabatan Pimpinan Tinggi</option>
     </select>
+  </div>
 
+  <div class="form-group">
     <label>Jenis Jabatan</label>
     <select name="jenis_jabatan" required>
       <option value="">(Pilih Jenis Jabatan)</option>
@@ -191,41 +274,114 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <option value="Jabatan Pelaksana">Jabatan Pelaksana</option>
       <option value="Jabatan Struktural">Jabatan Struktural</option>
     </select>
+  </div>
 
+  <div class="form-group">
     <label>Jabatan</label>
     <input type="text" name="jabatan" required>
+  </div>
 
+  <div class="form-group">
     <label>TMT Jabatan</label>
     <input type="date" name="tmt_jabatan" required>
+  </div>
 
-    <label>Tingkat Pendidikan</label>
-    <input type="text" name="tingkat_pendidikan" required>
-
-    <label>Pendidikan</label>
-    <input type="text" name="pendidikan" required>
-
-    <label>Tahun Lulus</label>
-    <input type="text" name="tahun_lulus" required>
-
+  <div class="form-group">
     <label>Lokasi Kerja</label>
     <input type="text" name="lokasi_kerja" required>
+  </div>
 
+  <div class="form-group">
     <label>Organisasi</label>
     <input type="text" name="organisasi" required>
+  </div>
 
+  <div class="form-group">
     <label>Organisasi Induk</label>
     <input type="text" name="organisasi_induk" required>
+  </div>
 
+  <div class="form-group">
     <label>Instansi Induk</label>
     <input type="text" name="instansi_induk" required>
+  </div>
 
-    <button type="submit">Simpan Data</button>
-  </form>
-
-  <div id="message" style="margin-top:10px; font-weight:bold;">
-    <?= $message ?>
+  <div class="form-nav">
+    <button type="button" class="back-btn">⬅ Kembali</button>
+    <button type="submit" class="submit-btn">Simpan Data</button>
   </div>
 </div>
+
+</form>
+
+<div id="message" style="margin-top:10px; font-weight:bold;">
+  <?= $message ?>
+</div>
+
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".form-step");
+  const nextBtns = document.querySelectorAll(".next-btn");
+  const backBtns = document.querySelectorAll(".back-btn");
+  const progress = document.querySelector(".progress");
+  const progressSteps = document.querySelectorAll(".progress-step");
+
+  let currentStep = 0;
+
+  // handle "Next" click
+  nextBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const currentFormStep = steps[currentStep];
+      const inputs = currentFormStep.querySelectorAll("input, select, textarea");
+
+      let allValid = true;
+
+      inputs.forEach(input => {
+        if (input.hasAttribute("required") && !input.value.trim()) {
+          input.style.borderColor = "red";
+          allValid = false;
+        } else {
+          input.style.borderColor = "#ccc";
+        }
+      });
+
+      if (!allValid) {
+        alert("⚠️ Harap isi semua kolom yang wajib diisi sebelum melanjutkan!");
+        return;
+      }
+
+      steps[currentStep].classList.remove("active");
+      progressSteps[currentStep].classList.remove("active");
+      currentStep++;
+      steps[currentStep].classList.add("active");
+      progressSteps[currentStep].classList.add("active");
+      updateProgress();
+    });
+  });
+
+  // handle "Back" click
+  backBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      steps[currentStep].classList.remove("active");
+      progressSteps[currentStep].classList.remove("active");
+      currentStep--;
+      steps[currentStep].classList.add("active");
+      progressSteps[currentStep].classList.add("active");
+      updateProgress();
+    });
+  });
+
+  // update progress bar
+  function updateProgress() {
+    const activeSteps = document.querySelectorAll(".progress-step.active");
+    progress.style.width = ((activeSteps.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+  }
+});
+</script>
+
 
 </body>
 </html>
