@@ -1,17 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-@font-face { font-family: Trebuchet-Old; src: url("../file/Font/Trebuchet.ttf"); }
-@font-face { font-family: Bahnschrift; src: url("../file/Font/Bahnschrift.ttf"); }
-@font-face { font-family: BebasNeue; src: url("../file/Font/BebasNeue.otf"); }
-@font-face { font-family: Raleway-Light; src: url("../file/Font/Raleway-Light.ttf"); }
-@font-face { font-family: Raleway-Medium; src: url("../file/Font/Raleway-Medium.ttf"); }
-@font-face { font-family: FreeHand; src: url("../file/Font/FreeHand.ttf"); }
-@font-face { font-family: SegoeUI; src: url("../file/Font/segoeui.ttf"); }
-@font-face { font-family: Roboto-Bold; src: url("../file/Font/Roboto-Bold.ttf"); }
-@font-face { font-family: Roboto-Light; src: url("../file/Font/Roboto-Light.ttf"); }
-@font-face { font-family: Roboto-Medium; src: url("../file/Font/Roboto-Medium.ttf"); }
-@font-face { font-family: Roboto-Regular; src: url("../file/Font/Roboto-Regular.ttf"); }
-@font-face { font-family: Lobster; src: url("../file/Font/Lobster.otf");}
 
 html, body {
   height: 100%;
@@ -31,24 +19,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.header
-{
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	width:100%;
-	height: 65px;
-	background-color: #0077b6;
-	z-index: 1;
-}
-.logo
-{
-	position:fixed;
-	margin: 10px;
 }
 
 .flex-container {
@@ -133,7 +103,7 @@ body {
 .flex-item-right input[type=nip]
 {
 	width: 100%;
-	height: 30px;
+	height: 45px; 
 	background: transparent;
 	border: 1px solid white;
 	color: white;
@@ -146,7 +116,7 @@ body {
 
 .input-with-icon {
 	position: relative;
-	width: 104%;
+	width: 100%;
 }
 
 .input-with-icon input {

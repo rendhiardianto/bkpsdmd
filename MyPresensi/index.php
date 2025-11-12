@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-<link href="../headerFooter.css" rel="stylesheet" type="text/css">
+<link href="/headerFooter.css" rel="stylesheet" type="text/css">
 <link href="index.css" rel="stylesheet" type="text/css">
 
 <title>MyPresensi - BKPSDMD Kabupaten Merangin</title>
-<link rel="shortcut icon" href="../icon/IconWeb.png">
+<link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 
 <body>
@@ -26,14 +26,14 @@
 <div class="topnav" id="mynavBtn">
 	<div id="startButton"></div>
 	<script>
-	fetch("../startButton.html")
+	fetch("/startButton.html")
 		.then(response => response.text())
 		.then(data => {
 			document.getElementById("startButton").innerHTML = data;
 		});
 	</script>
 	<div class="navLogo">
-		<a href="../index.php"><img src="../icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
+		<a href="/index.php"><img src="/icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
 	</div>
 </div>
 	
@@ -63,7 +63,7 @@ fetch("../footer.php")
 </script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 	
-<script src="../JavaScript/script.js"></script>
+<script src="/JavaScript/script.js"></script>
 	
 </body>
 </html>

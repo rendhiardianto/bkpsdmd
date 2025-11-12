@@ -12,7 +12,6 @@ $result = $stmt->get_result();
 
 ?>
 
-
 <!doctype html>
 <html>
 <head>
@@ -41,7 +40,7 @@ $result = $stmt->get_result();
 <div class="topnav" id="mynavBtn">
 	<div id="startButton"></div>
 	<script>
-	fetch("startButton.html")
+	fetch("/startButton.html")
 		.then(response => response.text())
 		.then(data => {
 			document.getElementById("startButton").innerHTML = data;
@@ -140,7 +139,7 @@ $result = $stmt->get_result();
 
 <div id="footer"></div>
 <script>
-fetch("footer.php")
+fetch("/footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;
@@ -148,7 +147,7 @@ fetch("footer.php")
 </script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 	
-<script src="../JavaScript/script.js"></script>
+<script src="/JavaScript/script.js"></script>
 	
 </body>
 </html>

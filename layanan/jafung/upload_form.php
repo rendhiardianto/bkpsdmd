@@ -114,8 +114,9 @@ if (!empty($verified_nip)) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <title>Dashboard - Layanan Jabatan Fungsional</title>
+  <link rel="stylesheet" href="/fontFamily.css">
   <link href="upload_form.css" rel="stylesheet" type="text/css">
-  <link href="../../headerFooter.css" rel="stylesheet" type="text/css">
+  <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="../icon/button/logo2.png">
@@ -162,7 +163,7 @@ if (!empty($verified_nip)) {
   <div class="info-box">
 
     <div class="fotoProfil">
-      <img src="../../icon/button/profil.png">
+      <img src="/icon/button/profil.png">
     </div>
 
     <table  class="infoTable">
@@ -479,7 +480,7 @@ if (!empty($verified_nip)) {
 <!------------------- FOOTER ----------------------------------->	
 <div id="footer"></div>
 <script>
-fetch("footer.php")
+fetch("/footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;

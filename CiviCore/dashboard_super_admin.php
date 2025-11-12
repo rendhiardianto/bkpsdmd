@@ -38,6 +38,7 @@ $user = $result->fetch_assoc();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Super Admin Dashboard</title>
+  
   <link href="dashboard_style.css" rel="stylesheet" type="text/css">
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="/icon/button/logo2.png">
@@ -227,7 +228,7 @@ $user = $result->fetch_assoc();
 
 <!------------------- FOOTER ----------------------------------->	
 <div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="../icon/go_to_top.png"></div>
-<script src="../JavaScript/back_to_top.js"></script>
+<script src="/JavaScript/back_to_top.js"></script>
 
 <div id="footer"></div>
 <script>

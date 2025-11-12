@@ -149,17 +149,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Revisi Dokumen Jabatan Fungsional</title>
+
+  <link rel="stylesheet" href="/fontFamily.css">
   <link href="revise_document.css" rel="stylesheet" type="text/css">
   <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
-  <link rel="shortcut icon" href="../icon/button/logo2.png">
+  <link rel="shortcut icon" href="/icon/button/logo2.png">
 </head>
 <body>
 
 <div class="header">
     <div class="logo">
-      <a href="index.php"><img src="../../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
+      <a href="index.php"><img src="/icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
     </div>
     <div class="roleHeader">
       <h1>Dashboard Revisi Dokumen Jabatan Fungsional</h1>
@@ -175,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="info-box">
     
     <div class="fotoProfil">
-      <img src="../../icon/button/profil.png">
+      <img src="/icon/button/profil.png">
     </div>
 
     <table  class="infoTable">
@@ -266,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!------------------- FOOTER ----------------------------------->	
 <div id="footer"></div>
 <script>
-fetch("footer.php")
+fetch("/footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;

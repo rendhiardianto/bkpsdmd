@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Verifikasi Revisi Dokumen</title>
+  <link rel="stylesheet" href="/fontFamily.css">
   <link href="revise_index.css" rel="stylesheet" type="text/css">
+  <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div class="header">
@@ -71,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!------------------- FOOTER ----------------------------------->	
 <div id="footer"></div>
 <script>
-fetch("footer.php")
+fetch("/footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;

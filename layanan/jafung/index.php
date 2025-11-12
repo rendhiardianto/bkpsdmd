@@ -53,8 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Dashboard - Pengajuan Jabatan Fungsional</title>
+
+  <link rel="stylesheet" href="/fontFamily.css">
   <link href="index.css" rel="stylesheet" type="text/css">
-  <link href="../../../headerFooter.css" rel="stylesheet" type="text/css">
+  <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="../icon/button/logo2.png">
@@ -108,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!------------------- FOOTER ----------------------------------->	
 <div id="footer"></div>
 <script>
-fetch("footer.php")
+fetch("/footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;

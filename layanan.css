@@ -1,33 +1,4 @@
-@charset "utf-8";
-/* CSS Document */
-@font-face {
-   font-family: Trebuchet;
-   src: url("file/Font/Trebuchet.ttf");
-}
-@font-face {
-   font-family:Bahnschrift;
-   src: url("file/Font/Bahnschrift.ttf");
-}
-@font-face {
-   font-family: BebasNeue;
-   src: url("file/Font/BebasNeue.otf");
-}
-@font-face {
-   font-family: Raleway-Light;
-   src: url("file/Font/Raleway-Light.ttf");
-}
-@font-face {
-   font-family: Raleway-Medium;
-   src: url("file/Font/Raleway-Medium.ttf");
-}
-@font-face {
-   font-family: FreeHand;
-   src: url("file/Font/FreeHand.ttf");
-}
-@font-face {
-   font-family: SegoeUI;
-   src: url("file/Font/segoeui.ttf");
-}
+
 
 body {
 	margin: 0;
@@ -79,9 +50,6 @@ h1 {
   background-color: #0a4a86;
 }
 
-
-/* ============================================ FLEX CONTAINER ==============================*/
-
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -99,7 +67,6 @@ h1 {
   padding: 0px 10px;
   background-color: #dddddd;
   color: #023e8a;
-  font-family: trebuchet;
   font-size: 20px;
   border-radius: 12px;
   width: 300px;

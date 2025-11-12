@@ -41,7 +41,7 @@ $result = $stmt->get_result();
 <div class="topnav" id="mynavBtn">
 	<div id="startButton"></div>
 	<script>
-	fetch("startButton.html")
+	fetch("/startButton.html")
 		.then(response => response.text())
 		.then(data => {
 			document.getElementById("startButton").innerHTML = data;
@@ -138,7 +138,7 @@ $result = $stmt->get_result();
 <!------------------- FOOTER ----------------------------------->	
 <div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="../icon/go_to_top.png"></div>
 
-<div id="footer"></div>
+<div id="/footer"></div>
 <script>
 fetch("footer.php")
   .then(response => response.text())
@@ -148,7 +148,7 @@ fetch("footer.php")
 </script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 	
-<script src="../JavaScript/script.js"></script>
+<script src="/JavaScript/script.js"></script>
 	
 </body>
 </html>

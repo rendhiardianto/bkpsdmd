@@ -135,24 +135,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
 <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
 
 <title>Masuk ke CiviCore - BKPSDMD Kabupaten Merangin</title>
+
 <link rel="shortcut icon" href="/icon/button/logo2.png">
 
+<link rel="stylesheet" href="/fontFamily.css">
 <link href="index.css" rel="stylesheet" type="text/css">
+<link href="/headerFooter.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
 
 </head>
 <body>
     <video autoplay muted loop id="myVideo" width="100%" preload="metadata">
-        <source src="../videos/CiviCoreVideo.mp4" type="video/mp4">
+        <source src="/videos/CiviCoreVideo.mp4" type="video/mp4">
     </video>
 
-    <div class="header">
-            <div class="logo">
-            	<a href="../index.php" target="_blank"><img src="../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
-            </div>
+    <div class="topnav" id="mynavBtn">
+        <div id="startButton"></div>
+        <script>
+        fetch("/startButton.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("startButton").innerHTML = data;
+            });
+        </script>
+        <div class="navLogo">
+            <a href="/index.php"><img src="/icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
+        </div>
     </div>
+    
     <div class="flex-container">
         <div class="flex-item-left">
             <h2>THAT HORIZON MIGHT BE CLOSER THAN YOU THINK!</h2>
@@ -164,11 +174,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
                 <div style="text-align: center; font-size:40px;"><b>Login CiviCore</b></div>
                 <div class="subtitle" style="text-align: center;">The Core of Civil Service Management</div>
                 <br><label>NIP</label>
-                <br><input type="nip" placeholder="Nomor Induk Pegawai" name="nip" required></p>
+                <br><input type="nip" placeholder="Masukkan Nomor Induk Pegawai" name="nip" required></p>
 
                 <p><label>Kata Sandi</label>
                 <div class="input-with-icon">
-                    <input type="password" id="password" name="password" placeholder="Kata Sandi" required>
+                    <input type="password" id="password" name="password" placeholder="Masukkan Kata Sandi" required>
                     <i class="fa-solid fa-eye toggle-eye" id="togglePassword"></i>
                 </div>
                 <p><a href="forgot_password/forgot_password.php" style="text-decoration: underline; color:#00b4d8;">Lupa Kata Sandi?</a></p>
@@ -182,27 +192,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
         </div>
         
     </div>
-    <div class="footer">
-        <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
-    </div>
 
+<div id="footer"></div>
 <script>
-var myIndex = 0;
-carousel();
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";  
-    }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 5000);
-}
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
 </script>
-
-
+<script src="/JavaScript/script.js"></script>
 
 <script>
 document.getElementById("togglePassword").addEventListener("click", function() {
@@ -218,17 +217,7 @@ document.getElementById("togglePassword").addEventListener("click", function() {
     }
 });
 </script>
-<!-- Load Google CSE only after page finishes -->
-<script>
-window.addEventListener('load', function() {
-  var cx = '008927343735519909654:w8bciv_yp7u';
-  var gcse = document.createElement('script');
-  gcse.type = 'text/javascript';
-  gcse.async = true;
-  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-  document.body.appendChild(gcse);
-});
-</script>
+
 
 </body>
 </html>

@@ -69,9 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
+<link href="/headerFooter.css" rel="stylesheet" type="text/css">
+
 <link href="download_sk_jafung.css" rel="stylesheet" type="text/css">
 <title>Download SK Jabatan Fungsional</title>
-
+<link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 <body>
 <div class="header">
@@ -100,10 +102,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
       <button type="submit">Download SK</button>
     </form>
 </div>
-
-<div class="footer">
-    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
-</div>
+<!------------------- FOOTER ----------------------------------->	
+<div id="footer"></div>
+<script>
+fetch("/footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 </body>
 </html>

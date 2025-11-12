@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face { font-family: Trebuchet-Old; src: url("file/Font/Trebuchet.ttf"); }
+@font-face { font-family: Bahnschrift; src: url("file/Font/Bahnschrift.ttf"); }
+@font-face { font-family: BebasNeue; src: url("file/Font/BebasNeue.otf"); }
+@font-face { font-family: Raleway-Light; src: url("file/Font/Raleway-Light.ttf"); }
+@font-face { font-family: Raleway-Medium; src: url("file/Font/Raleway-Medium.ttf"); }
+@font-face { font-family: FreeHand; src: url("file/Font/FreeHand.ttf"); }
+@font-face { font-family: SegoeUI; src: url("file/Font/segoeui.ttf"); }
+@font-face { font-family: Roboto-Bold; src: url("file/Font/Roboto-Bold.ttf"); }
+@font-face { font-family: Roboto-Light; src: url("file/Font/Roboto-Light.ttf"); }
+@font-face { font-family: Roboto-Medium; src: url("file/Font/Roboto-Medium.ttf"); }
+@font-face { font-family: Roboto-Regular; src: url("file/Font/Roboto-Regular.ttf"); }
+@font-face { font-family: Lobster; src: url("file/Font/Lobster.otf");}
+@font-face { font-family: Lobster; src: url("/file/Font/Lobster.otf"); }
+@font-face { font-family: Aptos-Bold; src: url("/file/Font/Aptos-Bold.ttf"); }
+@font-face { font-family: Aptos-Display; src: url("/file/Font/Aptos-Display.ttf"); }

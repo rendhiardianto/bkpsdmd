@@ -1,0 +1,67 @@
+body {
+	margin: 0;
+}
+
+/* ============================================ CONTENT ==============================*/
+h1{
+   font-family: Bahnschrift, sans-serif;
+   font-size: 40px;
+   color: #04AA6D;
+}
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  
+  margin: auto;
+  display: block;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+td {
+   text-align: center;
+}
+iframe {
+  display: block;
+  margin: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 100px;
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+  .btn {
+    font-size: 16px;
+    padding: 8px 20px;
+  }
+   
+}
