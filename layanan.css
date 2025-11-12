@@ -32,151 +32,95 @@
 body {
 	margin: 0;
 }
-
-/* ============================================ Layanan BKD ==============================*/
-.layananBKD {
-	background-color: #ebebeb;
-	overflow: hidden;
-	text-align: center;
-	padding: 20px;
-}
-.layananBKD h1 {
-	font-family: Bahnschrift;
-	text-align: center;
-	font-size: 40px;
-	color: #0077b6;
-	margin-top: 0px;
-}
-.layananBKD .layananKPG {
-	margin-top: 20px;
-}
-.layananBKD .layananPSDM {
-	margin-top: 50px;
-}
-.LogoBKD {
-	width: 200px;
-}
-.ajukanButton {
-  background-color: #0077b6;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-family: Bahnschrift;
-  margin-bottom: 10px;
-}
-.ajukanButton:hover {
-  background-color: #005f87;
-}
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 600px) {
-	.layananBKD h1{
-		font-family: Bahnschrift;
-		text-align: center;
-		font-size: 25px;
-		color: #0077b6;
-	}
-	.LogoBKD {
-		width: 150px;
-	}
-}
-
-/* ============================================ Layanan BKN ==============================*/
-.layananBKN {
-	background-color: #ebebeb;
-	overflow: hidden;
-	text-align: center;
-	padding: 20px;
-}
-.layananBKN h1{
-	font-family: Bahnschrift;
-	text-align: center;
-	font-size: 40px;
-	color: #0077b6;
-}
-.LogoBKN {
-	width: 200px;
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 600px) {
-	.layananBKN h1{
-		font-family: Bahnschrift;
-		text-align: center;
-		font-size: 30px;
-		color: #0077b6;
-	}
-	.LogoBKN {
-		width: 150px;
-	}
-}
-
-/* ============================================ FLEX CONTAINER ==============================*/
 * {
   box-sizing: border-box;
 }
 
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items:center;
-    background-color: #ebebeb;
+/* ============================================ Layanan BKD ==============================*/
+.content{
+  background-color: #ebebeb;
 }
-.flex-container > .flex-item-main {
-    margin: 10px;
-    background-color: #dddddd;
-    color: #023e8a;
-    line-height: 20px;
-    font-family: trebuchet;
-    font-size: 20px;
-    margin: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 0px 10px grey;
-  }
-.flex-container > div:hover {
-    background-color:  rgb(240, 240, 240);
-    box-shadow: 0px 0px 15px rgb(255, 255, 255);
-    
-    transition: 0.3s;
-}
-.flex-item-main {
-    flex: 20%;
-    padding: 5px;
-}
-.flex-item-main img {
-  width: 100px;
-}
-.layananBKN img {
-  width: 150px;
-}
-.flex-item-main img:hover {
-    filter: contrast(50%);
-    transition: 0.3s;
-}
-.flex-item-main sub {
-	color: rgb(41, 40, 40);
-	line-height: 0.1;
-	font-size: 15px;
-	padding: 5px;
+h1 {
+	font-family: Bahnschrift;
+	text-align: center;
+	font-size: 30px;
+	color: #0066ff;
+  background-color: #dddddd;
+  padding: 20px;
 }
 
+.layananBKD {
+	overflow: hidden;
+	text-align: center;
+}
+.KPG{
+
+}
+.PSDM{
+
+}
+.layananBKN {
+	text-align: center;
+  padding-bottom: 50px;
+}
+
+.ajukanButton {
+  background-color: #0f69bd;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: Bahnschrift;
+  width: 130px;
+}
+.ajukanButton:hover {
+  background-color: #0a4a86;
+}
+
+
+/* ============================================ FLEX CONTAINER ==============================*/
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items:center;
+    
+}
+.flex-item-main {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
+  text-align: center; /* center text inside */
+  margin: 20px;
+  padding: 0px 10px;
+  background-color: #dddddd;
+  color: #023e8a;
+  font-family: trebuchet;
+  font-size: 20px;
+  border-radius: 12px;
+  width: 300px;
+  height: 250px;
+  box-shadow: 0px 0px 10px grey;
+}
+.flex-item-main img{
+  width: 120px;
+}
+.flex-item-main:hover {
+  background-color:  rgb(240, 240, 240);
+  box-shadow: 0px 0px 15px rgb(255, 255, 255);
+  width: 310px;
+  transition: 0.3s;
+}
+
+
 /* Responsive layout - makes a one column-layout instead of a two-column layout */
-@media (max-width: 600px) {
-  .flex-container > div {
-    font-size: 15px;
-  }
-  .flex-item-main {
-    flex: 10%;
-    padding: 5px;
-  }
-  
-  .flex-item-main img {
-    width: 80px;
-  }
-  .layananBKN img {
-  width: 100px;
+@media (max-width: 800px) {
+.flex-container {
+  display: flex;
+  flex-direction: column;
   }
 }

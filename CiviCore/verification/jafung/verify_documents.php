@@ -93,20 +93,7 @@ $user = $resultUser->fetch_assoc();
   <div class="roleHeader">
     <h1>Daftar Permohonan Pengajuan Jafung</h1>
   </div>
-  <div class="startlogoDD">
-    Halo, <?php echo htmlspecialchars($user['fullname']); ?>
-    <button onclick="toggleStartMenu()" class="startbtn">
-      <?php if (!empty($user['profile_pic'])): ?>
-        <img src="../../uploads/profile_pics/<?php echo htmlspecialchars($user['profile_pic']); ?>" class="profile-pic">
-      <?php else: ?>
-        <img src="/icon/default_pic.png" alt="Default" class="profile-pic">
-      <?php endif; ?>
-    </button>
-    <div id="myStart" class="start-content">
-      <a href="../../edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
-      <a href="../../logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
-    </div>
-  </div>
+
 </div>
 
 <!-- 🔹 Popup HTML (added once globally) -->
@@ -323,11 +310,19 @@ $user = $resultUser->fetch_assoc();
   </table>
 </div>
 
-<div class="footer">
-  <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
-</div>
+<!------------------- FOOTER ----------------------------------->	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="../../../icon/go_to_top.png"></div>
+<script src="../../../JavaScript/back_to_top.js"></script>
 
-<script src="/JavaScript/script.js"></script>
+<div id="footer"></div>
+<script>
+fetch("../../footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script>
 document.getElementById("liveSearch").addEventListener("keyup", function() {

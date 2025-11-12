@@ -65,8 +65,8 @@ $user = $result->fetch_assoc();
       </button>
       
       <div id="myStart" class="start-content">
-        <a href="edit_profile/edit_profile.php"><img src="/icon/edit_profile.png" width="20px"> Edit Profile</a>
-        <a href="logout.php" class="logout" style="text-decoration: none;"><img src="/icon/log_out.png" width="20px">Logout</a>
+        <a href="edit_profile/edit_profile.php"><img src="../icon/edit_profile.png" width="20px"> Edit Profile</a>
+        <a href="logout.php" class="logout" style="text-decoration: none;"><img src="../icon/log_out.png" width="20px">Logout</a>
       </div>
     </div>
   </div>
@@ -225,11 +225,21 @@ $user = $result->fetch_assoc();
 
 </div><!--content-->
 
-  <div class="footer">
-    <p>Copyright &copy; 2025. BKPSDMD Kabupaten Merangin. All Rights Reserved.</p>
-  </div>
+<!------------------- FOOTER ----------------------------------->	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="../icon/go_to_top.png"></div>
+<script src="../JavaScript/back_to_top.js"></script>
 
-<script src="/JavaScript/script.js"></script>
+<div id="footer"></div>
+<script>
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
+
+<script src="../JavaScript/script.js"></script>
 
 <script>
   // JavaScript code to handle tab switching

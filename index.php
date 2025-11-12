@@ -41,23 +41,21 @@ while ($row = $result->fetch_assoc()) {
 
 <body>
 <div class="header">
-	<video src="/videos/HeaderVideo2.mp4" width="100%" autoplay muted loop id="myVideo"></video>
+	<video src="videos/HeaderVideo2.mp4" width="100%" autoplay muted loop id="myVideo"></video>
 	<!--<img src="images/HomeHeaderSS.jpg" width="100%" alt="Banner Home">-->
 </div>
 	
 <div class="topnav" id="mynavBtn">
 
-	<div class="startlogoDD">
-		<button onclick="toggleStartMenu()" class="startbtn"><img src="icon/LogoStart.png"></button>
-		<div id="myStart" class="start-content">
-			<a href="CiviCore/index.php" target="_blank"><img src="/icon/CiviCore.png" width="20px"> Login CiviCore</a>
-			<a href="https://simpeg-merangin.indohcms.com/login" target="_blank"><img src="/icon/simpeg.png" width="20px"> SIMPEG</a>
-			<a href="/MyPresensi/index.php" target="_blank"><img src="/icon/fingerprint.png" width="20px"> MyPresensi</a>
-			<a href="/MyDocuments/index.php" target="_blank"><img src="/icon/documents.png" width="20px"> MyDocuments</a>
-			<a href="/MyForm/index.php" target="_blank"><img src="/icon/form.png" width="20px"> MyForm</a>
-			<a href="/LiveDashboard/index.php" target="_blank" style="color:red	"><img src="/icon/live_db.png" width="20px"> Live Dashboard</a>
-		</div>
-	</div>
+	<div id="startButton"></div>
+	<script>
+	fetch("startButton.html")
+		.then(response => response.text())
+		.then(data => {
+			document.getElementById("startButton").innerHTML = data;
+		});
+	</script>
+
 	<div class="navLogo">
 		<!--<a href="index.php"><img src="icon/LogoStart.png" id="LogoStart" alt="Logo Start Apps"></a>-->
 		<a href="index.php"><img src="icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
@@ -261,63 +259,16 @@ while ($row = $result->fetch_assoc()) {
 </div>
 
 <!------------------- FOOTER ----------------------------------->	
-<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="/icon/go_to_top.png">Scroll to Top</div>
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="icon/go_to_top.png"></div>
 
-<div class="row">
-  <div class="column first">
-	<img src="icon/BKPLogo.png" alt="Logo BKPSDMD">
-	  <p style="text-align: center">Copyright © 2025.</p>
-	  <p style="text-align: center">Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah (BKPSDMD) Kabupaten Merangin.</p> 
-	  <p style="text-align: center">All Rights Reserved</p>
-  </div>
-	
-  <div class="column second">
-		<h3>Butuh Bantuan?</h3>
-	  
-		<p><a href="https://maps.app.goo.gl/idAZYTHVszUhSGRv8" target="_blank" class="Loc">
-			<img src="icon/sosmed/Loc.png" alt="Logo Loc" width="30px" style="float: left"></a> 
-			Jl. Jendral Sudirman, No. 01, Kel. Pematang Kandis, Kec. Bangko, Kab. Merangin, Prov. Jambi - Indonesia | Kode Pos - 37313</p>
-	  
-		<p><a href="https://wa.me/6285159997813" target="_blank" class="wa">
-			<img src="icon/sosmed/WA.png" alt="Logo WA" width="30px" style="vertical-align:middle"></a> 
-			+62851 5999 7813</p>
-	  
-		<p><a href="bkd.merangin@gmail.com" target="_blank" class="em">
-			<img src="icon/sosmed/EM.png" alt="Logo Email" width="30px" style="vertical-align:middle"></a> 
-			bkd.merangin@gmail.com</p>
-  </div>
-	
-  <div class="column third">
-		<h3>Follow Sosial Media Kami!</h3>
-		  <a href="https://www.instagram.com/bkpsdmd.merangin/?hl=en" target="_blank" class="ig"><img src="icon/sosmed/IG.png" alt="Logo IG"></a>
-	  
-		  <a href="https://www.youtube.com/@bkpsdmd.merangin" target="_blank" class="yt"><img src="icon/sosmed/YT.png" alt="Logo YT"></a>
-	  
-		  <a href="https://www.facebook.com/bkpsdmd.merangin/" target="_blank" class="fb"><img src="icon/sosmed/FB.png" alt="Logo FB"></a>
-	  
-		  <a href="https://x.com/bkpsdmdmerangin?t=a7RCgFHif89UfeV9aALj8g&s=08" target="_blank" class="x"><img src="icon/sosmed/X.png" alt="Logo X"></a>
-	  
-		  <a href="https://www.tiktok.com/@bkpsdmd.merangin?_t=ZS-8z3dFdtzgYy&_r=1 " target="_blank" class="tt"><img src="icon/sosmed/TT.png" alt="Logo TT"></a>
-  </div>
-  <div class="column fourth">
-		<h3>Kunjungan Website</h3>
-		<p>Hari Ini</p>
-		<p>Total</p>
-	  
-	  	
-	  <img src="icon/BerAkhlak.png" alt="Logo BerAkhlak">
-	  
-  </div>
-</div>
-
-<!--<script> <h3 id="visitor-count">Loading...</h3>
-  fetch("counter.php")
-    .then(res => res.text())
-    .then(count => {
-      document.getElementById("visitor-count").innerText = count;
-    });
-</script>-->
-
+<div id="footer"></div>
+<script>
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script src="JavaScript/script.js"></script>

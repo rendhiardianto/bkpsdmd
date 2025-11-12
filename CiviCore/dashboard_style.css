@@ -1,41 +1,25 @@
 @charset "utf-8";
 /* CSS Document */
-@font-face {
-   font-family: Trebuchet;
-   src: url("../file/Font/Trebuchet.ttf");
-}
-@font-face {
-   font-family:Bahnschrift;
-   src: url("../file/Font/Bahnschrift.ttf");
-}
-@font-face {
-   font-family: BebasNeue;
-   src: url("../file/Font/BebasNeue.otf");
-}
-@font-face {
-   font-family: Raleway-Light;
-   src: url("../file/Font/Raleway-Light.ttf");
-}
-@font-face {
-   font-family: Raleway-Medium;
-   src: url("../file/Font/Raleway-Medium.ttf");
-}
-@font-face {
-   font-family: FreeHand;
-   src: url("../file/Font/FreeHand.ttf");
-}
-@font-face {
-   font-family: SegoeUI;
-   src: url("../file/Font/segoeui.ttf");
-}
-@font-face {
-   font-family: Lobster;
-   src: url("../file/Font/Lobster.otf");
+@font-face { font-family: Trebuchet-Old; src: url("../file/Font/Trebuchet.ttf"); }
+@font-face { font-family: Bahnschrift; src: url("../file/Font/Bahnschrift.ttf"); }
+@font-face { font-family: BebasNeue; src: url("../file/Font/BebasNeue.otf"); }
+@font-face { font-family: Raleway-Light; src: url("../file/Font/Raleway-Light.ttf"); }
+@font-face { font-family: Raleway-Medium; src: url("../file/Font/Raleway-Medium.ttf"); }
+@font-face { font-family: FreeHand; src: url("../file/Font/FreeHand.ttf"); }
+@font-face { font-family: SegoeUI; src: url("../file/Font/segoeui.ttf"); }
+@font-face { font-family: Roboto-Bold; src: url("../file/Font/Roboto-Bold.ttf"); }
+@font-face { font-family: Roboto-Light; src: url("../file/Font/Roboto-Light.ttf"); }
+@font-face { font-family: Roboto-Medium; src: url("../file/Font/Roboto-Medium.ttf"); }
+@font-face { font-family: Roboto-Regular; src: url("../file/Font/Roboto-Regular.ttf"); }
+@font-face { font-family: Lobster; src: url("../file/Font/Lobster.otf");}
+
+/* --- Global --- */
+* {
+  box-sizing: border-box;
 }
 body {
-	margin: 0;
-  font-family: Arial;
-  background:#f4f6f9; 
+  margin: 0;
+  font-family: Roboto-Medium;
 }
 .header
 {
@@ -155,6 +139,7 @@ body {
 .content {  
   display: flex;
   margin-top: 70px;
+  margin-bottom: 50px;
 }
 .leftSide {
     flex: 20%;
@@ -263,7 +248,7 @@ body {
   border-radius: 12px;
   box-shadow: 0px 0px 10px grey;
   width: 200px;
-  height: 170px;
+  height: auto;
   text-align: center;
   transition: all 0.3s;
 }
@@ -303,21 +288,4 @@ body {
   .flex-item-main:hover{  
     width: 170px;
 }
-}
-
-.footer
-{
-	position: fixed;
-	background-color: #0096c7;
-	bottom: 0;
-	width:100%;
-	color: white;
-	font-family: Raleway-Medium;
-	text-align: center;
-	font-size: 15x;
-}
-@media screen and (max-width:600px) {
-	.footer {
-		font-size: 12px;
-	}
 }

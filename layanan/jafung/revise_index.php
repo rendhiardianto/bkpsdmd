@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="header">
     <div class="logo">
-      <a href="index.php"><img src="/icon/BKPLogo3.png" width="150"></a>
+      <a href="index.php"><img src="../../icon/BKPLogo3.png" width="150"></a>
     </div>
     <div class="roleHeader"><h1>Revisi Dokumen Jabatan Fungsional</h1></div>
   </div>
@@ -68,5 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </form>
     </div>
   </div>
+<!------------------- FOOTER ----------------------------------->	
+<div id="footer"></div>
+<script>
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
 </body>
 </html>

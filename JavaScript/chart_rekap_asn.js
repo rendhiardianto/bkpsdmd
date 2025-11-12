@@ -27,7 +27,7 @@ const data0 = [{
 Plotly.newPlot("myPlot0", data0, layout0);
 
 // ======================== PNS - Jenis Kelamin =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jenis%20Kelamin&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jenis%20Kelamin&semester=2")
   .then(response => response.json())
   .then(data => {
     const xArray1 = data.map(row => row.label);
@@ -61,7 +61,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
 
 
 // ======================== PPPK - Jenis Kelamin =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PPPK&sub_kategori=Jenis%20Kelamin&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PPPK&sub_kategori=Jenis%20Kelamin&semester=2")
   .then(response => response.json())
   .then(data => {
     const xArray2 = data.map(row => row.label);
@@ -124,7 +124,7 @@ const data3 = [{
 Plotly.newPlot("myPlot3", data3, layout3);
 
 // ======================== PNS - Pendidikan =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Pendidikan&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Pendidikan&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan
@@ -164,7 +164,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
   });
 
 // ======================== PNS - Usia =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Usia&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Usia&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan
@@ -204,7 +204,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
   });
 
   // ======================== PNS - Golongan =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Golongan&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Golongan&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan
@@ -244,7 +244,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
   });
 
   // ======================== PNS - Eselon =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Eselon&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Eselon&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan
@@ -284,7 +284,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
   });
 
  // ======================== PNS - Jabatan =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jabatan&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Jabatan&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan
@@ -325,7 +325,7 @@ fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kate
 
 
   // ======================== PNS - Kenaikan Pangkat =========================
-fetch("/CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Kenaikan Pangkat&semester=2")
+fetch("CiviCore/rekap_asn_merangin/ajax_get_rekap_asn.php?kategori=PNS&sub_kategori=Kenaikan Pangkat&semester=2")
   .then(response => response.json())
   .then(data => {
     // xArray: nama jabatan

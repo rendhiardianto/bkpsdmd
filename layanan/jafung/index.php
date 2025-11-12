@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Dashboard - Pengajuan Jabatan Fungsional</title>
   <link href="index.css" rel="stylesheet" type="text/css">
-  <link href="/headerFooter.css" rel="stylesheet" type="text/css">
+  <link href="../../../headerFooter.css" rel="stylesheet" type="text/css">
 
   <meta name="google-site-verification" content="e4QWuVl6rDrDmYm3G1gQQf6Mv2wBpXjs6IV0kMv4_cM" />
   <link rel="shortcut icon" href="../icon/button/logo2.png">
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="header">
     <div class="logo">
-      <a href="/index.php" target="_blank"><img src="/icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
+      <a href="../../layanan.html" ><img src="../../icon/BKPLogo3.png" width="150" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>
     </div>
     <div class="roleHeader">
       <h1>Dashboard Pengajuan Jabatan Fungsional</h1>
@@ -75,16 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php echo renderLiveClock(); ?>
 </div>
 
-<div class="content">
-  
-  
+<div class="content">  
 
   <div class="leftSide">
     <h2>SELAMAT DATANG</h2>
     <p>Kepada Yth. Bapak/Ibu ASN Di Lingkugan Pemerintah Kabupaten Merangin, 
         <b>sebelum melakukan pengajuan Jabatan Fungsional, harap membaca Pedoman Pengusulan 
         dan Syarat Layanan Jabatan Fungsional</b> berikut;</p>
-    <iframe src="/images/LayananKPG/Surat Syarat Usul JF.pdf"></iframe>
+    <iframe src="../../images/LayananKPG/Surat Syarat Usul JF.pdf"></iframe>
   </div><!--leftSide--> 
 
   <div class="rightSide">
@@ -107,58 +105,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div><!--rightSide-->
 </div><!--content-->
 
-<!------------------- FOOTER ----------------------------------->
-<div class="row">
-  <div class="column first">
-		<img src="/icon/BKPLogo.png" alt="Logo BKPSDMD">
-	  <p style="text-align: center">Copyright © 2025.</p>
-	  <p style="text-align: center">Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah (BKPSDMD) Kabupaten Merangin.</p> 
-	  <p style="text-align: center">All Rights Reserved</p>
-  </div>
-	
-  <div class="column second">
-		<h3>Butuh Bantuan?</h3>
-	  
-		<p><a href="https://maps.app.goo.gl/idAZYTHVszUhSGRv8" target="_blank" class="Loc">
-			<img src="/icon/sosmed/Loc.png" alt="Logo Loc" width="30px" style="float: left"></a> 
-			Jl. Jendral Sudirman, No. 01, Kel. Pematang Kandis, Kec. Bangko, Kab. Merangin, Prov. Jambi - Indonesia | Kode Pos - 37313</p>
-	  
-		<p><a href="https://wa.me/6285159997813" target="_blank" class="wa">
-			<img src="/icon/sosmed/WA.png" alt="Logo WA" width="30px" style="vertical-align:middle"></a> 
-			+62851 5999 7813</p>
-	  
-		<p><a href="https://wa.me/6285159997813" target="_blank" class="em">
-			<img src="/icon/sosmed/EM.png" alt="Logo Email" width="30px" style="vertical-align:middle"></a> 
-			bkd.merangin@gmail.com</p>
-  </div>
-	
-  <div class="column third">
-		<h3>Follow Sosial Media Kami!</h3>
-		  <a href="https://www.instagram.com/bkpsdmd.merangin/?hl=en" target="_blank" class="ig">
-			<img src="/icon/sosmed/IG.png" alt="Logo IG"></a>
-	  
-		  <a href="https://www.youtube.com/@bkpsdmd.merangin" target="_blank" class="yt">
-			<img src="/icon/sosmed/YT.png" alt="Logo YT"></a>
-	  
-		  <a href="https://www.facebook.com/bkpsdmd.merangin/" target="_blank" class="fb">
-			<img src="/icon/sosmed/FB.png" alt="Logo FB"></a>
-	  
-		  <a href="https://x.com/bkpsdmdmerangin?t=a7RCgFHif89UfeV9aALj8g&s=08" target="_blank" class="x">
-			<img src="/icon/sosmed/X.png" alt="Logo X"></a>
-	  
-		  <a href="https://www.tiktok.com/@bkpsdmd.merangin?_t=ZS-8z3dFdtzgYy&_r=1 " target="_blank" class="tt">
-			<img src="/icon/sosmed/TT.png" alt="Logo TT"></a>
-  </div>
-  <div class="column fourth">
-		<h3>Kunjungan Website</h3>
-		<p>Hari Ini</p>
-		<p>Total</p>
-	  
-	  	
-	  <img src="/icon/BerAkhlak.png" alt="Logo BerAkhlak">
-	  
-  </div>
-</div>
-<!------------------- BATAS FOOTER ----------------------------------->
+<!------------------- FOOTER ----------------------------------->	
+<div id="footer"></div>
+<script>
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
 </body>
 </html>
