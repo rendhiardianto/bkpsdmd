@@ -151,18 +151,19 @@ $result = $stmt->get_result();
     <p style="text-align:center;">Tidak ada data untuk tipe dokumen ini.</p>
 <?php endif; ?>
 
-<!------------------- FOOTER ----------------------------------->
-<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"><img src="/icon/go_to_top.png">
-</div>
+<!------------------- FOOTER ----------------------------------->	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"><img src="icon/go_to_top.png"></div>
+<script src="JavaScript/back_to_top.js"></script>
 
 <div id="footer"></div>
 <script>
-fetch("/footer.php")
+fetch("footer.php")
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;
   });
 </script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script src="/JavaScript/script.js"></script>
 </body>

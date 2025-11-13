@@ -260,7 +260,8 @@ while ($row = $result->fetch_assoc()) {
 </div>
 
 <!------------------- FOOTER ----------------------------------->	
-<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="icon/go_to_top.png"></div>
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"><img src="icon/go_to_top.png"></div>
+<script src="JavaScript/back_to_top.js"></script>
 
 <div id="footer"></div>
 <script>
@@ -274,7 +275,6 @@ fetch("footer.php")
 
 <script src="JavaScript/script.js"></script>
 <script src="JavaScript/chart_rekap_asn.js"></script>
-<script src="JavaScript/back_to_top.js"></script>
 <script src="JavaScript/image_slides.js"></script>
 
 </body>

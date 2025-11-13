@@ -141,6 +141,9 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
   </div>
 </div>
 <!------------------- FOOTER ----------------------------------->	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"><img src="icon/go_to_top.png"></div>
+<script src="JavaScript/back_to_top.js"></script>
+
 <div id="footer"></div>
 <script>
 fetch("footer.php")
@@ -149,6 +152,8 @@ fetch("footer.php")
     document.getElementById("footer").innerHTML = data;
   });
 </script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
+
 <script src="JavaScript/script.js"></script>
 
 </body>
