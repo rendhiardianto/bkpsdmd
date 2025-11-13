@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="fontFamily.css">
+<link href="navbarFooter.css" rel="stylesheet" type="text/css">
+<link href="index.css" rel="stylesheet" type="text/css">
+
+<title>Beranda - BAPEMPERDA | SETWAN Kabupaten Merangin</title>
+
+</head>
+<body>
+
+<div id="navbar">
+  <a href="#default" id="logo">
+    <img id="icon" src="Pictures/Logo/logo-dprd-icon.png"> BAPEMPERDA | SETWAN Kabupaten Merangin </a>
+
+	<!-- Hamburger (3 bars) -->
+	<div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+  <div id="navbar-right">
+    <a class="active" href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="proHukum.html">Produk Hukum</a>
+    <a href="proLegda.html">Prolegda</a>
+    <a href="berita.html">Berita</a>
+    <a href="kontak.html">Kontak</a>
+  </div>
+
+</div>
+
+<div class="content">
+
+  <div class="slideShow">
+    <h1>Banner besar / slider kegiatan</h1>
+  </div>
+
+  <div class="preview">
+    <h1>Sekilas tentang Bapemperda</h1> 
+  </div>
+  
+  <div class="shortCut">
+    <h1>Link cepat ke: Prolegda, Produk Hukum, Kegiatan Terbaru</h1>
+  </div>
+
+  <div class="statistik">
+    <h1>Statistik singkat (jumlah perda, raperda, kegiatan)</h1>
+  </div>
+  
+  <div class="kutipan">
+    <h1>Testimoni / kutipan pimpinan</h1>
+  </div>
+
+</div>
+<!------------------- FOOTER ----------------------------------->
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="Pictures/Icon/go_to_top.png"></div>
+
+<div id="footer"></div>
+<script>
+fetch("footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
+<script src="JavaScript/navbar.js"></script>
+
+</body>
+</html>

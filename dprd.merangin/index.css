@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* --- Global --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto-Light;
+}
+
+.content {
+  margin-top: 300px;
+  padding: 20px 20px 200px 20px;
+  font-size:30px;
+}
+.slideShow{
+
+}
+.preview{
+
+}
+.shortCut{
+
+}
+.statistik{
+
+}
+.kutipan{
+  
+}
