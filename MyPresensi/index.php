@@ -35,19 +35,33 @@
 	<div class="navLogo">
 		<a href="/index.php"><img src="/icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
 	</div>
+
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
 
-<div class="presensiContent">
-	<h2>Presensi ASN Kabupaten Merangin</h2>
+<div class="content">
+	<h2>Presensi ASN Pemkab Merangin</h2>
 
+  <div class="flex-container">
     <div class="flex-item-main">
-      <h4>Jumlah Pegawai : 50</h4>
-      <a href=""><img src="../icon/download_doc.png"></a>
+      <h4>Cek Presensi Saya</h4>
+      <a href=""><img src="/icon/button/myPresensi.png"></a>
       <p></p>
     </div>
 
+    <div class="flex-item-main">
+      <h4>Presensi OPD</h4>
+      <a href=""><img src="/icon/button/time.png"></a>
+      <p></p>
+    </div>
+
+    <div class="flex-item-main">
+      <h4>Rekap Cuti Berlangsung</h4>
+      <a href=""><img src="/icon/button/cuti_berlangsung.png"></a>
+      <p></p>
+    </div>
+  </div>
 </div>
 
 <!------------------- FOOTER ----------------------------------->	

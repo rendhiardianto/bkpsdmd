@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/fontFamily.css">
+<link href="TopNav.css" rel="stylesheet" type="text/css">
+<title>Beranda - BAPEMPERDA | SETWAN Kabupaten Merangin</title>
+
+</head>
+<body>
+
+<div id="navbar">
+
+  <a class="navLeft" href="#default" id="logo"> 
+	<img id="icon" src="/bapemperda/Pictures/Logo/logo-dprd-icon.png"> 
+	BAPEMPERDA | SETWAN Kabupaten Merangin </a>
+
+	<!-- Hamburger (3 bars) -->
+	<div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+  <div id="navbar-right">
+    <a class="active" href="#beranda">Beranda</a>
+    <a href="#profil">Profil</a>
+	<a href="#about">Produk Hukum</a>
+	<a href="#about">Berita</a>
+	<a href="#about">Kontak</a>
+  </div>
+
+</div>
+
+<div class="content">
+  <div class="slideShow">
+
+  </div>
+
+  <div class="contentLeft">
+    <p><b>This example demonstrates how to shrink a navigation bar when the user starts to scroll the page.</b></p>
+    <p>Scroll down this frame to see the effect!</p>
+    <p>Scroll to the top to remove the effect.</p>
+    <p><b>Note:</b> We have also made the navbar responsive, resize the browser window to see the effect.</p>
+    <p>Lorem ipsum dolor dummy text to enable scrolling, sit amet, consectetur adipiscing elit, sed do eiusmod 
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+      deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="contentRight">
+
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+
+
+<script>
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  const navbar = document.getElementById("navbar");
+  const logo = document.getElementById("logo");
+  const icon = document.getElementById("icon");
+
+  // Skip shrink behavior if on mobile
+  if (window.innerWidth <= 768) return;
+
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    navbar.style.padding = "10px 0px";
+    logo.style.fontSize = "17px";
+    icon.style.width = "80px";
+  } else {
+    navbar.style.padding = "50px 0px";
+    logo.style.fontSize = "25px";
+    icon.style.width = "150px";
+  }
+}
+</script>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("navbar-right");
+  const toggle = document.getElementById("menu-toggle");
+
+  menu.classList.toggle("show");
+  toggle.classList.toggle("active");
+}
+
+// ✅ Close menu automatically when clicking a link (on mobile)
+document.addEventListener("DOMContentLoaded", () => {
+  const menu = document.getElementById("navbar-right");
+  const toggle = document.getElementById("menu-toggle");
+  const links = menu.querySelectorAll("a");
+
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768 && menu.classList.contains("show")) {
+        menu.classList.remove("show");
+        toggle.classList.remove("active");
+      }
+    });
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const menu = document.getElementById("navbar-right");
+  const toggle = document.getElementById("menu-toggle");
+
+  if (window.innerWidth <= 768) {
+    const isClickInside = menu.contains(event.target) || toggle.contains(event.target);
+    if (!isClickInside && menu.classList.contains("show")) {
+      menu.classList.remove("show");
+      toggle.classList.remove("active");
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>

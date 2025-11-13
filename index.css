@@ -1,19 +1,21 @@
 body {
 	margin: 0;
 }
-
+.header {
+  margin: 0;
+}
 /*================ INFO GRAFIS ==========================*/
 .infoGrafis {
-	background-color: #FFF4F4;
-	padding-top: 10px;
+	background-color: white;
+	padding-top: 30px;
 }
 .infoGrafis h2 {
 	margin-top: 30px;
 	text-align: center;
 	font-family: Bahnschrift;
 	font-size: 30px;
-	color: #ffffff;
-  background-color: #b3b1b1;
+	color: #003858;
+  background-color: #c1c2f3;
   width: 100%;
   padding: 10px;
 }
@@ -27,16 +29,14 @@ body {
   display: none;
   /*box-shadow: 0px 0px 10px 0px black; */
 }
-
 .slides img {
   width: 100%;
   display: flex; 
 }
-
 /* Caption text */
 .caption {
     color: #f2f2f2;
-	  font-family: Trebuchet;
+	  font-family: Roboto-Light;
     font-size: 18px;
     padding: 10px;
     bottom: 0;
@@ -97,13 +97,26 @@ body {
 }
 /* ============================================ SAMBUTAN KABAN ==============================*/
 .pidato-kaban {
-	background-color: beige;
-	/*background-image: url(images//index_pict/1.jpg);
-	background-size: cover;*/
+	background-color: rgb(219, 219, 219);
 	padding-bottom: 40px;
 	overflow: hidden;
 	text-align: center;
+  position: relative;
+  z-index: 1;
 }
+/*
+.pidato-kaban::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("images/batik_korpri.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  z-index: -1;
+}*/
+
 .pidato-kaban h2{
 	font-family: FreeHand;
 	font-size: 50px;
@@ -121,6 +134,7 @@ body {
 	padding-left: 30px;
 	padding-right: 30px;
 	text-align: left;
+  color: #0077b6;
 	font-family: SegoeUI;
 }
 .pidato-kaban img {
@@ -134,7 +148,7 @@ body {
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 600px) {
   .pidato-kaban p {
-	  font-size: 15px;
+	  font-size: 18px;
 	  padding: 10px;
 	}
   .pidato-kaban img{

@@ -18,7 +18,7 @@
 <link href="/headerFooter.css" rel="stylesheet" type="text/css">
 <link href="index.css" rel="stylesheet" type="text/css">
 
-<title>Live Dashboard - BKPSDMD Kabupaten Merangin</title>
+<title>Dashboard Live Reporting - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 
@@ -40,7 +40,7 @@
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
-<h2>Live Dashboard Reporting</h2>
+<h2>Dashboard Live Reporting</h2>
 <div class="content">
 
     <!--<div class="flex-item-main">

@@ -1,79 +1,55 @@
 @charset "utf-8";
 /* CSS Document */
-@font-face {
-   font-family: Trebuchet;
-   src: url("file/Font/Trebuchet.ttf");
-}
-@font-face {
-   font-family:Bahnschrift;
-   src: url("file/Font/Bahnschrift.ttf");
-}
-@font-face {
-   font-family: BebasNeue;
-   src: url("file/Font/BebasNeue.otf");
-}
-@font-face {
-   font-family: Raleway-Light;
-   src: url("file/Font/Raleway-Light.ttf");
-}
-@font-face {
-   font-family: Raleway-Medium;
-   src: url("file/Font/Raleway-Medium.ttf");
-}
-@font-face {
-   font-family: FreeHand;
-   src: url("file/Font/FreeHand.ttf");
-}
-@font-face {
-   font-family: SegoeUI;
-   src: url("file/Font/segoeui.ttf");
-}
+
 body {
 	margin: 0;
 }
 
 /* ============================================ CONTENT ==============================*/
-h2 {
-    font-size: 30px;
-    color: #0077b6;
-    background-color: #dddddd;
-    padding: 10px;
-    margin-bottom: 100px;
-    font-family: Bahnschrift;
-    text-align: center;
-}
-
-.content { 
-   margin-bottom: 100px;
+.content {
+   text-align: center;
    font-family: Bahnschrift;
    color: #333333;
+   background-color: #ebebeb;
    display: flex;
+   flex-direction: column;
    justify-content: center;
 }
-.content > div {
-    background-color: #dddddd;
-    color: #023e8a;
-    padding: 10px;
-    margin: 20px;
-    font-family: Bahnschrift;
-    font-size: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 0px 10px grey;
-
-    width: 290px;
-    text-align: center;
+h2 {
+   font-size: 30px;
+   color: #0077b6;
+   background-color: #ffffff;
+   padding: 10px;
 }
-.flex-item-main:hover{  
-    width: 300px;
-    transition: width 0.5s;
-    transform: translate( 0px, -5px);
-    background-color:  rgb(240, 240, 240);
-    box-shadow: 0px 0px 15px rgb(255, 255, 255);
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+   align-items:center;
+   margin: 50px 0px;
 }
-.flex-item-main img:hover{
-    filter: contrast(50%);
-    transition: 0.3s;
+.flex-item-main {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
+  text-align: center; /* center text inside */
+  margin: 20px;
+  padding: 0px 10px;
+  background-color: #dddddd;
+  color: #023e8a;
+  font-size: 20px;
+  border-radius: 12px;
+  width: 300px;
+  height: 250px;
+  box-shadow: 0px 0px 10px grey;
 }
 .flex-item-main img{
-  width: 100px;
+  width: 120px;
+}
+.flex-item-main:hover {
+  background-color:  rgb(240, 240, 240);
+  box-shadow: 0px 0px 15px rgb(255, 255, 255);
+  width: 310px;
+  transition: 0.3s;
 }

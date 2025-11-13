@@ -39,7 +39,7 @@ document.addEventListener('keydown', e => {
 
 // --- Fallback image if original fails to load ---
 modalImg.onerror = () => {
-  modalImg.src = 'cms/pojokjafung/uploads/detail_image/default.jpg';
+  modalImg.src = 'CiviCore/pojokjafung/uploads/detail_image/default.jpg';
   modalImg.setAttribute('data-fallback', 'true');
   downloadBtn.style.display = 'none'; // hide download button
 };

@@ -39,19 +39,20 @@
 </div>
 	
 <!------------------- CONTENT ----------------------------------->
-<h2>BKPSDMD Merangin - MyDocuments</h2>
-<div class="content">
 
+<div class="content">
+  <h2>BKPSDMD Merangin - MyDocuments</h2>
+  <div class="flex-container">
     <div class="flex-item-main">
       <h4>DOWNLOAD SK JAFUNG</h4>
-      <a href="download_sk_jafung.php"><img src="/icon/download_doc.png"></a>
+      <a href="download_sk_jafung.php"><img src="/icon/button/download_doc.png"></a>
     </div>
 
-	<div class="flex-item-main">
+	  <div class="flex-item-main">
       <h4>DOWNLOAD DOKUMEN PPPK</h4>
-      <a href="https://script.google.com/macros/s/AKfycbwQfPziQEPDsQEGVCe39gZDz00F58khSWIVVx-bqKaXdGXIrwJx2EM_knhkN7Y-Pwa9pg/exec"><img src="/icon/download_doc.png"></a>
+      <a href="https://script.google.com/macros/s/AKfycbwQfPziQEPDsQEGVCe39gZDz00F58khSWIVVx-bqKaXdGXIrwJx2EM_knhkN7Y-Pwa9pg/exec"><img src="/icon/button/download_doc.png"></a>
     </div>
-
+  </div>
 </div>
 
 <!------------------- FOOTER ----------------------------------->	
