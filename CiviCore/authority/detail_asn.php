@@ -14,14 +14,6 @@ if ($result->num_rows === 0) {
 }
 
 $row = $result->fetch_assoc();
-
-// Determine role and backlink
-$role = $_GET['role'] ?? $_SESSION['role'];
-$backLinks = [
-    'super_admin' => '../dashboard_super_admin.php',
-    'admin'       => '../dashboard_admin.php',
-];
-$backUrl = $backLinks[$role] ?? 'list_asn_merangin.php';
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +32,7 @@ $backUrl = $backLinks[$role] ?? 'list_asn_merangin.php';
 <!-- HEADER -->
 <div class="header">
   <div class="navbar">
-    <a href="<?php echo htmlspecialchars($backUrl); ?>" style="text-decoration: none; color:white;">&#10094; Kembali</a>
+    <a href="list_asn_merangin.php" style="text-decoration: none; color:white;">&#10094; Kembali</a>
   </div>
   <div class="roleHeader">
     <h1>Detail Data ASN Kabupaten Merangin</h1>

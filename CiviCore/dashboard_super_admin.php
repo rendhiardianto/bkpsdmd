@@ -138,8 +138,8 @@ $user = $result->fetch_assoc();
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'tab1')" id="defaultOpen">User Authorithy</button>
       <button class="tablinks" onclick="openCity(event, 'tab4')">Website CMS</button>
-      <button class="tablinks" onclick="openCity(event, 'tab2')">Command Center</button>
-      <button class="tablinks" onclick="openCity(event, 'tab3')">Services Verification</button>
+      <button class="tablinks" onclick="openCity(event, 'tab2')">Monitoring Center</button>
+      <button class="tablinks" onclick="openCity(event, 'tab3')">Verifikasi Layanan</button>
     </div>
 
   </div><!--leftSide-->

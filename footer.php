@@ -17,7 +17,7 @@
 <!-- Floating WhatsApp Call Button -->
 <div class="floating-wa"> <h4>Butuh bantuan?</h4>
 	<a href="https://wa.me/6285159997813" target="_blank" class="wa-button">
-	<img src="icon/WhatsApp.png" alt="WhatsApp Call"></a>
+	<img src="/icon/WhatsApp.png" alt="WhatsApp Call"></a>
 </div>
 
 <div class="footer">
