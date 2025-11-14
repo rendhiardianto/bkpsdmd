@@ -16,6 +16,8 @@ body {
     margin-top: 150px;
   }
 }
+
+/* --- Slide Show --- */
 .slider {
   width: 100%;
   margin: 20px auto;
@@ -29,7 +31,7 @@ body {
 }
 .slides img {
   width: 100%;
-  height: auto;             /* responsive */
+  height: auto;
   flex-shrink: 0;
   object-fit: cover;
 }
@@ -48,9 +50,8 @@ body {
 .prev { left: 10px; }
 .next { right: 10px; }
 
-
 .preview{
-  padding: 50px 10px 50px 10px;
+  padding: 50px 20px;
   font-family: Roboto-Regular;
   line-height: 2.0;
   text-align: justify;

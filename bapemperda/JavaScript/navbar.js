@@ -25,12 +25,20 @@ function scrollFunction() {
 
 // ✅ Toggle menu visibility on mobile
 function toggleMenu() {
-  const menu = document.getElementById("navbar-right");
-  const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("navbar-right");
+    const toggle = document.getElementById("menu-toggle");
 
-  menu.classList.toggle("show");
-  toggle.classList.toggle("active");
+    toggle.classList.toggle("active");
+
+    if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
+        menu.style.maxHeight = "0px";
+    } else {
+        menu.classList.add("show");
+        menu.style.maxHeight = menu.scrollHeight + "px"; 
+    }
 }
+
 
 // ✅ Close menu automatically when clicking a link (on mobile)
 document.addEventListener("DOMContentLoaded", () => {
