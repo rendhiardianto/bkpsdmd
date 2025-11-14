@@ -12,9 +12,9 @@ $tipeMap = [
     'reaksi'  => 'Rencana Aksi',
     'lapkin'  => 'Laporan Kinerja',
     'sop'     => 'Standar Operasional Prosedur',
-    'rapbd'   => 'RAPBD',
-    'apbd'    => 'APBD',
-    'lppd'    => 'LPPD'
+    'rapbd'   => 'Rancangan Anggaran Pendapatan dan Belanja Daerah (RAPBD)',
+    'apbd'    => 'Anggaran Pendapatan dan Belanja Daerah (APBD)',
+    'lppd'    => 'Laporan Penyelenggaraan Pemerintahan Daerah (LPPD)'
 ];
 
 // Get the tipe parameter from URL
@@ -39,10 +39,9 @@ $result = $stmt->get_result();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transparansi - BKPSDMD Kabupaten Merangin</title>
-<link rel="shortcut icon" href="../icon/IconWeb.png">
+<link rel="shortcut icon" href="/icon/IconWeb.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/fontFamily.css">
-<link href="headerFooter.css" rel="stylesheet" type="text/css">
 <link href="transparansi.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -148,7 +147,7 @@ $result = $stmt->get_result();
         <iframe src="CiviCore/transparansi/uploads/files/<?= htmlspecialchars($row['attachment']) ?>" width="80%" height="500px" style="display:block; margin:auto; margin-bottom:30px;"></iframe>
     <?php endwhile; ?>
 <?php else: ?>
-    <p style="text-align:center;">Tidak ada data untuk tipe dokumen ini.</p>
+    <p style="text-align:center; margin-bottom:400px;">Tidak ada data untuk tipe dokumen ini.</p>
 <?php endif; ?>
 
 <!------------------- FOOTER ----------------------------------->	

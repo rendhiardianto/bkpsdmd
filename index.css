@@ -27,6 +27,7 @@ body {
 }
 .slides {
   display: none;
+  transition: transform 0.6s ease;
   /*box-shadow: 0px 0px 10px 0px black; */
 }
 .slides img {
@@ -96,64 +97,108 @@ body {
     }
 }
 /* ============================================ SAMBUTAN KABAN ==============================*/
-.pidato-kaban {
-	background-color: rgb(219, 219, 219);
-	padding-bottom: 40px;
-	overflow: hidden;
-	text-align: center;
-  position: relative;
-  z-index: 1;
+.sambutan-wrapper {
+  width: 95%;
+  margin: 32px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13);
+  font-family: Roboto-Regular;
+  color: #0b2545;
+  line-height: 1.55;
 }
-/*
-.pidato-kaban::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("images/batik_korpri.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.7;
-  z-index: -1;
-}*/
+#sambutan-kaban h2 {
+  margin: 0;
+  font-size: 35px;
+  color: #023059;
+  font-weight: 700;
+}
+#sambutan-kaban .subheading {
+  margin-top: 4px;
+  font-size: 20px;
+  color: #486e8f;
+}
+#sambutan-kaban p {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+#sambutan-kaban .ttd p {
+  font-size: 20px;
+  line-height: 0.6;
+  color: #023059;
+}
 
-.pidato-kaban h2{
-	font-family: FreeHand;
-	font-size: 50px;
-	color: #0077b6;
+@media (max-width: 800px) {
+  .sambutan-wrapper {
+    padding: 18px;
+    margin: 18px;
+  }
+  #sambutan-kaban h2 {
+    font-size: 20px;
+  }
 }
-.pidato-kaban h2 p {
-	font-family: Bahnschrift;
-	font-size: 20px;
-	text-align: center;
-	color: #0077b6;
-	margin-top: 0px;
+
+/* =================================== SHORTCUT =========================================*/
+.shortCut {
+  width: 95%;
+  margin: auto;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px 0px 100px 0px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13);
 }
-.pidato-kaban p {
-	font-size: 20px;
-	padding-left: 30px;
-	padding-right: 30px;
-	text-align: left;
-  color: #0077b6;
-	font-family: SegoeUI;
+.shortCut h1 {
+  color: #9c0d71;
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 50px;
+  font-family: Bahnschrift;
 }
-.pidato-kaban img {
-	float: right;
-	margin-right: 0;
-	width: 300px;
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items:center;
 }
-.isiPidato {
-  font-style: italic;
+.flex-item-main {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
+  text-align: center; /* center text inside */
+  margin: 40px 20px;
+  padding: 0px 10px;
+  background-color: #f3f3f3;
+  color: #023e8a;
+  font-size: 20px;
+  border-radius: 15px;
+  width: 270px;
+  height: 220px;
+  box-shadow: 0px 0px 15px grey;
 }
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 600px) {
-  .pidato-kaban p {
-	  font-size: 18px;
-	  padding: 10px;
-	}
-  .pidato-kaban img{
-	  width: 60%;
-	}
+.flex-item-main img{
+  width: 100px;
+}
+.flex-item-main:hover {
+  background-color:  rgb(247, 247, 247);
+  box-shadow: 0px 0px 17px rgb(195, 0, 255);
+  width: 280px;
+  transition: 0.8s;
+}
+
+@media screen and (max-width: 1000px) {
+  .flex-item-main {
+    width: 200px;
+    height: 150px;
+    font-size: 17px;
+  }
+  .flex-item-main img{
+    width: 70px;
+  }
+  .flex-item-main:hover {
+    width: 210px;
+  }
 }
 /* =================================== STATISTIK =========================================*/
 .asn-rekap {
@@ -162,37 +207,37 @@ body {
 	overflow: hidden;
 	background-color: white;
 	text-align: center;
-	
+  font-family: Bahnschrift;
 }
 .asn-rekap h2{
-	font-family: Bahnschrift;
-	font-size: 30px;
-	color: #0077b6;
+	font-size: 40px;
+  line-height: 0.0;
 }
 .asn-rekap p {
-	font-family: Bahnschrift;
-	font-size: 20px;
+	font-size: 25px;
 	text-align: center;
-	color: #0077b6;
-	margin-top: 0px;
+	line-height: 0.0;
 }
-
 .chart-rekap {
 	display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   background-color: #ffffff;
 	gap: 40px 20px;
+  margin: 50px 0px;
 }
-#myPlot0 {
+.myPlotMain {
   width: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.chart-donat{
-  
+.chart-donat, .chart-bar{
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.13);
 }
 
 

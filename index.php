@@ -1,16 +1,12 @@
 <?php
 include "CiviCore/db.php";
-$result = $conn->query("SELECT * FROM infografis ORDER BY created_at DESC");
 
-$ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-$idList = implode(",", $ids);
-
-$sql = "SELECT id, caption FROM infografis WHERE id IN ($idList)";
+$sql = "SELECT id, caption FROM infografis ORDER BY created_at ASC";
 $result = $conn->query($sql);
 
-$captions = [];
+$slides = [];
 while ($row = $result->fetch_assoc()) {
-    $captions[$row['id']] = $row['caption'];
+    $slides[] = $row;
 }
 ?>
 
@@ -37,7 +33,7 @@ while ($row = $result->fetch_assoc()) {
 <link href="index.css" rel="stylesheet" type="text/css">
 
 <title>Beranda - BKPSDMD Kabupaten Merangin</title>
-<link rel="shortcut icon" href="icon/IconWeb.png">
+<link rel="shortcut icon" href="/icon/IconWeb.png">
 </head>
 
 <body>
@@ -125,109 +121,39 @@ while ($row = $result->fetch_assoc()) {
 <!------------------- CONTENT ----------------------------------->
 
 <div class="infoGrafis">
-	<h2>INFOGRAFIS</h2>
+    <h2>INFOGRAFIS</h2>
 
-<div class="slideshow-container">
-	
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/1.png" alt="">
-    <div class="caption"> <?php echo $captions[1]; ?> </div>
-  </div>
+    <div class="slideshow-container">
+    <?php foreach ($slides as $index => $row): ?>
+        <div class="slides">
+            <img src="CiviCore/infoGrafis/uploads/images/<?php echo $row['id']; ?>.png" alt="">
+            <div class="caption"><?php echo $row['caption']; ?></div>
+        </div>
+    <?php endforeach; ?>
+    </div>
 
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/2.png" alt="">
-    <div class="caption"><?php echo $captions[2]; ?> </div>
-  </div>
+    <!-- Dots -->
+    <div class="dots">
+    <?php foreach ($slides as $index => $row): ?>
+        <span class="dot" onclick="currentSlide(<?php echo $index + 1; ?>)"></span>
+    <?php endforeach; ?>
+    </div>
 
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/3.png" alt="">
-    <div class="caption"><?php echo $captions[3]; ?> </div>
-  </div>
-
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/4.png" alt="">
-    <div class="caption"><?php echo $captions[4]; ?> </div>
-  </div>
-
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/5.png" alt="">
-    <div class="caption"><?php echo $captions[5]; ?> </div>
-  </div>
-
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/6.png" alt="">
-    <div class="caption"><?php echo $captions[6]; ?> </div>
-  </div>
-
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/7.png" alt="">
-    <div class="caption"><?php echo $captions[7]; ?> </div>
-  </div>
-
-  <div class="slides">
-    <img src="CiviCore/infoGrafis/uploads/images/8.png" alt="">
-    <div class="caption"><?php echo $captions[8]; ?> </div>
-  </div>
-
-  <div class="slides">
-	<img src="CiviCore/infoGrafis/uploads/images/9.png" alt="">
-	<div class="caption"><?php echo $captions[9]; ?> </div>
-  </div>
-
-  <div class="slides">
-	<img src="CiviCore/infoGrafis/uploads/images/10.png" alt="">
-	<div class="caption"><?php echo $captions[10]; ?> </div>
-  </div>
-
-  <div class="slides">
-	<img src="CiviCore/infoGrafis/uploads/images/11.png" alt="">
-	<div class="caption"><?php echo $captions[11]; ?> </div>
-  </div>
-
-  <div class="slides">
-	<img src="CiviCore/infoGrafis/uploads/images/12.png" alt="">
-	<div class="caption"><?php echo $captions[12]; ?> </div>
-  </div>
-
+    <!-- Thumbnails -->
+    <div class="thumbnail-row">
+    <?php foreach ($slides as $index => $row): ?>
+        <img src="CiviCore/infoGrafis/uploads/images/<?php echo $row['id']; ?>.png"
+             onclick="currentSlide(<?php echo $index + 1; ?>)">
+    <?php endforeach; ?>
+    </div>
 </div>
 
-	<!-- Dots -->
-	<div class="dots">
-	<span class="dot" onclick="currentSlide(1)"></span>
-	<span class="dot" onclick="currentSlide(2)"></span>
-	<span class="dot" onclick="currentSlide(3)"></span>
-	<span class="dot" onclick="currentSlide(4)"></span>
-	<span class="dot" onclick="currentSlide(5)"></span>
-	<span class="dot" onclick="currentSlide(6)"></span>
-	<span class="dot" onclick="currentSlide(7)"></span>
-	<span class="dot" onclick="currentSlide(8)"></span>
-	<span class="dot" onclick="currentSlide(9)"></span>
-	<span class="dot" onclick="currentSlide(10)"></span>
-	<span class="dot" onclick="currentSlide(11)"></span>
-	<span class="dot" onclick="currentSlide(12)"></span>
-	</div>
-
-	<!-- Thumbnail navigation -->
-	<div class="thumbnail-row">
-	<img src="CiviCore/infoGrafis/uploads/images/1.png" onclick="currentSlide(1)">
-	<img src="CiviCore/infoGrafis/uploads/images/2.png" onclick="currentSlide(2)">
-	<img src="CiviCore/infoGrafis/uploads/images/3.png" onclick="currentSlide(3)">
-	<img src="CiviCore/infoGrafis/uploads/images/4.png" onclick="currentSlide(4)">
-	<img src="CiviCore/infoGrafis/uploads/images/5.png" onclick="currentSlide(5)">
-	<img src="CiviCore/infoGrafis/uploads/images/6.png" onclick="currentSlide(6)">
-	<img src="CiviCore/infoGrafis/uploads/images/7.png" onclick="currentSlide(7)">
-	<img src="CiviCore/infoGrafis/uploads/images/8.png" onclick="currentSlide(8)">
-	<img src="CiviCore/infoGrafis/uploads/images/9.png" onclick="currentSlide(9)">
-	<img src="CiviCore/infoGrafis/uploads/images/10.png" onclick="currentSlide(10)">
-	<img src="CiviCore/infoGrafis/uploads/images/11.png" onclick="currentSlide(11)">
-	<img src="CiviCore/infoGrafis/uploads/images/12.png" onclick="currentSlide(12)">
-	</div>
-</div>
-
-<div class="pidato-kaban">
-	<h2> Sekapur Sirih<br><p>Kepala BKPSDMD Kabupaten Merangin</p></h2>
-	<img src="images/Foto_Kaban.png" alt="Foto Kaban">
-	<div class="isiPidato">	
+<section id="sambutan-kaban" class="sambutan-wrapper">
+	<header>
+		<h2>SEKAPUR SIRIH</h2>
+		<p class="subheading">Kepala BKPSDMD Kabupaten Merangin</p>
+	</header>
+	<div class="isiPidato" style="font-style: italic; margin-top: 40px;">
 		<p>&#10077;Assalamu'alaikum Warahmatullahi Wabarakaatuh,</p>
 		<p>Puji syukur kita panjatkan ke hadirat Allah SWT, karena atas rahmat dan karunia-Nya, Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah (BKPSDMD) Kabupaten Merangin dapat meluncurkan Website Resmi BKPSDMD Kabupaten Merangin sebagai salah satu sarana informasi dan pelayanan publik.</p>
 		<p>Peluncuran website ini merupakan wujud komitmen kami dalam meningkatkan kualitas layanan kepegawaian serta pengembangan sumber daya aparatur secara lebih transparan, efektif, dan mudah diakses oleh seluruh ASN maupun masyarakat. Melalui platform ini, kami berharap seluruh informasi terkait kepegawaian, pengembangan kompetensi, maupun layanan administrasi dapat tersampaikan dengan lebih cepat, akurat, dan terbuka.</p>
@@ -235,16 +161,76 @@ while ($row = $result->fetch_assoc()) {
 		<p>Akhir kata, kami mengajak seluruh ASN dan masyarakat untuk memanfaatkan website ini sebaik-baiknya, serta memberikan masukan demi peningkatan kualitas layanan BKPSDMD di masa yang akan datang.</p>
 		<p>Wassalamu'alaikum Warahmatullahi Wabarakaatuh.&#10078;</p>
 	</div>
-	<p>Merangin, 26 Agustus 2025<br>Kepala BKPSDM Kabupaten Merangin<br><b>H. Ferdi Firdaus Ansori, S.Sos., M.E.</b></p>
-	
-	
+	<footer class="ttd" style="margin-top: 50px;">
+		<p>Merangin, 26 Agustus 2025</p>
+		<p>Kepala BKPSDMD Kabupaten Merangin</p>
+		<p><strong>H. Ferdi Firdaus Ansori, S.Sos., M.E.</strong></p>
+	</footer>
+</section>
+
+<div class="shortCut">
+	<h1>LAYANAN ASN</h1>
+
+	<div class="flex-container">
+
+		<div class="flex-item-main">
+			<a href="layanan/jafung/index.php" target="_blank">
+			<img src="icon/Kepegawaian/fungsional.png" ></a>
+			<br>KENAIKAN JABATAN FUNGSIONAL
+		</div>
+
+		<div class="flex-item-main">
+			<a href="/images/LayananKPG/PERSYARATAN KENAIKAN PANGKAT 2025.pdf" target="_blank" >
+			<img src="icon/Kepegawaian/kp.png" ></a>
+			<br>KENAIKAN PANGKAT
+		</div>
+		
+		<div class="flex-item-main">
+			<a href="/images/LayananKPG/gajiBerkala.PNG" target="_blank" >
+			<img src="icon/Kepegawaian/gaji.png"></a>
+			<br>GAJI BERKALA
+		</div>
+		
+		<div class="flex-item-main">
+			<a href="/images/LayananKPG/pmk.PNG" target="_blank" >
+			<img src="icon/Kepegawaian/pmk.png" ></a>
+			<br>PENINJAUAN MASA KERJA (PMK)
+		</div>
+		
+		<div class="flex-item-main">
+			<a href="/images/LayananKPG/SYARAT PENSIUN.pdf" target="_blank" >
+			<img src="icon/Kepegawaian/pensiun.png" ></a>
+			<br>PENSIUN
+		</div>
+
+		<div class="flex-item-main">
+			<a href="#" target="_blank" >
+			<img src="icon/PSDM/disiplin.png" ></a>
+			<br>HUKUMAN DISIPLIN
+		</div>
+		
+		<div class="flex-item-main">
+			<a href="#" target="_blank" >
+			<img src="icon/PSDM/ujiandinas.png"></a>
+			<br>UJIAN DINAS
+		</div>
+		
+		<div class="flex-item-main">
+			<a href="https://bioqu.id/SICUTI" target="_blank" >
+			<img src="icon/PSDM/sakit.png"></a>
+			<br>CUTI
+		</div>
+    </div>
 </div>
-	
+
 <div class="asn-rekap">
-	<h2>STATISTIK<br><p>Rekapitulasi ASN Kabupaten Merangin</p></h2>
-			
+	<h2>STATISTIK</h2>
+	<p>Rekapitulasi ASN Kabupaten Merangin</p>
+
 	<div class="chart-rekap">
-		<div class="chart-donat" id="myPlot0"></div>
+		<div class="myPlotMain">
+			<div class="chart-donat" id="myPlot0"></div>
+		</div>
 		<div class="chart-donat" id="myPlot1"></div>
 		<div class="chart-donat" id="myPlot2"></div>
 		<div class="chart-donat" id="myPlot3"></div>
@@ -274,8 +260,8 @@ fetch("footer.php")
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
 <script src="JavaScript/script.js"></script>
-<script src="JavaScript/chart_rekap_asn.js"></script>
 <script src="JavaScript/image_slides.js"></script>
+<script src="JavaScript/chart_rekap_asn.js"></script>
 
 </body>
 </html>
