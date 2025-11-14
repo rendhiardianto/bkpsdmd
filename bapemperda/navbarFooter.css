@@ -1,6 +1,12 @@
 @charset "utf-8";
-/* CSS Document */
-
+/* --- Global --- */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Roboto-Light;
+}
 /* =================================== TOP NAV =========================================*/
 /* --- Navbar Container --- */
 #navbar {

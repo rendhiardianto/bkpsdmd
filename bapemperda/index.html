@@ -23,21 +23,28 @@
 		<span></span>
 	</div>
 
-  <div id="navbar-right">
-    <a class="active" href="index.html">Beranda</a>
-    <a href="profil.html">Profil</a>
-    <a href="proHukum.html">Produk Hukum</a>
-    <a href="proLegda.html">Prolegda</a>
-    <a href="berita.html">Berita</a>
-    <a href="kontak.html">Kontak</a>
-  </div>
+  <div id="navbar-right"></div>
+  <script>
+  fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("navbar-right").innerHTML = data;
+    });
+  </script>
 
 </div>
 
 <div class="content">
 
-  <div class="slideShow">
-    <img src="Pictures/Images/Slide1.png">
+  <div class="slider">
+    <div class="slides">
+      <img src="Pictures/Images/Slide1.png">
+      <img src="https://picsum.photos/id/1015/800/400" alt="Slide 1">
+      <img src="https://picsum.photos/id/1016/800/400" alt="Slide 2">
+      <img src="https://picsum.photos/id/1020/800/400" alt="Slide 3">
+    </div>
+    <button class="btn prev" onclick="prevSlide()">❮</button>
+    <button class="btn next" onclick="nextSlide()">❯</button>
   </div>
 
   <div class="preview">
@@ -61,25 +68,19 @@
   </div>
   
   <div class="shortCut">
-
+    <h1>Link Terkait</h1>
     <div class="flex-container">
       <div class="flex-item-main">
-        <button class="button">Prolegda</button>
-      </div>
-      <div class="flex-item-main">
         <button class="button">Produk Hukum</button>
       </div>
       <div class="flex-item-main">
-        <button class="button">Kegiatan Terbaru</button>
+        <button class="button">Peraturan Daerah</button>
       </div>
       <div class="flex-item-main">
-        <button class="button">Prolegda</button>
+        <button class="button">Rancangan Peraturan Daerah</button>
       </div>
       <div class="flex-item-main">
-        <button class="button">Produk Hukum</button>
-      </div>
-      <div class="flex-item-main">
-        <button class="button">Kegiatan Terbaru</button>
+        <button class="button">Program Legislasi Daerah</button>
       </div>
     </div>
 
@@ -132,6 +133,6 @@ fetch("footer.html")
 </script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 <script src="JavaScript/navbar.js"></script>
-
+<script src="JavaScript/slideShow.js"></script>
 </body>
 </html>
