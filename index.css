@@ -1,5 +1,6 @@
 body {
 	margin: 0;
+  font-family: Roboto-Regular;
 }
 .header {
   margin: 0;
@@ -10,20 +11,20 @@ body {
 	padding-top: 30px;
 }
 .infoGrafis h2 {
-	margin-top: 30px;
+	margin-top: 0px;
 	text-align: center;
 	font-family: Bahnschrift;
 	font-size: 30px;
-	color: #003858;
-  background-color: #c1c2f3;
+	color: #ffffff;
+  background-color: #003858ab;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
 }
 .slideshow-container {  
-	  margin: auto;
-	  justify-content: center;
-    max-width: 700px;
-	  width: 90%;
+	margin: auto;
+	justify-content: center;
+  max-width: 700px;
+	width: 90%;
 }
 .slides {
   display: none;
@@ -36,65 +37,59 @@ body {
 }
 /* Caption text */
 .caption {
-    color: #f2f2f2;
-	  font-family: Roboto-Light;
-    font-size: 18px;
-    padding: 10px;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background: rgba(0,0,0,0.5);
- }
-    /* Dots */
-    .dots {
-      text-align: center;
-      margin: 10px 0;
-    }
-
-    .dot {
-      cursor: pointer;
-      height: 12px;
-      width: 12px;
-      margin: 0 3px;
-      background: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-
-    }
-
-    .active, .dot:hover {
-      background: #717171;
-    }
-
-    /* Thumbnail images */
-    .thumbnail-row {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      padding-bottom: 50px;
-      flex-wrap: wrap;
-    }
-
-    .thumbnail-row img {
-      width: 80px;
-      height: 50px;
-      object-fit: cover;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    
+  color: #f2f2f2;
+	font-family: Roboto-Light;
+  font-size: 18px;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,0.5);
+}
+/* Dots */
+.dots {
+  text-align: center;
+  margin: 10px 0;
+}
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 3px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.active, .dot:hover {
+  background: #717171;
+}
+/* Thumbnail images */
+.thumbnail-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  gap: 10px;
+  margin-top: 10px;
+}
+.thumbnail-row img {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
 /* On smaller screens, decrease text size */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
+  .thumbnail-row {
+    width: 100%;
+  }
   .thumbnail-row img {
-      width: 70px;
-      height: 35px;
-      object-fit: cover;
-      cursor: pointer;
-      
-      transition: 0.3s;
-    }
+    width: 70px;
+    height: 35px;
+  }
 }
 /* ============================================ SAMBUTAN KABAN ==============================*/
 .sambutan-wrapper {
@@ -107,6 +102,20 @@ body {
   font-family: Roboto-Regular;
   color: #0b2545;
   line-height: 1.55;
+}
+header {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+  background-color: rgb(243, 243, 243);
+}
+#sambutan-kaban img {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
 }
 #sambutan-kaban h2 {
   margin: 0;
@@ -135,7 +144,7 @@ body {
     margin: 18px;
   }
   #sambutan-kaban h2 {
-    font-size: 20px;
+    font-size: 30px;
   }
 }
 

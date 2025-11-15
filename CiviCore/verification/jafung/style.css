@@ -204,49 +204,43 @@ h2 {
 }
 
 .status-badge {      
-  padding: 10px 15px;           
-  font-weight: 600;      
-  font-size: 15px; 
+  border: none;               
+  padding: 10px 20px;
+  width: 120px;
 }
 .status-new { 
   background:#007bff; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;  
 }
 .status-accepted { 
   background:#00ce30; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;  
 }
 .status-rejected { 
   background:#d30015; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;   
 }
 .status-approved { 
   background:#e7c503; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;  
 }
 .status-revised { 
   background:#ff0095; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;  
 }
 .status-completed { 
   background:#bdc2c7; 
   color:white; 
-  width: 80px;
   margin: auto;
   display: block;  
 }
@@ -258,7 +252,7 @@ h2 {
   padding: 10px 10px;      
   border-radius: 5px;      
   cursor: pointer;      
-  width: 100px;
+  width: 120px;
   margin: auto;
   display: block; 
 }
@@ -273,7 +267,7 @@ h2 {
   text-decoration: none;
 }
 .upload-final-btn {
-  background: #09ce02;      
+  background:#ffc400;      
   color: white;
   text-decoration: none;
 }
@@ -294,9 +288,10 @@ h2 {
 .lihat-sk-btn{
   display:inline-block; 
   margin-top: 10px; 
-  background:#007bff; 
+  background: #09ce02;
   color:white; 
-  padding: 5px 10px; 
+  padding: 10px 10px;
+  width: 120px; 
   border-radius:5px; 
   text-decoration:none;
 }
@@ -390,13 +385,11 @@ table {
     
 th, td {      
   border: 1px solid #ddd;      
-  padding: 10px;      
-  text-align: left;   
+  padding: 5px;        
 }
     
 th {      
   background: #1965ff;      
-  font-weight: 700; 
   font-size: 15px;
   color: white;
   text-align: center;  

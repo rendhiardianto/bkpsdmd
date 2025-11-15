@@ -15,9 +15,12 @@ require_once __DIR__ . '/../../db.php';
  */
 function getSubmissionCounts($conn) {
     $counts = [
-        'pending' => 0,
-        'approved' => 0,
+        'new' => 0,
+        'accepted' => 0,
         'rejected' => 0,
+        'revised' => 0,
+        'approved' => 0,
+        'completed' => 0,
         'all' => 0
     ];
 

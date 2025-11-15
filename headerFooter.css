@@ -103,6 +103,29 @@ body {
 .dropdown {
   float: left;
 }
+.nav-announcement {
+    position: relative;
+    display: inline-block;
+}
+
+/* Badge Style */
+.new-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #f80000;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 25px;
+    animation: pulse 1.2s infinite ease-in-out;
+}
+/* Little glowing animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
 
 .dropdown .dropbtn {
   cursor: pointer;

@@ -15,7 +15,14 @@ $role = 'super_admin';
 
 // define filter default so it's always available
 $filter = $_GET['filter'] ?? 'all';
+
 $counts = getSubmissionCounts($conn);
+$groupCounts = [
+    'new'      => $counts['new'],
+    'process'  => $counts['accepted'] + $counts['rejected'] + $counts['revised'] + $counts['approved'],
+    'done'     => $counts['completed']
+];
+
 ?>
 
 <?php
@@ -136,9 +143,9 @@ $user = $result->fetch_assoc();
     </div>
 
     <div class="tab">
-      <button class="tablinks" onclick="openCity(event, 'tab1')" id="defaultOpen">User Authorithy</button>
+      <button class="tablinks" onclick="openCity(event, 'tab1')">User Authorithy</button>
       <button class="tablinks" onclick="openCity(event, 'tab4')">Website CMS</button>
-      <button class="tablinks" onclick="openCity(event, 'tab2')">Monitoring Center</button>
+      <button class="tablinks" onclick="openCity(event, 'tab2')" id="defaultOpen">Monitoring Center</button>
       <button class="tablinks" onclick="openCity(event, 'tab3')">Verifikasi Layanan</button>
     </div>
 
@@ -162,11 +169,46 @@ $user = $result->fetch_assoc();
         <img src="../icon/button/add_asn.png" alt="Add User"> </a><br>ASN DATA MANAGEMENT</p>
       </div>
 
-    </div>
+    </div><!--tab1-->
 
     <div id="tab2" class="tabcontent">
-      
-    </div>
+
+      <div class="monitoring-jafung" id="jafung">
+        <h2 class="monitoring-title">JABATAN FUNGSIONAL</h2>
+        <div class="status-cards">
+          <div class="status-card total">
+              <h3>TOTAL</h3>
+              <div class="status-count" id="count-total"><?= $counts['all'] ?></div>
+          </div>
+          <div class="status-card new">
+              <h3>BARU</h3>
+              <div class="status-count" id="count-new"><?= $counts['new'] ?></div>
+          </div>
+          <div class="status-card process">
+              <h3>DIPROSES</h3>
+              <div class="status-count" id="count-process"><?= $groupCounts['process'] ?></div>
+          </div>
+          <div class="status-card done">
+              <h3>SELESAI</h3>
+              <div class="status-count" id="count-done"><?= $counts['completed'] ?></div>
+          </div>
+        </div>
+      </div><!--monitoring-jafung-->
+
+      <script>
+          let original = document.getElementById("jafung");
+
+          // berapa banyak clone yang ingin dibuat
+          let totalClone = 4;
+
+          for (let i = 1; i <= totalClone; i++) {
+              let clone = original.cloneNode(true);
+              clone.id = "jafung-copy-" + i; // buat ID unik
+              original.after(clone);
+          }
+      </script>
+
+    </div><!--tab2-->
 
     <div id="tab3" class="tabcontent">
       <!--<div class="filter-bar">
@@ -181,45 +223,45 @@ $user = $result->fetch_assoc();
       <div class="flex-item-main">
         <span class="badge"><?= $counts['all'] ?? 0; ?></span>
         <p><a href="verification/jafung/verify_documents.php?role=<?= urlencode($role); ?>">
-          <img src="../icon/button/fungsional.png"></a><br>VERIFIKASI JABATAN FUNGSIONAL</p>
+          <img src="/icon/button/fungsional.png"></a><br>VERIFIKASI JABATAN FUNGSIONAL</p>
       </div>
-    </div>
+    </div><!--tab3-->
 
     <div id="tab4" class="tabcontent">
       
       <div class="flex-item-main">
         <p><a href="pengumuman/dashboard_pengumuman.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/announcement.png" ></a><br>PENGUMUMAN</p>
+          <img src="/icon/button/announcement.png" ></a><br>PENGUMUMAN</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="berita/admin_news.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/news.png" ></a><br>BERITA</p>
+          <img src="/icon/button/news.png" ></a><br>BERITA</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="blog/admin_blog.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/blog.png" ></a><br>BLOG</p>
+          <img src="/icon/button/blog.png" ></a><br>BLOG</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="infoGrafis/admin_infoGrafis.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/graphics.png" ></a><br>INFOGRAFIS</p>
+          <img src="/icon/button/graphics.png" ></a><br>INFOGRAFIS</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="transparansi/dashboard_transparansi.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/transparansi.png"></a><br>TRANSPARANSI</p>
+          <img src="/icon/button/transparansi.png"></a><br>TRANSPARANSI</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="pojokjafung/dashboard_jf.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
+          <img src="/icon/button/fungsional.png"></a><br>POJOK FUNGSIONAL</p>
       </div>
 
       <div class="flex-item-main">
         <p><a href="rekap_asn_merangin/dashboard_input_rekap_asn.php?role=<?php echo urlencode($role); ?>">
-          <img src="../icon/button/rekap_asn.png"></a><br>INPUT REKAP ASN</p>
+          <img src="/icon/button/rekap_asn.png"></a><br>INPUT REKAP ASN</p>
       </div>
     </div><!--tab4-->
   </div><!--rightSide-->
@@ -227,7 +269,7 @@ $user = $result->fetch_assoc();
 </div><!--content-->
 
 <!------------------- FOOTER ----------------------------------->	
-<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="../icon/go_to_top.png"></div>
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"> <img src="/icon/go_to_top.png"></div>
 <script src="/JavaScript/back_to_top.js"></script>
 
 <div id="footer"></div>
@@ -240,7 +282,7 @@ fetch("footer.php")
 </script>
 <!------------------- BATAS AKHIR CONTENT ---------------------------------->
 
-<script src="../JavaScript/script.js"></script>
+<script src="/JavaScript/script.js"></script>
 
 <script>
   // JavaScript code to handle tab switching
@@ -261,6 +303,26 @@ function openCity(evt, cityName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
+</script>
+
+<script>
+function updateCounts() {
+    fetch("get_counts.php")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("count-total").textContent   = data.total;
+            document.getElementById("count-new").textContent     = data.new;
+            document.getElementById("count-process").textContent = data.process;
+            document.getElementById("count-done").textContent    = data.done;
+        })
+        .catch(err => console.error("Error updating counts:", err));
+}
+
+// Refresh setiap 10 detik
+setInterval(updateCounts, 5000);
+
+// Jalankan langsung saat halaman dibuka
+updateCounts();
 </script>
 
 </body>

@@ -1,3 +1,19 @@
+<?php
+include "CiviCore/db.php";
+
+// Update New Pengumuman Badge Logic
+// 1. Query all announcements
+$result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
+
+// Check if there is NEW announcement within last 3 days
+$newCheck = $conn->query("
+    SELECT id 
+    FROM announcements 
+    WHERE created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)
+    LIMIT 1
+");
+$hasNew = $newCheck->num_rows > 0;
+?>
 <!doctype html>
 <html>
 <head>
@@ -16,9 +32,9 @@
 
 <link rel="stylesheet" href="/fontFamily.css">
 <link href="headerFooter.css" rel="stylesheet" type="text/css">
-<link href="ppid.css" rel="stylesheet" type="text/css">
+<link href="galeri.css" rel="stylesheet" type="text/css">
 
-<title>PPID - BKPSDMD Kabupaten Merangin</title>
+<title>Galeri - BKPSDMD Kabupaten Merangin</title>
 <link rel="shortcut icon" href="icon/IconWeb.png">
 </head>
 
@@ -77,7 +93,6 @@
 			<a href="transparansi.php?tipe=lppd">LPPD</a>
 		</div>
 		</div>
-
 		
 		<a href="ppid.html">P.P.I.D.</a>
 		
@@ -91,7 +106,6 @@
 		</div>
 		
 		<a href="pengumuman.php">PENGUMUMAN</a>
-
 		<a href="fungsional.php">POJOK FUNGSIONAL</a>
 		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
 		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>
@@ -100,7 +114,7 @@
 	
 <!------------------- CONTENT ----------------------------------->
 
-<div class="coomingSoon" id="">
+<div class="galeri">
 	<p>COMING SOON!!!</p>
 	<p>Mohon Bersabar Yaa!!!</p>
 	<p>This Page Is Under Construction, Thanks!</p>  

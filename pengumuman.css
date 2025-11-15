@@ -2,65 +2,41 @@ body {
 	margin: 0;
 }
 /* ============================================ CONTENT ==============================*/
-.pengumuman {
+.content {
+  display: flex;
 	text-align: center;
+  align-items: flex-start;
 	font-size: 30px;
 	font-family: Segoe UI;
 	color: #0077b6;
+  gap: 30px;
+  padding: 20px;
 }
-.breadcrumb {
-   background-color: aliceblue;
-   margin: 10px;
-   text-align: center; 
-   padding: 20px;
-   width: 50%;
-   
-}
-.pengumuman h1 {
-   font-size: 30px;
-   color: #023e8a;
-}
-.pengumuman p {
-   font-size: 20px;
-   text-align: justify;
-   width: 100%;
+.content h1 {
+  font-size: 30px;
+  color: #023e8a;
 }
 
-.content {
+.pengumuman {
+  flex: 3;
   display: flex;
   flex-direction: column;
   font-family: Bahnschrift;
-  
   color: #0e0e0e;
-
   overflow: hidden;
   justify-self: center;
   align-items: center;
-  
 }
-.content h1{
-  width: 100%;
-  background-color: #ddd;
-  padding: 10px;
-}
-.controls {
-  width: 400px;
-  margin: 10px;
-  align-items: center;
-  justify-content: center;
-}
-
 .card {
-    background-color: #f8f8f8;
-    color: #023e8a;
-    padding: 20px 20px 30px 20px;
-    margin: 30px;
-    width: 70%;
-
-    font-family: Raleway-Light;
-    border-radius: 1px;
-    box-shadow: 0px 0px 10px grey;
-    text-align: center;
+  background-color: #f8f8f8;
+  color: #023e8a;
+  padding: 20px 20px 30px 20px;
+  margin: 30px;
+  width: 70%;
+  font-family: Raleway-Light;
+  border-radius: 1px;
+  box-shadow: 0px 0px 10px grey;
+  text-align: center;
 }
 .card img {
   width: 100%;
@@ -68,23 +44,271 @@ body {
   border-radius:5px;
 }
 .card h2 {
-  font-size: 30px;
+  font-size: 20px;
 }
 .content .card {
-    font-size: 20px;
-  }
-@media screen and (max-width: 800px) {
-  .content .card h2 {
-    font-size: 20px;
-  }
-  .content .card p {
-    font-size: 15px;
-  }
-  .content .card {
-    font-size: 15px;
-  }
-  .card img {
-  width: 100%;
-  height: auto;
+  font-size: 15px;
+  text-align: justify;
 }
+
+.share-box {
+  margin: auto;
+  font-family: Roboto-Regular;
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+}
+.download {
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: #3ab600;
+  color: white;
+  text-decoration: none;
+  font-family: Raleway-Medium;
+  font-size: 17px;
+}
+.download:hover {
+  background: #2e8a04; 
+}
+.share-btn {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.share-btn.copy {
+  background: none;
+}
+
+.share-btn:hover {
+  opacity: 0.8;
+}
+
+.sidebar {
+  flex: 1;
+  font-family: Roboto-Regular;
+  position: sticky;
+  top: 40px;           /* IMPORTANT */
+  height: fit-content;
+}
+
+
+.sidebar-box {
+  overflow: hidden;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px #00000015;
+  margin-bottom: 20px;
+}
+.sidebar-box h3 {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+.sidebar-box ul {
+  list-style: none;
+  font-size: 15px;
+  text-align: left;
+  padding: 0;
+  margin: 10px;
+}
+
+.sidebar-box ul li {
+  margin-bottom: 10px;
+}
+.sidebar-box ul li a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+.sidebar-box ul li small {
+  font-size: 15px;
+  color: #777;
+}
+.sidebar-box ul li a:hover {
+  text-decoration: underline;
+}
+
+/* ARCHIVE ACCORDION */
+.archive-box {
+    margin-top: 10px;
+}
+
+.archive-accordion .archive-year {
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.year-btn {
+    width: 100%;
+    background: #f5f5f5;
+    padding: 10px 12px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Roboto-Regular;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.year-btn:hover {
+    background: #e9e9e9;
+}
+
+.year-btn .arrow {
+    transition: 0.3s;
+}
+
+/* Hidden by default */
+.month-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.month-list li a {
+    display: block;
+    padding: 8px 14px;
+    font-size: 15px;
+    border-top: 1px solid #eee;
+}
+
+.month-list li a:hover {
+    background: #fafafa;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .archive-box h3 {
+        text-align: center;
+    }
+}
+
+/* ---------------------- */
+/* FLOATING BUTTON MOBILE */
+/* ---------------------- */
+.sidebar-float-btn {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 0px;
+    background: #0077b6;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: Arial;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+}
+
+/* ---------------------- */
+/* MOBILE SLIDE SIDEBAR   */
+/* ---------------------- */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 9990;
+}
+
+#mobileSidebar {
+    transition: transform .35s ease-in-out;
+}
+
+/* Mobile Mode -------------------------------- */
+@media (max-width: 768px) {
+
+    /* Show Floating Button */
+    .sidebar-float-btn {
+        display: block;
+    }
+
+    /* Sidebar becomes sliding panel */
+    #mobileSidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background: #fff;
+        overflow-y: auto;
+        box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+        padding: 20px;
+        transform: translateX(100%); /* hidden */
+        z-index: 9998;
+    }
+
+    /* When active */
+    #mobileSidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    /* Content becomes full width */
+    .content {
+        flex-direction: column;
+    }
+    .sidebar {
+        position: relative;
+        top: 0;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .share-box {
+    font-size: 15px;
+  }
+  .download {
+    font-size: 15px;
+  }
+  .share-btn {
+    width: 40px;
+    height: 40px;
+    justify-content: right;
+    align-items: right;
+  }
+
+    /* Stack content vertically on mobile */
+    .content {
+        flex-direction: column;
+    }
+
+    /* Sidebar becomes full width */
+    .sidebar {
+        position: relative;   /* remove sticky */
+        width: 100%;
+        top: 0;
+        margin-top: 20px;
+    }
+
+    .sidebar-box {
+        width: 100%;
+    }
 }

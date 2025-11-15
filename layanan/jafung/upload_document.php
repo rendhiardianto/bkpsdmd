@@ -138,7 +138,7 @@ try {
 
     $response = [
         "status" => "success",
-        "message" => "Dokumen berhasil diunggah.",
+        "message" => "Dokumen berhasil diajukan, terima kasih.",
         "ticket" => $ticket_number
     ];
 

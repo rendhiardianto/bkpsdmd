@@ -1,0 +1,201 @@
+<?php
+include "CiviCore/db.php";
+
+// Update New Pengumuman Badge Logic
+// 1. Query all announcements
+$result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
+
+// Check if there is NEW announcement within last 3 days
+$newCheck = $conn->query("
+    SELECT id 
+    FROM announcements 
+    WHERE created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)
+    LIMIT 1
+");
+$hasNew = $newCheck->num_rows > 0;
+
+?>
+
+<!doctype html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-65T4XSDM2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-65T4XSDM2Q');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<link rel="stylesheet" href="/fontFamily.css">
+<link href="headerFooter.css" rel="stylesheet" type="text/css">
+<link href="profil.css" rel="stylesheet" type="text/css">
+
+<title>Profil - BKPSDMD Kabupaten Merangin</title>
+<link rel="shortcut icon" href="icon/IconWeb.png">
+</head>
+
+<body>
+	
+<div class="topnav" id="mynavBtn">
+	<div id="startButton"></div>
+	<script>
+	fetch("startButton.html")
+		.then(response => response.text())
+		.then(data => {
+			document.getElementById("startButton").innerHTML = data;
+		});
+	</script>
+	<div class="navLogo">
+		<a href="index.php"><img src="icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
+	</div>
+	
+	<div class="navRight" >
+		<div class="dropdown">
+			<button class="dropbtn">PROFIL <i class="fa fa-caret-down"></i></button>
+		  <div id="menu1" class="dropdown-content">
+			<a href="profil.html#visiMisi">Visi dan Misi</a>
+			<a href="profil.html#selaPang">Selayang Pandang</a>
+			<a href="profil.html#sejarah">Sejarah</a>
+			<a href="profil.html#strukOrga">Struktur Organisasi</a>
+			<a href="profil.html#maklumat">Maklumat Pelayanan</a>
+			<a href="profil.html#tuPoksi">Tugas Pokok dan Fungsi</a>
+		  </div>
+		</div>
+		
+		<div class="dropdown">
+			<button class="dropbtn">ARTIKEL <i class="fa fa-caret-down"></i></button>
+		  <div id="menu2" class="dropdown-content">
+			<a href="news.php">Berita ASN</a>
+			<a href="blog.php">Blog ASN</a>
+		  </div>
+		</div>
+		
+		<a href="layanan.html">LAYANAN</a>
+		
+		<div class="dropdown">
+			<button class="dropbtn">TRANSPARANSI <i class="fa fa-caret-down"></i></button>
+		<div id="menu3" class="dropdown-content">
+			<a href="transparansi.php?tipe=perbup">Perbup</a>
+			<a href="transparansi.php?tipe=renstra">Rencana Strategis</a>
+			<a href="transparansi.php?tipe=renja">Rencana Kerja</a>
+			<a href="transparansi.php?tipe=iku">Indikator Kinerja Utama</a>
+			<a href="transparansi.php?tipe=casscad">Casscading</a>
+			<a href="transparansi.php?tipe=perkin">Perjanjian Kinerja</a>
+			<a href="transparansi.php?tipe=reaksi">Rencana Aksi</a>
+			<a href="transparansi.php?tipe=lapkin">Laporan Kinerja</a>
+			<a href="transparansi.php?tipe=sop">Standar Operasional Prosedur</a>
+			<a href="transparansi.php?tipe=rapbd">RAPBD</a>
+			<a href="transparansi.php?tipe=apbd">APBD</a>
+			<a href="transparansi.php?tipe=lppd">LPPD</a>
+		</div>
+		</div>
+		
+		<a href="ppid.html">P.P.I.D.</a>
+		
+		<div class="dropdown">
+			<button class="dropbtn">GALERI <i class="fa fa-caret-down"></i></button>
+		  <div id="menu4" class="dropdown-content">
+			<a href="galeri.html#foto">Album Foto</a>
+			<a href="galeri.html#video">Album Video</a>
+			<a href="galeri.html#tempMm">Template Multimedia BKPSDMD</a>
+		  </div>
+		</div>
+		
+		<a href="pengumuman.php">PENGUMUMAN</a>
+		<a href="fungsional.php">POJOK FUNGSIONAL</a>
+		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
+		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>
+	</div>
+</div>
+	
+<!------------------- CONTENT ----------------------------------->
+<div class="content">
+	
+	<div class="visiMisi" id="visiMisi">
+		<h1>Visi dan Misi<br><p>Pemerintah Kabupaten Merangin</p></h1>
+		<img src="images/MeranginBaru.png" class="meranginBaru" style="width: 150px">
+		<p>Visi dan Misi pasangan Bupati dan Wakil Bupati Terpilih, yaitu H. M. Syukur, S.H., M.H., dan Drs. Abdul Khafidh, M.M., yang telah dilantik secara sah sebagai Bupati dan Wakil Bupati pada tanggal 20 Februari 2025. Oleh karena itu, berdasarkan pada permasalahan pembangunan, serta isu strategis, dengan berpegang pada Visi RPJPD Kabupaten Merangin tahun 2025-2045, maka disusun sebuah cita-cita atau Visi pembangunan masyarakat Merangin dalam periode 2025-2029.</p>
+		<img src="images/Foto-Bupati_Wabup.png" class="bupatiWabup" style="width: 350px">
+		<h2>Visi</h2>
+		<h3>"MENUJU MERANGIN BARU 2030"<p>Dengan semangat BARU, Merangin Berdaya saing, Akuntabel,  Reformis dan Unggul</p></h3>
+
+		<ol>
+			<li><b>Berdaya saing</b>, artinya Kabupaten Merangin yang kaya akan Potensi sumber daya alam dan sumber daya manusia, harus dibangun dengan konsep berkelanjutan dan terencana dengan baik, fokus dan tuntas agar memiliki daya saing antar daerah khususnya di Provinsi Jambi.</li>
+			<li><b>Akuntabel</b>, artinya Pemerintah Daerah harus bekerja dengan bertanggung jawab atas amanah yang diberikan oleh masyarakat Kabupaten Merangin dalam rangka melayani masyarakat, Pemerintah Daerah harus selalu hadir saat dibutuhkan masyarakat.</li>
+			<li><b>Reformis</b>, Pemerintah Kabupaten Merangin harus berani mereformasi kinerja Pemerintah Daerah sesuai potensi dan keunggulan daerah dan dimulai dari kompetensi Aparatur dan dan sistem Merit dan perencanaan berbasis Proses bisnis. </li>
+			<li><b>Unggul</b>, Pemerintah Kabupaten Merangin harus memiliki Program Prioritas dan tepat sasaran agar Program Pembangunan berjalan sesuai proses bisnis Perencanaan untuk Merangin Unggul.</li>
+		</ol>
+
+		<h2>Misi</h2>
+		<p>Merujuk pada hasil pemetaan Misi berdasarkan pokok-pokok Visi di atas, maka dihasilkan empat Misi Kepala Daerah Kabupaten Merangin selama tahun 2025-2029 sebagai berikut.</p>
+		<ul>
+		<li><b>Misi 1: </b>Mengembangkan Sumber daya manusia Merangin yang Unggul dan berbudaya. </li>
+		<li><b>Misi 2: </b>Memantapkan infrastruktur daerah. </li>
+		<li><b>Misi 3: </b>Mewujudkan Perekonomian Daerah yang inklusif dengan skema Ekonomi Hijau (Green Economic) berbasis Keunggulan Daerah (Pertanian, Pariwisata dan UMKM). </li>
+		<li><b>Misi 4: </b>Membangun Tata kelola Pemerintahan yang baik dan bersih untuk peningkatan kualitas pelayanan masyarakat (berbasis teknologi informasi 5.0).</li>
+		</ul>  
+	</div>
+		
+	<div class="selaPang" id="selaPang">
+		<h1>Selayang Pandang<br><p>BKPSDMD Kabupaten Merangin</p></h1>
+		<img src="images/TuguPedang.jpg" class="TuguPedang" alt="Tugu Pedang">
+		<p>Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Daerah (BKPSDMD) Kabupaten Merangin merupakan perangkat daerah yang memiliki peran strategis dalam pengelolaan manajemen aparatur sipil negara (ASN). BKPSDMD bertugas menyelenggarakan fungsi di bidang kepegawaian, pembinaan, serta pengembangan kapasitas sumber daya manusia aparatur, guna mendukung terciptanya aparatur yang profesional, berintegritas, dan berdaya saing.</p>
+		<p>Sebagai instansi teknis, BKPSDMD Kabupaten Merangin melaksanakan berbagai layanan seperti perencanaan kebutuhan pegawai, pengadaan, mutasi dan promosi jabatan, pengembangan kompetensi, penilaian kinerja, serta urusan administrasi kepegawaian lainnya sesuai ketentuan peraturan perundang-undangan.</p>
+		<p>Dalam upaya meningkatkan kualitas pelayanan publik, BKPSDM juga berkomitmen melakukan inovasi, transparansi, dan pemanfaatan teknologi informasi untuk mendukung terciptanya tata kelola pemerintahan yang baik (good governance). Dengan dukungan aparatur yang kompeten, BKPSDM Kabupaten Merangin berperan penting dalam mewujudkan visi pembangunan daerah yang maju, mandiri, dan berdaya saing.</p>
+		
+		
+	</div>
+		
+	<div class="sejarah" id="sejarah">
+		<h1> Sejarah<br><p>BKPSDMD Kabupaten Merangin</p></h1>
+		<img src="images/Kantor-BKD-Lama.png" class="Kantor-BKD-Lama" alt="Kantor BKD Lama">
+		<p>Secara historis Badan Kepegawaian Daerah muncul sebagai konsekuensi pelaksanaan otonomi daerah dengan ditetapkannya Undang-Undang Nomor 22 Tahun 1999 sebagaimana telah direvisi dengan Undang-Undang Nomor 34Tahun 2004 tentang Pemerintahan Daerah, di mana dalam salah satu pasalnya mengisyaratkan adanya kewenangan pelaksanaan manajemen kepegawaian daerah.</p>
+		<p>Kelembagaan Badan Kepegawaian Daerah sendiri mulai di sebut untuk pertama kalinya dalam Undang-Undang Nomor 43 Tahun 1999 tentang Perubahan Atas Undang-Undang Nomor 8 Tahun 1974 tentang Pokok-Pokok Kepegawaian, Pasal 34A yang menegaskan: <b>"Untuk kelancaran pelaksanaan manajemen Pegawai Negeri Sipil Daerah dibentuk Badan Kepegawaian Daerah".</b></p>
+		<p>Selanjutnya untuk melaksanakan pembentukan lembaga Badan Kepegawaian Daerah diterbitkan Keputusan Presiden Nomor 159 Tahun 2000 tentang Pedoman Pembentukan Badan Kepegawaian Daerah. </p>
+		<p>Sejalan dengan hal tersebut telah dilaksanakan penataan organisasi perangkat daerah di Jajaran Pemerintah Kabupaten Merangin yang menempatkan fungsi manajemen kepegawaian yang semula dilaksanakan oleh Bagian Kepegawaian pada Sekretariat Daerah, dialihkan kepada lembaga tersendiri yang melaksanakan fungsi manajemen kepegawaian, yaitu Badan Kepegawaian Daerah (Selanjutnya disebut BKD). Oleh karena itu pada tahun 2002 dengan Peraturan Daerah Nomor 05 Tahun 2002 dibentuklah BKD Kabupaten Merangin sebagai salah satu lembaga perangkat daerah Kabupaten Merangin, yang menempati kantor Dinas Tata Kota lama di <b>Jalan Sultan Hasanuddin No. 02 Bangko.</b></p>
+		<p>Pengisian jabatan-jabatan pada BKD Kabupaten Merangin diawali pada tanggal 06 Januari 2003, yaitu dengan dilantiknya <b>Bapak Drs. Sumardi</b>, sebagai Kepala BKD Kabupaten Merangin yang pertama. Momentum inilah yang kemudian menjadi pertimbangan bahwa tanggal 06 Januari setiap tahunnya diperingati sebagai Hari Ulang Tahun BKD Kabupaten Merangin. Sebagai lembaga baru yang mengemban amanat pada pengelolaan manajemen kepegawaian daerah, BKD menata diri dengan melakukan penataan diri baik dari segi sistem, personil maupun pelayanannya dengan mengacu visi dan misinya yang telah ditetapkan dan telah dijabarkan dalam program-program kerjanya. Berdasarkan penjelasan di atas, maka perlu adanya media penyalur informasi tentang pengelolaan manajemen kepegawaian daerah, termasuk salah satunya diwujudkan dalam website ini, untuk disampaikan kepada stakeholder kepegawaian daerah.</p>
+		
+	</div>
+		
+	<div class="strukOrga" id="strukOrga">
+		<h1> Struktur Organisasi<br><p>BKPSDMD Kabupaten Merangin</p></h1>
+		<img src="images/StrukturOrganisasi.png" alt="Struktur Organisasi" style="width: 100%;">
+	</div>
+
+	<div class="maklumat" id="maklumat">
+		<h2>Maklumat Pelayanan<br><p>BKPSDMD Kabupaten Merangin</p></h2>
+		<p></p>
+	</div>
+
+	<div class="tuPoksi" id="tuPoksi">
+		<h2> Tugas Pokok dan Fungsi<br><p>BKPSDMD Kabupaten Merangin</p></h2>
+		
+		<p></p>
+		
+	</div>
+</div>
+
+<!------------------- FOOTER ----------------------------------->	
+<div class="gotoTop" onclick="topFunction()" id="myBtn" title="Go to top"><img src="icon/go_to_top.png"></div>
+<script src="JavaScript/back_to_top.js"></script>
+
+<div id="footer"></div>
+<script>
+fetch("footer.php")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+<!------------------- BATAS AKHIR CONTENT ---------------------------------->
+	
+<script src="JavaScript/script.js"></script>
+	
+</body>
+</html>

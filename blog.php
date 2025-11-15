@@ -1,6 +1,19 @@
 <?php
 include "CiviCore/db.php"; // your DB connection file
 
+// Update New Pengumuman Badge Logic
+// 1. Query all announcements
+$result = $conn->query("SELECT * FROM announcements ORDER BY created_at DESC");
+
+// Check if there is NEW announcement within last 3 days
+$newCheck = $conn->query("
+    SELECT id 
+    FROM announcements 
+    WHERE created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)
+    LIMIT 1
+");
+$hasNew = $newCheck->num_rows > 0;
+
 // Fetch latest news
 $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 ?>
@@ -32,7 +45,6 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 <body>
 
 <div class="topnav" id="mynavBtn">
-	
 	<div id="startButton"></div>
 	<script>
 	fetch("startButton.html")
@@ -41,22 +53,20 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 			document.getElementById("startButton").innerHTML = data;
 		});
 	</script>
-
 	<div class="navLogo">
 		<a href="index.php"><img src="icon/BKPLogo3.png" id="bkpsdmdLogo" alt="Logo BKPSDMD"></a>	
 	</div>
 	
 	<div class="navRight" >
-		
-		<div class="dropdown" class="active">
+		<div class="dropdown">
 			<button class="dropbtn">PROFIL <i class="fa fa-caret-down"></i></button>
 		  <div id="menu1" class="dropdown-content">
-			<a href="profil.html#visiMisi">Visi dan Misi</a>
-			<a href="profil.html#selaPang">Selayang Pandang</a>
-			<a href="profil.html#sejarah">Sejarah</a>
-			<a href="profil.html#strukOrga">Struktur Organisasi</a>
-			<a href="profil.html#maklumat">Maklumat Pelayanan</a>
-			<a href="profil.html#tuPoksi">Tugas Pokok dan Fungsi</a>
+			<a href="profil.php#visiMisi">Visi dan Misi</a>
+			<a href="profil.php#selaPang">Selayang Pandang</a>
+			<a href="profil.php#sejarah">Sejarah</a>
+			<a href="profil.php#strukOrga">Struktur Organisasi</a>
+			<a href="profil.php#maklumat">Maklumat Pelayanan</a>
+			<a href="profil.php#tuPoksi">Tugas Pokok dan Fungsi</a>
 		  </div>
 		</div>
 		
@@ -68,7 +78,7 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 		  </div>
 		</div>
 		
-		<a href="layanan.html">LAYANAN</a>
+		<a href="layanan.php">LAYANAN</a>
 		
 		<div class="dropdown">
 			<button class="dropbtn">TRANSPARANSI <i class="fa fa-caret-down"></i></button>
@@ -88,18 +98,24 @@ $result = $conn->query("SELECT * FROM blog ORDER BY created_at DESC LIMIT 10");
 		</div>
 		</div>
 		
-		<a href="ppid.html">P.P.I.D.</a>
+		<a href="ppid.php">P.P.I.D.</a>
 		
 		<div class="dropdown">
 			<button class="dropbtn">GALERI <i class="fa fa-caret-down"></i></button>
 		  <div id="menu4" class="dropdown-content">
-			<a href="galeri.html#foto">Album Foto</a>
-			<a href="galeri.html#video">Album Video</a>
-			<a href="galeri.html#tempMm">Template Multimedia BKPSDMD</a>
+			<a href="galeri.php#foto">Album Foto</a>
+			<a href="galeri.php#video">Album Video</a>
+			<a href="galeri.php#tempMm">Template Multimedia BKPSDMD</a>
 		  </div>
 		</div>
 		
-		<a href="pengumuman.php">PENGUMUMAN</a>
+		<a href="pengumuman.php" class="nav-announcement">
+			PENGUMUMAN
+			<?php if ($hasNew): ?>
+				<span class="new-badge">NEW</span>
+			<?php endif; ?>
+		</a>
+
 		<a href="fungsional.php">POJOK FUNGSIONAL</a>
 		<!--<a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fa fa-bars"></i> </a>-->
 		<a href="javascript:void(0);" style="font-size:17px;" class="icon" onclick="toggleNav()">&#9776;</a>

@@ -33,7 +33,7 @@ body {
   
 }
 .navbar {
-float: left;
+  float: left;
   margin: 10px;
   padding: 10px 15px;
   color: white;
@@ -88,9 +88,6 @@ float: left;
   align-items: center;
   gap: 15px;
 }
-
-
-
 /* make labels fixed width so inputs line up vertically */
 .form-group label {
   flex: 0 0 180px; /* fixed width */

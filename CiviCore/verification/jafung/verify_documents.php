@@ -145,13 +145,13 @@ $user = $resultUser->fetch_assoc();
     <thead>
       <tr>
         <th>No</th>
-        <th>Tanggal Pengajuan</th>
+        <th style="width: 150px;">Tanggal Pengajuan</th>
         <th>Status</th>
         <th>NIP</th>
         <th>Nama Lengkap</th>
         <th>No HP</th>
-        <th>Jenis Pengajuan</th>
-        <th>Dokumen</th>
+        <th style="width: 150px;">Jenis Pengajuan</th>
+        <th style="width: 200px;">Dokumen</th>
         <th>Instruksi</th>
         <th>Action</th>
       </tr>
@@ -178,7 +178,7 @@ $user = $resultUser->fetch_assoc();
     ?>
       <tr>
         <td><?= $no++; ?></td>
-        <td><?= formatTanggalIndonesia($row['created_at']); ?></td>
+        <td><b><?= formatTanggalIndonesia($row['created_at']); ?></b></td>
 
         <td style="text-align:center">
           <span class="status-badge <?= $statusClass; ?>">
@@ -196,7 +196,7 @@ $user = $resultUser->fetch_assoc();
         <td><?= htmlspecialchars($row['nip']); ?></td>
         <td><?= htmlspecialchars($row['fullname']); ?></td>
         <td><?= htmlspecialchars($row['phone']); ?></td>
-        <td><?= $displayJenis; ?></td>
+        <td style="text-align: center;"><?= $displayJenis; ?></td>
         <td style="text-align: center;">
           <?php 
             if (!empty($docs)) {
@@ -303,7 +303,7 @@ $user = $resultUser->fetch_assoc();
     <?php
       }
     } else {
-      echo '<tr><td colspan="10" style="text-align:center;">Tidak ada berkas yang ditemukan .</td></tr>';
+      echo '<tr><td colspan="10" style="text-align:center;">Tidak ada berkas yang ditemukan.</td></tr>';
     }
     ?>
     </tbody>

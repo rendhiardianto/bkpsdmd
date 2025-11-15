@@ -46,24 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // === Upload Thumbnail (keep your resize logic) ===
     $thumbnail = null;
-    if (!empty($_FILES['thumbnail']['name'])) {
+        if (!empty($_FILES['thumbnail']['name'])) {
         $thumbName = uniqid("thumb_") . "." . pathinfo($_FILES['thumbnail']['name'], PATHINFO_EXTENSION);
-        $tmpPath = $_FILES['thumbnail']['tmp_name'];
-
-        list($width, $height) = getimagesize($tmpPath);
-        $newWidth = 2560;
-        $newHeight = 1440;
-
-        $src = imagecreatefromstring(file_get_contents($tmpPath));
-        $dst = imagecreatetruecolor($newWidth, $newHeight);
-
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-        imagejpeg($dst, "uploads/thumbnails/" . $thumbName, 90);
-
-        imagedestroy($src);
-        imagedestroy($dst);
-
+        move_uploaded_file($_FILES['thumbnail']['tmp_name'], "uploads/thumbnails/" . $thumbName);
         $thumbnail = $thumbName;
     }
 
