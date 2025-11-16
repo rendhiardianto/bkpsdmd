@@ -5,7 +5,7 @@
 }
 body {
   margin: 0;
-  font-family: Roboto-Regular;
+  font-family: Aptos-Display;
 }
 
 .content {
@@ -52,10 +52,10 @@ body {
 
 .preview{
   padding: 50px 20px;
-  font-family: Roboto-Regular;
+  font-family: Aptos-Display;
   line-height: 2.0;
   text-align: justify;
-  font-size: 20px;
+  font-size: 18px;
 }
 .preview h1 {
   text-align: left;
@@ -67,6 +67,7 @@ body {
   padding: 20px 0px 150px 0px;
 }
 .shortCut h1 {
+  font-family: Aptos-Display;
   color: #ffffff;
   text-align: center;
   margin-bottom: 50px;
@@ -88,7 +89,6 @@ body {
   background-color: #dddddd;
   color: #023e8a;
   font-size: 20px;
-  border-radius: 15px;
   width: 200px;
   height: 150px;
   box-shadow: 0px 0px 10px grey;
@@ -97,10 +97,10 @@ body {
   width: 70px;
 }
 .flex-item-main:hover {
-  background-color:  rgb(240, 240, 240);
+  background-color:  rgb(255, 255, 255);
   box-shadow: 0px 0px 15px rgb(255, 255, 255);
-  width: 210px;
   transition: 0.5s;
+  transform: scale(1.05);
 }
 
 .statistik{
@@ -108,10 +108,79 @@ body {
 }
 .sambutan{
   color: #ffffff;
-  font-family: Roboto-Regular;
+  font-family: Aptos-Display;
   line-height: 1.5;
-  font-size: 20px;
+  font-size: 18px;
 }
+/* --- Container --- */
+#sambutan-ketua {
+  width: 95%;
+  margin: 32px auto;
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  color: #0b2545;
+}
+
+/* --- Header --- */
+.sambutan-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.sambutan-logo {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sambutan-logo img {
+  max-width: 72px;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+/* --- Text --- */
+#judul-sambutan {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.15;
+  color: #023059;
+}
+
+.sambutan-sub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #486e8f;
+}
+
+/* --- Article --- */
+.sambutan-panjang p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.sambutan-ttd {
+  margin: 0;
+  font-weight: 700;
+  color: #023059;
+}
+
+.sambutan-ttd span {
+  font-weight: 400;
+  font-size: 13px;
+  color: #486e8f;
+}
+
 @media (max-width:720px){
   #sambutan-ketua{padding:16px;margin:18px}
   #sambutan-ketua h2{font-size:18px}

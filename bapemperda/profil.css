@@ -8,11 +8,10 @@ body {
 /* ============================================ Visi Misi ==============================*/
 .visiMisi {
 	background-color: azure;
-	/*background-image: url(images//index_pict/1.jpg);
-	background-size: cover;*/
 	overflow: hidden;
 	text-align: justify;
 	padding: 20px;
+	margin-top: 280px;
 }
 .visiMisi h1{
 	font-family: FreeHand;
